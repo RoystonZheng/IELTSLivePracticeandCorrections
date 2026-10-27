@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "summary": {"type": "string"},
+    "estimatedBand": {"type": ["number", "null"]},
+    "criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "estimate": {"type": ["number", "null"]},
+          "feedback": {"type": "string"}
+        },
+        "required": ["name", "estimate", "feedback"],
+        "additionalProperties": false
+      }
+    },
+    "correction": {"type": "string"},
+    "nextStep": {"type": "string"},
+    "limitations": {"type": "string"}
+  },
+  "required": ["summary", "estimatedBand", "criteria", "correction", "nextStep", "limitations"],
+  "additionalProperties": false
+}

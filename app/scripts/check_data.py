@@ -25,23 +25,24 @@ assert bundle == {'publicIndex': index, 'readingTest': test, 'listeningTest': li
 
 checked = date.fromisoformat(index['checkedAt'])
 season = season_for(checked)
-assert index['schemaVersion'] == 2
+assert index['schemaVersion'] == 3
 assert index['season'] == season.as_dict()
 assert set(index['futureMonths']).issubset(season.months)
 assert index['sourceStatus']
-for field in ('reading', 'listening', 'writing', 'recallLeads'):
+for field in ('reading', 'listening', 'writing', 'speaking', 'recallLeads'):
     items = index[field]
-    assert len({x['url'] for x in items}) == len(items), field
+    unique_key = 'id' if field == 'speaking' else 'url'
+    assert len({x[unique_key] for x in items}) == len(items), field
     assert all(x['url'].startswith('https://') and x['month'] in season.months for x in items), field
     assert all(not x.get('date') or date.fromisoformat(x['date']) <= checked for x in items), field
     with (ROOT / 'question-bank/current' / f'{field}.csv').open(encoding='utf-8', newline='') as f:
         rows = list(csv.DictReader(f))
     assert len(rows) == len(items), field
-    assert [x['url'] for x in rows] == [x['url'] for x in items], field
+    assert [x[unique_key] for x in rows] == [x[unique_key] for x in items], field
 manifest = json.loads((ROOT / 'question-bank/current/manifest.json').read_text(encoding='utf-8'))
 assert manifest['season'] == index['season']
 assert manifest['checkedAt'] == index['checkedAt']
-assert manifest['counts'] == {field: len(index[field]) for field in ('reading', 'listening', 'writing', 'recallLeads')}
+assert manifest['counts'] == {field: len(index[field]) for field in ('reading', 'listening', 'writing', 'speaking', 'recallLeads')}
 
 assert test['durationMinutes'] == 60 and len(test['passages']) == 3
 assert len(test['questions']) == 40 and [q['number'] for q in test['questions']] == list(range(1, 41))
@@ -57,7 +58,13 @@ assert [q['number'] for q in listening['questions']] == list(range(1, 41))
 for section in listening['sections']:
     assert (APP / section['audio']).stat().st_size > 100_000
     assert len(section['transcript'].split()) > 200
+    assert len(section.get('sentences', [])) >= 15
+    assert [s['number'] for s in section['sentences']] == list(range(1, len(section['sentences']) + 1))
+    for sentence in section['sentences']:
+        assert sentence['text'] and sentence['audio'].startswith('audio/sentences/')
+        assert (APP / sentence['audio']).stat().st_size > 2_000
 for q in listening['questions']:
     assert q['answer'].strip() and q['explanation'].strip()
 assert [task['minimumWords'] for task in writing['tasks']] == [150, 250]
-print('OK:', season.id, {field: len(index[field]) for field in ('reading', 'listening', 'writing', 'recallLeads')}, '40R/40L/2W local practice')
+print('OK:', season.id, {field: len(index[field]) for field in ('reading', 'listening', 'writing', 'speaking', 'recallLeads')},
+      f"40R/40L/2W/{sum(len(s['sentences']) for s in listening['sections'])} sentence clips local practice")

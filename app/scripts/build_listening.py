@@ -2,6 +2,7 @@
 from __future__ import annotations
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 APP=Path(__file__).resolve().parents[1]
@@ -78,3 +79,4 @@ for section in sections:
  aiff.unlink()
  print(section['id'],out.stat().st_size,'bytes')
 print('wrote',len(questions),'questions')
+subprocess.run([sys.executable, str(APP/'scripts/build_sentence_audio.py')], check=True)

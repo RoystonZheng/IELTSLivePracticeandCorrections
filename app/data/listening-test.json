@@ -10,28 +10,601 @@
       "title": "Community centre booking",
       "kind": "Everyday conversation",
       "transcript": "Receptionist: Good morning, Riverside Community Centre. How can I help? Caller: I would like to book a room for a neighbourhood photography club. The booking should be in my surname, Morris. That is M O R R I S. Receptionist: Thank you. We have Thursday the fourteenth of June available. Would you like the morning or evening? Caller: Evening, please. Our members finish work quite late. Receptionist: The room is free from six thirty until eight thirty. Caller: That works. We expect twelve people, though perhaps one or two might be absent. Receptionist: For twelve, I recommend Studio B, which has a long table and twelve chairs. The large hall costs more and would be unnecessary. The fee for Studio B is twenty five pounds for the whole two-hour session. Caller: May I pay in cash when I arrive? Receptionist: We ask for payment by card when you confirm the booking online. Cash is no longer accepted for room bookings. Caller: Fine. Do people enter from the main road? Receptionist: Please use the side entrance on Garden Lane. The main entrance closes at six. Caller: We will show photographs, so do you have a projector? Receptionist: Yes, a projector is included, but please bring your own laptop. Caller: I will. I would also like to visit before the meeting. Receptionist: Our coordinator can show you the studio on Tuesday afternoon. She is away on Monday. Caller: Great. Please email the form, and I will pay by card this evening. Receptionist: I have your details. We will hold the room until tomorrow at noon.",
-      "audio": "audio/l1.m4a"
+      "audio": "audio/l1.m4a",
+      "sentences": [
+        {
+          "number": 1,
+          "text": "Receptionist: Good morning, Riverside Community Centre.",
+          "audio": "audio/sentences/l1-001.m4a"
+        },
+        {
+          "number": 2,
+          "text": "How can I help?",
+          "audio": "audio/sentences/l1-002.m4a"
+        },
+        {
+          "number": 3,
+          "text": "Caller: I would like to book a room for a neighbourhood photography club.",
+          "audio": "audio/sentences/l1-003.m4a"
+        },
+        {
+          "number": 4,
+          "text": "The booking should be in my surname, Morris.",
+          "audio": "audio/sentences/l1-004.m4a"
+        },
+        {
+          "number": 5,
+          "text": "That is M O R R I S.",
+          "audio": "audio/sentences/l1-005.m4a"
+        },
+        {
+          "number": 6,
+          "text": "Receptionist: Thank you.",
+          "audio": "audio/sentences/l1-006.m4a"
+        },
+        {
+          "number": 7,
+          "text": "We have Thursday the fourteenth of June available.",
+          "audio": "audio/sentences/l1-007.m4a"
+        },
+        {
+          "number": 8,
+          "text": "Would you like the morning or evening?",
+          "audio": "audio/sentences/l1-008.m4a"
+        },
+        {
+          "number": 9,
+          "text": "Caller: Evening, please.",
+          "audio": "audio/sentences/l1-009.m4a"
+        },
+        {
+          "number": 10,
+          "text": "Our members finish work quite late.",
+          "audio": "audio/sentences/l1-010.m4a"
+        },
+        {
+          "number": 11,
+          "text": "Receptionist: The room is free from six thirty until eight thirty.",
+          "audio": "audio/sentences/l1-011.m4a"
+        },
+        {
+          "number": 12,
+          "text": "Caller: That works.",
+          "audio": "audio/sentences/l1-012.m4a"
+        },
+        {
+          "number": 13,
+          "text": "We expect twelve people, though perhaps one or two might be absent.",
+          "audio": "audio/sentences/l1-013.m4a"
+        },
+        {
+          "number": 14,
+          "text": "Receptionist: For twelve, I recommend Studio B, which has a long table and twelve chairs.",
+          "audio": "audio/sentences/l1-014.m4a"
+        },
+        {
+          "number": 15,
+          "text": "The large hall costs more and would be unnecessary.",
+          "audio": "audio/sentences/l1-015.m4a"
+        },
+        {
+          "number": 16,
+          "text": "The fee for Studio B is twenty five pounds for the whole two-hour session.",
+          "audio": "audio/sentences/l1-016.m4a"
+        },
+        {
+          "number": 17,
+          "text": "Caller: May I pay in cash when I arrive?",
+          "audio": "audio/sentences/l1-017.m4a"
+        },
+        {
+          "number": 18,
+          "text": "Receptionist: We ask for payment by card when you confirm the booking online.",
+          "audio": "audio/sentences/l1-018.m4a"
+        },
+        {
+          "number": 19,
+          "text": "Cash is no longer accepted for room bookings.",
+          "audio": "audio/sentences/l1-019.m4a"
+        },
+        {
+          "number": 20,
+          "text": "Caller: Fine.",
+          "audio": "audio/sentences/l1-020.m4a"
+        },
+        {
+          "number": 21,
+          "text": "Do people enter from the main road?",
+          "audio": "audio/sentences/l1-021.m4a"
+        },
+        {
+          "number": 22,
+          "text": "Receptionist: Please use the side entrance on Garden Lane.",
+          "audio": "audio/sentences/l1-022.m4a"
+        },
+        {
+          "number": 23,
+          "text": "The main entrance closes at six.",
+          "audio": "audio/sentences/l1-023.m4a"
+        },
+        {
+          "number": 24,
+          "text": "Caller: We will show photographs, so do you have a projector?",
+          "audio": "audio/sentences/l1-024.m4a"
+        },
+        {
+          "number": 25,
+          "text": "Receptionist: Yes, a projector is included, but please bring your own laptop.",
+          "audio": "audio/sentences/l1-025.m4a"
+        },
+        {
+          "number": 26,
+          "text": "Caller: I will.",
+          "audio": "audio/sentences/l1-026.m4a"
+        },
+        {
+          "number": 27,
+          "text": "I would also like to visit before the meeting.",
+          "audio": "audio/sentences/l1-027.m4a"
+        },
+        {
+          "number": 28,
+          "text": "Receptionist: Our coordinator can show you the studio on Tuesday afternoon.",
+          "audio": "audio/sentences/l1-028.m4a"
+        },
+        {
+          "number": 29,
+          "text": "She is away on Monday.",
+          "audio": "audio/sentences/l1-029.m4a"
+        },
+        {
+          "number": 30,
+          "text": "Caller: Great.",
+          "audio": "audio/sentences/l1-030.m4a"
+        },
+        {
+          "number": 31,
+          "text": "Please email the form, and I will pay by card this evening.",
+          "audio": "audio/sentences/l1-031.m4a"
+        },
+        {
+          "number": 32,
+          "text": "Receptionist: I have your details.",
+          "audio": "audio/sentences/l1-032.m4a"
+        },
+        {
+          "number": 33,
+          "text": "We will hold the room until tomorrow at noon.",
+          "audio": "audio/sentences/l1-033.m4a"
+        }
+      ]
     },
     {
       "id": "L2",
       "title": "Museum visitor information",
       "kind": "Everyday monologue",
       "transcript": "Welcome to the Harbour Museum. I will give you a short introduction before you explore. The ticket desk is on the ground floor, immediately behind the glass doors. Please keep your ticket, because staff may ask to see it in the exhibition rooms. Our newest gallery, called Water and Maps, is in the east wing. It follows the changing coastline over two hundred years and includes maps drawn by local sailors. The café is in the courtyard, not inside the gallery. It serves sandwiches until three, and the outdoor tables are sheltered from rain. Researchers who wish to use the archive must make an appointment for the research room. That room is not open for casual visits. At eleven fifteen each morning, a conservator gives a short demonstration of how paper maps are repaired. The demonstration is free, but places are limited to twenty visitors. Children under eight must remain with an adult in every gallery. Older children may join our activities independently if their family stays on the site. Audio guides are available at the desk. There is no rental charge, but we ask for a five pound refundable deposit. Please return the device before you leave. Today's family workshop is about drawing wetland birds. It begins after lunch and all materials are provided. The workshop room is next to the café. If you are leaving after four, use the north gate. The doors by the ticket desk are closed then so that staff can prepare for the next day. You may photograph most displays without a flash. The exception is the temporary exhibition, where photography is not allowed. Thank you, and enjoy your visit.",
-      "audio": "audio/l2.m4a"
+      "audio": "audio/l2.m4a",
+      "sentences": [
+        {
+          "number": 1,
+          "text": "Welcome to the Harbour Museum.",
+          "audio": "audio/sentences/l2-001.m4a"
+        },
+        {
+          "number": 2,
+          "text": "I will give you a short introduction before you explore.",
+          "audio": "audio/sentences/l2-002.m4a"
+        },
+        {
+          "number": 3,
+          "text": "The ticket desk is on the ground floor, immediately behind the glass doors.",
+          "audio": "audio/sentences/l2-003.m4a"
+        },
+        {
+          "number": 4,
+          "text": "Please keep your ticket, because staff may ask to see it in the exhibition rooms.",
+          "audio": "audio/sentences/l2-004.m4a"
+        },
+        {
+          "number": 5,
+          "text": "Our newest gallery, called Water and Maps, is in the east wing.",
+          "audio": "audio/sentences/l2-005.m4a"
+        },
+        {
+          "number": 6,
+          "text": "It follows the changing coastline over two hundred years and includes maps drawn by local sailors.",
+          "audio": "audio/sentences/l2-006.m4a"
+        },
+        {
+          "number": 7,
+          "text": "The café is in the courtyard, not inside the gallery.",
+          "audio": "audio/sentences/l2-007.m4a"
+        },
+        {
+          "number": 8,
+          "text": "It serves sandwiches until three, and the outdoor tables are sheltered from rain.",
+          "audio": "audio/sentences/l2-008.m4a"
+        },
+        {
+          "number": 9,
+          "text": "Researchers who wish to use the archive must make an appointment for the research room.",
+          "audio": "audio/sentences/l2-009.m4a"
+        },
+        {
+          "number": 10,
+          "text": "That room is not open for casual visits.",
+          "audio": "audio/sentences/l2-010.m4a"
+        },
+        {
+          "number": 11,
+          "text": "At eleven fifteen each morning, a conservator gives a short demonstration of how paper maps are repaired.",
+          "audio": "audio/sentences/l2-011.m4a"
+        },
+        {
+          "number": 12,
+          "text": "The demonstration is free, but places are limited to twenty visitors.",
+          "audio": "audio/sentences/l2-012.m4a"
+        },
+        {
+          "number": 13,
+          "text": "Children under eight must remain with an adult in every gallery.",
+          "audio": "audio/sentences/l2-013.m4a"
+        },
+        {
+          "number": 14,
+          "text": "Older children may join our activities independently if their family stays on the site.",
+          "audio": "audio/sentences/l2-014.m4a"
+        },
+        {
+          "number": 15,
+          "text": "Audio guides are available at the desk.",
+          "audio": "audio/sentences/l2-015.m4a"
+        },
+        {
+          "number": 16,
+          "text": "There is no rental charge, but we ask for a five pound refundable deposit.",
+          "audio": "audio/sentences/l2-016.m4a"
+        },
+        {
+          "number": 17,
+          "text": "Please return the device before you leave.",
+          "audio": "audio/sentences/l2-017.m4a"
+        },
+        {
+          "number": 18,
+          "text": "Today's family workshop is about drawing wetland birds.",
+          "audio": "audio/sentences/l2-018.m4a"
+        },
+        {
+          "number": 19,
+          "text": "It begins after lunch and all materials are provided.",
+          "audio": "audio/sentences/l2-019.m4a"
+        },
+        {
+          "number": 20,
+          "text": "The workshop room is next to the café.",
+          "audio": "audio/sentences/l2-020.m4a"
+        },
+        {
+          "number": 21,
+          "text": "If you are leaving after four, use the north gate.",
+          "audio": "audio/sentences/l2-021.m4a"
+        },
+        {
+          "number": 22,
+          "text": "The doors by the ticket desk are closed then so that staff can prepare for the next day.",
+          "audio": "audio/sentences/l2-022.m4a"
+        },
+        {
+          "number": 23,
+          "text": "You may photograph most displays without a flash.",
+          "audio": "audio/sentences/l2-023.m4a"
+        },
+        {
+          "number": 24,
+          "text": "The exception is the temporary exhibition, where photography is not allowed.",
+          "audio": "audio/sentences/l2-024.m4a"
+        },
+        {
+          "number": 25,
+          "text": "Thank you, and enjoy your visit.",
+          "audio": "audio/sentences/l2-025.m4a"
+        }
+      ]
     },
     {
       "id": "L3",
       "title": "Urban tree research plan",
       "kind": "Academic discussion",
       "transcript": "Maya: We need to finalise our project on street trees before Friday. Leo: I thought we were studying air pollution. Maya: We changed the question after speaking to our tutor. We will test whether tree shade reduces pavement temperature in summer. Leo: That is easier to measure. How many streets are we using? Maya: Six streets, selected from three neighbourhoods. Two streets in each neighbourhood gives us some variety without making the project too large. Leo: And we need sensors. Maya: Two temperature sensors on each street: one in shade and one in full sun. We should put them at the same height above the pavement. Leo: When do we take readings? Maya: At noon and at four in the afternoon, on three clear days. The later reading may show whether the pavement keeps heat. Leo: Should we record humidity too? Maya: Yes. It might explain some variation, even though temperature is our main outcome. Leo: The tutor also warned us to consider pavement type. Dark asphalt and pale stone may heat differently. Maya: We will record pavement type and compare similar surfaces when possible. Leo: The pilot readings were strange yesterday. Maya: One sensor battery failed, so the data stopped halfway through. We have replaced it and will repeat the pilot tomorrow. Leo: Where do we store the results? Maya: In a shared spreadsheet, with a column for the date and exact location. Photos can go in a separate folder. Leo: The presentation is next week, but when is the written plan due? Maya: Friday at five. Leo: Our conclusion should mention that six streets are a small sample. Maya: Exactly. If the early findings look promising, we can recommend a larger sample for a later study. We must not claim that our results represent the whole city.",
-      "audio": "audio/l3.m4a"
+      "audio": "audio/l3.m4a",
+      "sentences": [
+        {
+          "number": 1,
+          "text": "Maya: We need to finalise our project on street trees before Friday.",
+          "audio": "audio/sentences/l3-001.m4a"
+        },
+        {
+          "number": 2,
+          "text": "Leo: I thought we were studying air pollution.",
+          "audio": "audio/sentences/l3-002.m4a"
+        },
+        {
+          "number": 3,
+          "text": "Maya: We changed the question after speaking to our tutor.",
+          "audio": "audio/sentences/l3-003.m4a"
+        },
+        {
+          "number": 4,
+          "text": "We will test whether tree shade reduces pavement temperature in summer.",
+          "audio": "audio/sentences/l3-004.m4a"
+        },
+        {
+          "number": 5,
+          "text": "Leo: That is easier to measure.",
+          "audio": "audio/sentences/l3-005.m4a"
+        },
+        {
+          "number": 6,
+          "text": "How many streets are we using?",
+          "audio": "audio/sentences/l3-006.m4a"
+        },
+        {
+          "number": 7,
+          "text": "Maya: Six streets, selected from three neighbourhoods.",
+          "audio": "audio/sentences/l3-007.m4a"
+        },
+        {
+          "number": 8,
+          "text": "Two streets in each neighbourhood gives us some variety without making the project too large.",
+          "audio": "audio/sentences/l3-008.m4a"
+        },
+        {
+          "number": 9,
+          "text": "Leo: And we need sensors.",
+          "audio": "audio/sentences/l3-009.m4a"
+        },
+        {
+          "number": 10,
+          "text": "Maya: Two temperature sensors on each street: one in shade and one in full sun.",
+          "audio": "audio/sentences/l3-010.m4a"
+        },
+        {
+          "number": 11,
+          "text": "We should put them at the same height above the pavement.",
+          "audio": "audio/sentences/l3-011.m4a"
+        },
+        {
+          "number": 12,
+          "text": "Leo: When do we take readings?",
+          "audio": "audio/sentences/l3-012.m4a"
+        },
+        {
+          "number": 13,
+          "text": "Maya: At noon and at four in the afternoon, on three clear days.",
+          "audio": "audio/sentences/l3-013.m4a"
+        },
+        {
+          "number": 14,
+          "text": "The later reading may show whether the pavement keeps heat.",
+          "audio": "audio/sentences/l3-014.m4a"
+        },
+        {
+          "number": 15,
+          "text": "Leo: Should we record humidity too?",
+          "audio": "audio/sentences/l3-015.m4a"
+        },
+        {
+          "number": 16,
+          "text": "Maya: Yes.",
+          "audio": "audio/sentences/l3-016.m4a"
+        },
+        {
+          "number": 17,
+          "text": "It might explain some variation, even though temperature is our main outcome.",
+          "audio": "audio/sentences/l3-017.m4a"
+        },
+        {
+          "number": 18,
+          "text": "Leo: The tutor also warned us to consider pavement type.",
+          "audio": "audio/sentences/l3-018.m4a"
+        },
+        {
+          "number": 19,
+          "text": "Dark asphalt and pale stone may heat differently.",
+          "audio": "audio/sentences/l3-019.m4a"
+        },
+        {
+          "number": 20,
+          "text": "Maya: We will record pavement type and compare similar surfaces when possible.",
+          "audio": "audio/sentences/l3-020.m4a"
+        },
+        {
+          "number": 21,
+          "text": "Leo: The pilot readings were strange yesterday.",
+          "audio": "audio/sentences/l3-021.m4a"
+        },
+        {
+          "number": 22,
+          "text": "Maya: One sensor battery failed, so the data stopped halfway through.",
+          "audio": "audio/sentences/l3-022.m4a"
+        },
+        {
+          "number": 23,
+          "text": "We have replaced it and will repeat the pilot tomorrow.",
+          "audio": "audio/sentences/l3-023.m4a"
+        },
+        {
+          "number": 24,
+          "text": "Leo: Where do we store the results?",
+          "audio": "audio/sentences/l3-024.m4a"
+        },
+        {
+          "number": 25,
+          "text": "Maya: In a shared spreadsheet, with a column for the date and exact location.",
+          "audio": "audio/sentences/l3-025.m4a"
+        },
+        {
+          "number": 26,
+          "text": "Photos can go in a separate folder.",
+          "audio": "audio/sentences/l3-026.m4a"
+        },
+        {
+          "number": 27,
+          "text": "Leo: The presentation is next week, but when is the written plan due?",
+          "audio": "audio/sentences/l3-027.m4a"
+        },
+        {
+          "number": 28,
+          "text": "Maya: Friday at five.",
+          "audio": "audio/sentences/l3-028.m4a"
+        },
+        {
+          "number": 29,
+          "text": "Leo: Our conclusion should mention that six streets are a small sample.",
+          "audio": "audio/sentences/l3-029.m4a"
+        },
+        {
+          "number": 30,
+          "text": "Maya: Exactly.",
+          "audio": "audio/sentences/l3-030.m4a"
+        },
+        {
+          "number": 31,
+          "text": "If the early findings look promising, we can recommend a larger sample for a later study.",
+          "audio": "audio/sentences/l3-031.m4a"
+        },
+        {
+          "number": 32,
+          "text": "We must not claim that our results represent the whole city.",
+          "audio": "audio/sentences/l3-032.m4a"
+        }
+      ]
     },
     {
       "id": "L4",
       "title": "Conserving historic textiles",
       "kind": "Academic monologue",
       "transcript": "Today I will describe how a museum conserves an old textile. The example is a small woven cloth from a coastal village. Laboratory examination showed that its main fibre is flax. That identification matters because different fibres respond differently to water and handling. The blue colour came from a plant dye, while a darker area near the edge contained traces of iron. We do not yet know whether the iron was part of the original design or arrived later. The textile is fragile, so the first treatment is not washing. Instead, the conservator uses a soft brush to remove loose surface dust under magnification. A pH test checks whether the cloth has become unusually acidic. The test uses a tiny sample from an existing damaged edge. If the cloth needs support, a fine piece of silk can be placed behind it. The support is sewn with widely spaced stitches so that future conservators can remove it. Once treated, the textile is stored at around fifty percent relative humidity. Sudden changes in moisture can make fibres expand and contract. For display, the recommended light level is no more than fifty lux. Stronger light may fade the remaining colour, even when a visitor notices no immediate change. Insects are another risk. A newly acquired textile may be sealed and frozen before it joins the main collection, because freezing can kill many pests without applying chemicals directly to the cloth. Finally, every step is documented with photographs and written notes. The record includes what was tested, what materials were added and what was left untouched. The object is reviewed every year. Conservation is therefore not a single perfect repair. It is a series of limited decisions that preserve evidence while allowing later experts to reconsider earlier choices.",
-      "audio": "audio/l4.m4a"
+      "audio": "audio/l4.m4a",
+      "sentences": [
+        {
+          "number": 1,
+          "text": "Today I will describe how a museum conserves an old textile.",
+          "audio": "audio/sentences/l4-001.m4a"
+        },
+        {
+          "number": 2,
+          "text": "The example is a small woven cloth from a coastal village.",
+          "audio": "audio/sentences/l4-002.m4a"
+        },
+        {
+          "number": 3,
+          "text": "Laboratory examination showed that its main fibre is flax.",
+          "audio": "audio/sentences/l4-003.m4a"
+        },
+        {
+          "number": 4,
+          "text": "That identification matters because different fibres respond differently to water and handling.",
+          "audio": "audio/sentences/l4-004.m4a"
+        },
+        {
+          "number": 5,
+          "text": "The blue colour came from a plant dye, while a darker area near the edge contained traces of iron.",
+          "audio": "audio/sentences/l4-005.m4a"
+        },
+        {
+          "number": 6,
+          "text": "We do not yet know whether the iron was part of the original design or arrived later.",
+          "audio": "audio/sentences/l4-006.m4a"
+        },
+        {
+          "number": 7,
+          "text": "The textile is fragile, so the first treatment is not washing.",
+          "audio": "audio/sentences/l4-007.m4a"
+        },
+        {
+          "number": 8,
+          "text": "Instead, the conservator uses a soft brush to remove loose surface dust under magnification.",
+          "audio": "audio/sentences/l4-008.m4a"
+        },
+        {
+          "number": 9,
+          "text": "A pH test checks whether the cloth has become unusually acidic.",
+          "audio": "audio/sentences/l4-009.m4a"
+        },
+        {
+          "number": 10,
+          "text": "The test uses a tiny sample from an existing damaged edge.",
+          "audio": "audio/sentences/l4-010.m4a"
+        },
+        {
+          "number": 11,
+          "text": "If the cloth needs support, a fine piece of silk can be placed behind it.",
+          "audio": "audio/sentences/l4-011.m4a"
+        },
+        {
+          "number": 12,
+          "text": "The support is sewn with widely spaced stitches so that future conservators can remove it.",
+          "audio": "audio/sentences/l4-012.m4a"
+        },
+        {
+          "number": 13,
+          "text": "Once treated, the textile is stored at around fifty percent relative humidity.",
+          "audio": "audio/sentences/l4-013.m4a"
+        },
+        {
+          "number": 14,
+          "text": "Sudden changes in moisture can make fibres expand and contract.",
+          "audio": "audio/sentences/l4-014.m4a"
+        },
+        {
+          "number": 15,
+          "text": "For display, the recommended light level is no more than fifty lux.",
+          "audio": "audio/sentences/l4-015.m4a"
+        },
+        {
+          "number": 16,
+          "text": "Stronger light may fade the remaining colour, even when a visitor notices no immediate change.",
+          "audio": "audio/sentences/l4-016.m4a"
+        },
+        {
+          "number": 17,
+          "text": "Insects are another risk.",
+          "audio": "audio/sentences/l4-017.m4a"
+        },
+        {
+          "number": 18,
+          "text": "A newly acquired textile may be sealed and frozen before it joins the main collection, because freezing can kill many pests without applying chemicals directly to the cloth.",
+          "audio": "audio/sentences/l4-018.m4a"
+        },
+        {
+          "number": 19,
+          "text": "Finally, every step is documented with photographs and written notes.",
+          "audio": "audio/sentences/l4-019.m4a"
+        },
+        {
+          "number": 20,
+          "text": "The record includes what was tested, what materials were added and what was left untouched.",
+          "audio": "audio/sentences/l4-020.m4a"
+        },
+        {
+          "number": 21,
+          "text": "The object is reviewed every year.",
+          "audio": "audio/sentences/l4-021.m4a"
+        },
+        {
+          "number": 22,
+          "text": "Conservation is therefore not a single perfect repair.",
+          "audio": "audio/sentences/l4-022.m4a"
+        },
+        {
+          "number": 23,
+          "text": "It is a series of limited decisions that preserve evidence while allowing later experts to reconsider earlier choices.",
+          "audio": "audio/sentences/l4-023.m4a"
+        }
+      ]
     }
   ],
   "questions": [

@@ -17,6 +17,7 @@
     "reading": 31,
     "listening": 22,
     "writing": 44,
+    "speaking": 92,
     "recallLeads": 13
   },
   "sourceStatus": [
@@ -74,6 +75,13 @@
       "url": "https://tuonidefu.com.cn/blogs",
       "status": "ok",
       "items": 6,
+      "checkedAt": "2026-10-27"
+    },
+    {
+      "id": "joe-speaking",
+      "url": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec",
+      "status": "ok",
+      "items": 92,
       "checkedAt": "2026-10-27"
     }
   ],
