@@ -37,6 +37,62 @@ Answer Key
         self.assertIn("Describe the chart", result["questions"][0]["prompt"])
         self.assertEqual(result["questions"][1]["answer"], "")
 
+    def test_multiple_reading_passages_keep_restarted_question_numbers(self):
+        page = """Reading Passage 1
+Questions 1-2
+1. First passage question?
+2. Another question?
+Reading Passage 2
+Questions 1-2
+1. Second passage question?
+2. Last question?
+"""
+        result = parse_pages([page], "reading", "Two passages")
+        self.assertEqual(len(result["groups"]), 2)
+        self.assertEqual([q["id"] for q in result["questions"]], ["1-1", "1-2", "2-1", "2-2"])
+        self.assertIn("Passage 2", result["groups"][1]["title"])
+
+    def test_repeated_numbers_do_not_guess_answer_key_across_passages(self):
+        page = """Reading Passage 1
+Questions 1-1
+1. First question?
+Reading Passage 2
+Questions 1-1
+1. Second question?
+Answer Key
+1 A
+"""
+        result = parse_pages([page], "reading", "Two passages")
+        self.assertEqual([q["answer"] for q in result["questions"]], ["", ""])
+        self.assertTrue(any("重复题号" in warning for warning in result["warnings"]))
+
+    def test_unnumbered_speaking_parts_are_grouped(self):
+        page = """Speaking Part 1
+Where do you live?
+What do you like there?
+Speaking Part 2
+Describe a person who helped you.
+You should say:
+Who they are
+Speaking Part 3
+Why do people help others?
+"""
+        result = parse_pages([page], "speaking", "Speaking")
+        self.assertEqual(len(result["groups"]), 3)
+        self.assertEqual([q["id"] for q in result["questions"]], ["1-1", "1-2", "2-1", "3-1"])
+        self.assertIn("Who they are", result["questions"][2]["prompt"])
+
+    def test_listening_rejects_two_sets_with_restarted_numbers(self):
+        page = """Questions 1-2
+1. First question?
+2. Second question?
+Questions 1-2
+1. Another test question?
+2. Final question?
+"""
+        with self.assertRaisesRegex(ValueError, "不支持批量导入"):
+            parse_pages([page], "listening", "Two tests")
+
     def test_text_pdf_round_trip_and_scanned_pdf_error(self):
         try:
             import pymupdf

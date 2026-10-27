@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from collections import Counter
 
 MAX_PDF_BYTES = 20 * 1024 * 1024
 MAX_PAGES = 80
@@ -14,6 +15,31 @@ OPTION = re.compile(r"^\s*([A-D])[.)]\s*(.+)$", re.I)
 TASK = re.compile(r"^\s*(?:Writing\s+)?Task\s*([12])\s*[:.\-]?\s*(.*)$", re.I)
 ANSWER_HEADING = re.compile(r"^\s*(?:answer\s*key|answers|参考答案|答案解析)\s*[:：]?\s*$", re.I)
 KEY_LINE = re.compile(r"^\s*([1-9]\d?)[.):]?\s+(.{1,80}?)\s*$")
+READING_HEADING = re.compile(r"^\s*(?:academic\s+)?(?:reading\s+)?passage\s+(\d+|one|two|three|four)\b.*$", re.I)
+SPEAKING_HEADING = re.compile(r"^\s*(?:speaking\s+)?part\s*([123])\b.*$|^\s*topic\s*\d+\b.*$", re.I)
+
+
+def split_sections(lines: list[tuple[int, str]], skill: str) -> list[tuple[str, list[tuple[int, str]]]]:
+    """Keep passage/task boundaries so repeated question numbers remain distinct."""
+    if skill == "listening":
+        return [("听力试卷", lines)]
+    heading = READING_HEADING if skill == "reading" else SPEAKING_HEADING if skill == "speaking" else TASK
+    sections: list[tuple[str, list[tuple[int, str]]]] = []
+    current: list[tuple[int, str]] = []
+    title = "第 1 篇" if skill == "reading" else "第 1 组"
+    for entry in lines:
+        match = heading.match(entry[1])
+        if match and (current or sections):
+            if current:
+                sections.append((title, current))
+            current = []
+            title = entry[1][:100]
+        elif match:
+            title = entry[1][:100]
+        current.append(entry)
+    if current:
+        sections.append((title, current))
+    return sections
 
 
 def parse_pages(pages: list[str], skill: str, title: str) -> dict:
@@ -33,50 +59,84 @@ def parse_pages(pages: list[str], skill: str, title: str) -> dict:
             answer_key[int(match[1])] = match[2].strip()
 
     questions: list[dict] = []
-    if skill == "writing":
-        for page, line in body_lines:
-            match = TASK.match(line)
+    groups: list[dict] = []
+    for section_title, section_lines in split_sections(body_lines, skill):
+        group_number = len(groups) + 1
+        section_questions: list[dict] = []
+        if skill == "writing":
+            match = TASK.match(section_lines[0][1])
             if match:
-                questions.append({"number": int(match[1]), "page": page, "prompt": match[2].strip(), "options": [], "answer": ""})
-            elif questions:
-                questions[-1]["prompt"] += "\n" + line
-    else:
-        in_questions = False
-        skip_next = False
-        for i, (page, line) in enumerate(body_lines):
-            if skip_next:
-                skip_next = False
-                continue
-            if RANGE.match(line):
-                in_questions = True
-                continue
-            match = QUESTION.match(line)
-            number = int(match[1]) if match else None
-            body = match[2].strip() if match else ""
-            bare = BARE_NUMBER.match(line) if not match and in_questions else None
-            if bare and i + 1 < len(body_lines):
-                number = int(bare[1])
-                body = body_lines[i + 1][1]
-                skip_next = True
-            # Avoid treating dates, page numbers and repeated references as questions.
-            if number is not None and (not questions or number > questions[-1]["number"]):
-                questions.append({"number": number, "page": page, "prompt": body, "options": [], "answer": ""})
-                continue
-            if not questions or bare:
-                continue
-            option = OPTION.match(line)
-            if option and len(questions[-1]["options"]) < 4:
-                questions[-1]["options"].append(f"{option[1].upper()}. {option[2].strip()}")
-            elif not (line.lower().startswith(("page ", "questions ")) or RANGE.match(line)):
-                questions[-1]["prompt"] += "\n" + line
+                section_questions.append({"number": int(match[1]), "page": section_lines[0][0],
+                                          "prompt": "\n".join([match[2], *(line for _, line in section_lines[1:])]).strip(),
+                                          "options": [], "answer": ""})
+        else:
+            in_questions = False
+            skip_next = False
+            for i, (page, line) in enumerate(section_lines):
+                if skip_next:
+                    skip_next = False
+                    continue
+                if RANGE.match(line):
+                    in_questions = True
+                    continue
+                match = QUESTION.match(line)
+                number = int(match[1]) if match else None
+                body = match[2].strip() if match else ""
+                bare = BARE_NUMBER.match(line) if not match and in_questions else None
+                if bare and i + 1 < len(section_lines):
+                    number = int(bare[1])
+                    body = section_lines[i + 1][1]
+                    skip_next = True
+                if number is not None and section_questions and number <= section_questions[-1]["number"]:
+                    # A second passage without a heading can restart at Question 1.
+                    if skill != "listening" and number == 1:
+                        groups.append({"id": group_number, "title": section_title, "questions": len(section_questions)})
+                        for question in section_questions:
+                            question["group"] = group_number
+                        questions.extend(section_questions)
+                        group_number += 1
+                        section_title = f"第 {group_number} 组"
+                        section_questions = []
+                    elif skill == "listening" and number == 1:
+                        raise ValueError("听力不支持批量导入多套题；请每次选择一套 PDF 和对应音频")
+                    else:
+                        continue
+                if number is not None:
+                    section_questions.append({"number": number, "page": page, "prompt": body,
+                                              "options": [], "answer": ""})
+                    continue
+                if not section_questions or bare:
+                    continue
+                option = OPTION.match(line)
+                if option and len(section_questions[-1]["options"]) < 4:
+                    section_questions[-1]["options"].append(f"{option[1].upper()}. {option[2].strip()}")
+                elif not (line.lower().startswith(("page ", "questions ")) or RANGE.match(line)
+                          or READING_HEADING.match(line) or SPEAKING_HEADING.match(line)):
+                    section_questions[-1]["prompt"] += "\n" + line
+        if skill == "speaking" and not section_questions:
+            prompt_lines = section_lines[1:] if SPEAKING_HEADING.match(section_lines[0][1]) else section_lines
+            for page, line in prompt_lines:
+                if line.endswith("?") or re.match(r"^(?:describe|talk about|discuss|说说|描述)", line, re.I):
+                    section_questions.append({"number": len(section_questions) + 1, "page": page,
+                                              "prompt": line, "options": [], "answer": ""})
+                elif section_questions:
+                    section_questions[-1]["prompt"] += "\n" + line
+        if section_questions:
+            groups.append({"id": group_number, "title": section_title, "questions": len(section_questions)})
+            for question in section_questions:
+                question["group"] = group_number
+            questions.extend(section_questions)
 
+    repeated_numbers = {number for number, count in Counter(q["number"] for q in questions).items() if count > 1}
     for question in questions:
         question["prompt"] = question["prompt"].strip()
-        answer = answer_key.get(question["number"], "")
+        answer = "" if question["number"] in repeated_numbers else answer_key.get(question["number"], "")
         if question["options"] and re.match(r"^[A-D](?:[.):]|$)", answer, re.I):
             answer = answer[0].upper()
         question["answer"] = answer
     questions = [q for q in questions if q["prompt"]][:120]
+    for question in questions:
+        question["id"] = f"{question['group']}-{question['number']}"
 
     reference_parts = []
     for page_number, line in body_lines:
@@ -90,8 +150,12 @@ def parse_pages(pages: list[str], skill: str, title: str) -> dict:
         warnings.append("没有识别到题号；可在预览中手动添加题目。")
     if not answer_key:
         warnings.append("未找到明确的答案页；可手动填写标准答案。没有答案的题目不会自动评分。")
+    if len(groups) > 1:
+        warnings.append(f"识别到 {len(groups)} 组内容；请检查分组和题目是否完整。")
+    if repeated_numbers and answer_key:
+        warnings.append("多组题目出现重复题号，无法可靠匹配答案页；这些题的标准答案已留空，请手动核对。")
     return {"title": title, "skill": skill, "pageCount": len(pages), "referenceText": reference,
-            "questions": questions, "warnings": warnings}
+            "questions": questions, "groups": groups, "warnings": warnings}
 
 
 def parse_pdf(data: bytes, skill: str, filename: str) -> dict:
