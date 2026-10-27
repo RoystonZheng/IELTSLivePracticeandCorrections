@@ -1,0 +1,27 @@
+{
+  "id": "original-academic-writing-01",
+  "title": "原创 Academic Writing 模考 01",
+  "sourceType": "original_practice",
+  "notice": "题目与表格为原创练习，不是 2026 年考场原题。提交后保留初稿和修订稿，不提供机器评分。",
+  "durationMinutes": 60,
+  "tasks": [
+    {
+      "id": "W1",
+      "name": "Task 1 · 表格描述",
+      "minimumWords": 150,
+      "suggestedMinutes": 20,
+      "prompt": "The table shows annual visits to public libraries in three fictional towns, measured in thousands, between 2010 and 2025. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+      "columns": ["Town", "2010", "2015", "2020", "2025"],
+      "rows": [["Alder", "120", "145", "160", "178"], ["Brook", "95", "110", "108", "102"], ["Cedar", "70", "88", "125", "154"]],
+      "review": ["是否概括整体趋势，而不是逐格罗列？", "是否比较了增长最快、基本持平的城镇？", "数字和单位是否准确？"]
+    },
+    {
+      "id": "W2",
+      "name": "Task 2 · 观点讨论",
+      "minimumWords": 250,
+      "suggestedMinutes": 40,
+      "prompt": "Some cities encourage residents to repair household items instead of replacing them. Do the environmental benefits of this approach outweigh the difficulties it may create for consumers and businesses? Give reasons for your answer and include relevant examples from your own knowledge or experience.",
+      "review": ["是否明确回答 outweigh，而不只是罗列优缺点？", "是否分别论证环境收益与消费者、商家的成本？", "例子是否具体且支持中心观点？", "段落衔接、语法和用词是否经过复查？"]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IELTS Practice Desk · 阅读、听力与写作</title>
+  <meta name="description" content="本地雅思阅读、听力与写作练习，含公开来源索引、限时答题和提交后改错。非官方雅思产品。">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">I</span><span><strong>IELTS Practice Desk</strong><small id="season-label">当期公开资料</small></span></div>
+      <nav aria-label="主导航">
+        <button class="nav-button active" data-view="home"><span>⌂</span> 总览</button>
+        <button class="nav-button" data-view="reading"><span>▣</span> 阅读模考</button>
+        <button class="nav-button" data-view="listening"><span>♫</span> 听力练习</button>
+        <button class="nav-button" data-view="writing"><span>✎</span> 写作练习</button>
+        <button class="nav-button" data-view="library"><span>▤</span> 公开题库目录</button>
+        <button class="nav-button" data-view="history"><span>↺</span> 练习记录</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="status-dot"></div><span>所有练习记录仅保存在此浏览器</span></div>
+    </aside>
+    <div class="main-area">
+      <header class="topbar"><div class="eyebrow">ACADEMIC PRACTICE · LOCAL EDITION</div><div class="top-actions"><span id="today-label"></span><button id="contrast-toggle" title="切换对比度">◐ 对比度</button></div></header>
+      <main id="main" tabindex="-1"></main>
+    </div>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="bank.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

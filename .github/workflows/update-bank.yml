@@ -1,0 +1,43 @@
+name: Update current IELTS source index
+
+on:
+  schedule:
+    # GitHub Actions uses UTC. 00:00 UTC = 08:00 Asia/Shanghai.
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-current-bank
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Refresh current season
+        run: python3 bank_update.py --once
+      - name: Verify current data and rollover rules
+        run: |
+          python3 app/scripts/check_data.py
+          python3 -m unittest discover -s tests -v
+      - name: Commit new index when it changed
+        run: |
+          if git diff --quiet -- app/data/public-index.json app/bank.js question-bank/current; then
+            echo 'No source-index change.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/data/public-index.json app/bank.js question-bank/current
+          git commit -m "Update current IELTS source index"
+          git push origin HEAD:main

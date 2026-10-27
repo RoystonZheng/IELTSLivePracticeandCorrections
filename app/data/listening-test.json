@@ -1,0 +1,435 @@
+{
+  "id": "original-academic-listening-01",
+  "title": "原创 Academic Listening 模考 01",
+  "sourceType": "original_practice",
+  "notice": "原创缩时听力练习：4 个场景、40 题，音频由系统语音合成；并非 2026 年考场原题、真实录音或官方模考。",
+  "durationMinutes": 30,
+  "sections": [
+    {
+      "id": "L1",
+      "title": "Community centre booking",
+      "kind": "Everyday conversation",
+      "transcript": "Receptionist: Good morning, Riverside Community Centre. How can I help? Caller: I would like to book a room for a neighbourhood photography club. The booking should be in my surname, Morris. That is M O R R I S. Receptionist: Thank you. We have Thursday the fourteenth of June available. Would you like the morning or evening? Caller: Evening, please. Our members finish work quite late. Receptionist: The room is free from six thirty until eight thirty. Caller: That works. We expect twelve people, though perhaps one or two might be absent. Receptionist: For twelve, I recommend Studio B, which has a long table and twelve chairs. The large hall costs more and would be unnecessary. The fee for Studio B is twenty five pounds for the whole two-hour session. Caller: May I pay in cash when I arrive? Receptionist: We ask for payment by card when you confirm the booking online. Cash is no longer accepted for room bookings. Caller: Fine. Do people enter from the main road? Receptionist: Please use the side entrance on Garden Lane. The main entrance closes at six. Caller: We will show photographs, so do you have a projector? Receptionist: Yes, a projector is included, but please bring your own laptop. Caller: I will. I would also like to visit before the meeting. Receptionist: Our coordinator can show you the studio on Tuesday afternoon. She is away on Monday. Caller: Great. Please email the form, and I will pay by card this evening. Receptionist: I have your details. We will hold the room until tomorrow at noon.",
+      "audio": "audio/l1.m4a"
+    },
+    {
+      "id": "L2",
+      "title": "Museum visitor information",
+      "kind": "Everyday monologue",
+      "transcript": "Welcome to the Harbour Museum. I will give you a short introduction before you explore. The ticket desk is on the ground floor, immediately behind the glass doors. Please keep your ticket, because staff may ask to see it in the exhibition rooms. Our newest gallery, called Water and Maps, is in the east wing. It follows the changing coastline over two hundred years and includes maps drawn by local sailors. The café is in the courtyard, not inside the gallery. It serves sandwiches until three, and the outdoor tables are sheltered from rain. Researchers who wish to use the archive must make an appointment for the research room. That room is not open for casual visits. At eleven fifteen each morning, a conservator gives a short demonstration of how paper maps are repaired. The demonstration is free, but places are limited to twenty visitors. Children under eight must remain with an adult in every gallery. Older children may join our activities independently if their family stays on the site. Audio guides are available at the desk. There is no rental charge, but we ask for a five pound refundable deposit. Please return the device before you leave. Today's family workshop is about drawing wetland birds. It begins after lunch and all materials are provided. The workshop room is next to the café. If you are leaving after four, use the north gate. The doors by the ticket desk are closed then so that staff can prepare for the next day. You may photograph most displays without a flash. The exception is the temporary exhibition, where photography is not allowed. Thank you, and enjoy your visit.",
+      "audio": "audio/l2.m4a"
+    },
+    {
+      "id": "L3",
+      "title": "Urban tree research plan",
+      "kind": "Academic discussion",
+      "transcript": "Maya: We need to finalise our project on street trees before Friday. Leo: I thought we were studying air pollution. Maya: We changed the question after speaking to our tutor. We will test whether tree shade reduces pavement temperature in summer. Leo: That is easier to measure. How many streets are we using? Maya: Six streets, selected from three neighbourhoods. Two streets in each neighbourhood gives us some variety without making the project too large. Leo: And we need sensors. Maya: Two temperature sensors on each street: one in shade and one in full sun. We should put them at the same height above the pavement. Leo: When do we take readings? Maya: At noon and at four in the afternoon, on three clear days. The later reading may show whether the pavement keeps heat. Leo: Should we record humidity too? Maya: Yes. It might explain some variation, even though temperature is our main outcome. Leo: The tutor also warned us to consider pavement type. Dark asphalt and pale stone may heat differently. Maya: We will record pavement type and compare similar surfaces when possible. Leo: The pilot readings were strange yesterday. Maya: One sensor battery failed, so the data stopped halfway through. We have replaced it and will repeat the pilot tomorrow. Leo: Where do we store the results? Maya: In a shared spreadsheet, with a column for the date and exact location. Photos can go in a separate folder. Leo: The presentation is next week, but when is the written plan due? Maya: Friday at five. Leo: Our conclusion should mention that six streets are a small sample. Maya: Exactly. If the early findings look promising, we can recommend a larger sample for a later study. We must not claim that our results represent the whole city.",
+      "audio": "audio/l3.m4a"
+    },
+    {
+      "id": "L4",
+      "title": "Conserving historic textiles",
+      "kind": "Academic monologue",
+      "transcript": "Today I will describe how a museum conserves an old textile. The example is a small woven cloth from a coastal village. Laboratory examination showed that its main fibre is flax. That identification matters because different fibres respond differently to water and handling. The blue colour came from a plant dye, while a darker area near the edge contained traces of iron. We do not yet know whether the iron was part of the original design or arrived later. The textile is fragile, so the first treatment is not washing. Instead, the conservator uses a soft brush to remove loose surface dust under magnification. A pH test checks whether the cloth has become unusually acidic. The test uses a tiny sample from an existing damaged edge. If the cloth needs support, a fine piece of silk can be placed behind it. The support is sewn with widely spaced stitches so that future conservators can remove it. Once treated, the textile is stored at around fifty percent relative humidity. Sudden changes in moisture can make fibres expand and contract. For display, the recommended light level is no more than fifty lux. Stronger light may fade the remaining colour, even when a visitor notices no immediate change. Insects are another risk. A newly acquired textile may be sealed and frozen before it joins the main collection, because freezing can kill many pests without applying chemicals directly to the cloth. Finally, every step is documented with photographs and written notes. The record includes what was tested, what materials were added and what was left untouched. The object is reviewed every year. Conservation is therefore not a single perfect repair. It is a series of limited decisions that preserve evidence while allowing later experts to reconsider earlier choices.",
+      "audio": "audio/l4.m4a"
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "section": "L1",
+      "type": "text",
+      "prompt": "The booking surname is ______.",
+      "answer": "Morris",
+      "explanation": "The caller spells the surname Morris.",
+      "options": []
+    },
+    {
+      "number": 2,
+      "section": "L1",
+      "type": "text",
+      "prompt": "The meeting is on 14 ______.",
+      "answer": "June",
+      "explanation": "The receptionist says the fourteenth of June.",
+      "options": []
+    },
+    {
+      "number": 3,
+      "section": "L1",
+      "type": "text",
+      "prompt": "The booking begins at ______.",
+      "answer": "6:30",
+      "explanation": "The room is free from six thirty.",
+      "options": []
+    },
+    {
+      "number": 4,
+      "section": "L1",
+      "type": "text",
+      "prompt": "The group expects ______ people.",
+      "answer": "12",
+      "explanation": "The caller expects twelve people.",
+      "options": []
+    },
+    {
+      "number": 5,
+      "section": "L1",
+      "type": "text",
+      "prompt": "The recommended room is Studio ______.",
+      "answer": "B",
+      "explanation": "The receptionist recommends Studio B.",
+      "options": []
+    },
+    {
+      "number": 6,
+      "section": "L1",
+      "type": "text",
+      "prompt": "The room fee is £______.",
+      "answer": "25",
+      "explanation": "The fee is twenty five pounds.",
+      "options": []
+    },
+    {
+      "number": 7,
+      "section": "L1",
+      "type": "mcq",
+      "prompt": "How must the caller pay?",
+      "answer": "B",
+      "explanation": "The receptionist requires payment by card.",
+      "options": [
+        "A. In cash",
+        "B. By card",
+        "C. By bank cheque"
+      ]
+    },
+    {
+      "number": 8,
+      "section": "L1",
+      "type": "text",
+      "prompt": "Visitors should use the entrance on ______ Lane.",
+      "answer": "Garden",
+      "explanation": "The side entrance is on Garden Lane.",
+      "options": []
+    },
+    {
+      "number": 9,
+      "section": "L1",
+      "type": "mcq",
+      "prompt": "Which item is provided by the centre?",
+      "answer": "A",
+      "explanation": "A projector is included, but the caller brings a laptop.",
+      "options": [
+        "A. A projector",
+        "B. A laptop",
+        "C. A camera"
+      ]
+    },
+    {
+      "number": 10,
+      "section": "L1",
+      "type": "text",
+      "prompt": "The coordinator can show the room on ______.",
+      "answer": "Tuesday",
+      "explanation": "She is available on Tuesday afternoon.",
+      "options": []
+    },
+    {
+      "number": 11,
+      "section": "L2",
+      "type": "text",
+      "prompt": "The ticket desk is on the ______ floor.",
+      "answer": "ground",
+      "explanation": "It is on the ground floor.",
+      "options": []
+    },
+    {
+      "number": 12,
+      "section": "L2",
+      "type": "text",
+      "prompt": "The new gallery is in the ______ wing.",
+      "answer": "east",
+      "explanation": "Water and Maps is in the east wing.",
+      "options": []
+    },
+    {
+      "number": 13,
+      "section": "L2",
+      "type": "text",
+      "prompt": "The café is in the ______.",
+      "answer": "courtyard",
+      "explanation": "The café is in the courtyard.",
+      "options": []
+    },
+    {
+      "number": 14,
+      "section": "L2",
+      "type": "mcq",
+      "prompt": "Who can enter the research room?",
+      "answer": "C",
+      "explanation": "Archive researchers need an appointment.",
+      "options": [
+        "A. Any visitor with a ticket",
+        "B. Only children",
+        "C. Researchers with an appointment"
+      ]
+    },
+    {
+      "number": 15,
+      "section": "L2",
+      "type": "text",
+      "prompt": "The map repair demonstration starts at ______.",
+      "answer": "11:15",
+      "explanation": "The talk is at eleven fifteen.",
+      "options": []
+    },
+    {
+      "number": 16,
+      "section": "L2",
+      "type": "text",
+      "prompt": "Children under ______ must stay with an adult.",
+      "answer": "8",
+      "explanation": "Children under eight need an adult.",
+      "options": []
+    },
+    {
+      "number": 17,
+      "section": "L2",
+      "type": "text",
+      "prompt": "The refundable audio-guide deposit is £______.",
+      "answer": "5",
+      "explanation": "The deposit is five pounds.",
+      "options": []
+    },
+    {
+      "number": 18,
+      "section": "L2",
+      "type": "text",
+      "prompt": "The family workshop involves drawing wetland ______.",
+      "answer": "birds",
+      "explanation": "Visitors will draw wetland birds.",
+      "options": []
+    },
+    {
+      "number": 19,
+      "section": "L2",
+      "type": "text",
+      "prompt": "After four o’clock, visitors should leave by the ______ gate.",
+      "answer": "north",
+      "explanation": "The north gate is used after four.",
+      "options": []
+    },
+    {
+      "number": 20,
+      "section": "L2",
+      "type": "mcq",
+      "prompt": "Where is photography prohibited?",
+      "answer": "B",
+      "explanation": "Photography is prohibited in the temporary exhibition.",
+      "options": [
+        "A. In every gallery",
+        "B. In the temporary exhibition",
+        "C. In the courtyard"
+      ]
+    },
+    {
+      "number": 21,
+      "section": "L3",
+      "type": "mcq",
+      "prompt": "What is the main research question?",
+      "answer": "B",
+      "explanation": "They study whether tree shade reduces pavement temperature.",
+      "options": [
+        "A. Whether trees reduce noise",
+        "B. Whether shade reduces pavement temperature",
+        "C. Whether trees increase traffic"
+      ]
+    },
+    {
+      "number": 22,
+      "section": "L3",
+      "type": "text",
+      "prompt": "The students will study ______ streets.",
+      "answer": "6",
+      "explanation": "They choose six streets.",
+      "options": []
+    },
+    {
+      "number": 23,
+      "section": "L3",
+      "type": "text",
+      "prompt": "They will use ______ temperature sensors on each street.",
+      "answer": "2",
+      "explanation": "There will be one shaded and one sunny sensor.",
+      "options": []
+    },
+    {
+      "number": 24,
+      "section": "L3",
+      "type": "text",
+      "prompt": "Readings will be taken at noon and at ______.",
+      "answer": "4",
+      "explanation": "Maya specifies four in the afternoon.",
+      "options": []
+    },
+    {
+      "number": 25,
+      "section": "L3",
+      "type": "text",
+      "prompt": "They will also record ______ as an additional variable.",
+      "answer": "humidity",
+      "explanation": "Maya says to record humidity.",
+      "options": []
+    },
+    {
+      "number": 26,
+      "section": "L3",
+      "type": "text",
+      "prompt": "They need to control for the type of ______.",
+      "answer": "pavement",
+      "explanation": "Pavement type may affect heating.",
+      "options": []
+    },
+    {
+      "number": 27,
+      "section": "L3",
+      "type": "mcq",
+      "prompt": "Why were the pilot readings incomplete?",
+      "answer": "A",
+      "explanation": "A sensor battery failed.",
+      "options": [
+        "A. A battery failed",
+        "B. It rained",
+        "C. A street was closed"
+      ]
+    },
+    {
+      "number": 28,
+      "section": "L3",
+      "type": "text",
+      "prompt": "They will keep the results in a shared ______.",
+      "answer": "spreadsheet",
+      "explanation": "Maya specifies a shared spreadsheet.",
+      "options": []
+    },
+    {
+      "number": 29,
+      "section": "L3",
+      "type": "text",
+      "prompt": "The written plan is due on ______.",
+      "answer": "Friday",
+      "explanation": "Maya says Friday at five.",
+      "options": []
+    },
+    {
+      "number": 30,
+      "section": "L3",
+      "type": "mcq",
+      "prompt": "What do they suggest for a later study?",
+      "answer": "C",
+      "explanation": "They recommend a larger sample.",
+      "options": [
+        "A. Fewer readings",
+        "B. No control variables",
+        "C. A larger sample"
+      ]
+    },
+    {
+      "number": 31,
+      "section": "L4",
+      "type": "text",
+      "prompt": "The textile’s main fibre is ______.",
+      "answer": "flax",
+      "explanation": "Laboratory work identifies flax.",
+      "options": []
+    },
+    {
+      "number": 32,
+      "section": "L4",
+      "type": "text",
+      "prompt": "Traces of ______ were found near the edge.",
+      "answer": "iron",
+      "explanation": "The darker edge contains iron.",
+      "options": []
+    },
+    {
+      "number": 33,
+      "section": "L4",
+      "type": "mcq",
+      "prompt": "What is used first to remove loose dust?",
+      "answer": "A",
+      "explanation": "The conservator uses a soft brush.",
+      "options": [
+        "A. A soft brush",
+        "B. A washing machine",
+        "C. A chemical spray"
+      ]
+    },
+    {
+      "number": 34,
+      "section": "L4",
+      "type": "text",
+      "prompt": "A ______ test checks whether the cloth is too acidic.",
+      "answer": "pH",
+      "explanation": "The lecturer mentions a pH test.",
+      "options": []
+    },
+    {
+      "number": 35,
+      "section": "L4",
+      "type": "text",
+      "prompt": "A fine piece of ______ may support the cloth.",
+      "answer": "silk",
+      "explanation": "Silk can be placed behind it.",
+      "options": []
+    },
+    {
+      "number": 36,
+      "section": "L4",
+      "type": "text",
+      "prompt": "Storage humidity is about ______ percent.",
+      "answer": "50",
+      "explanation": "The target is fifty percent relative humidity.",
+      "options": []
+    },
+    {
+      "number": 37,
+      "section": "L4",
+      "type": "text",
+      "prompt": "Display light should not exceed ______ lux.",
+      "answer": "50",
+      "explanation": "The recommended maximum is fifty lux.",
+      "options": []
+    },
+    {
+      "number": 38,
+      "section": "L4",
+      "type": "mcq",
+      "prompt": "Why might a newly acquired textile be frozen?",
+      "answer": "B",
+      "explanation": "Freezing can kill many pests.",
+      "options": [
+        "A. To change its colour",
+        "B. To kill insects",
+        "C. To make it easier to fold"
+      ]
+    },
+    {
+      "number": 39,
+      "section": "L4",
+      "type": "text",
+      "prompt": "Treatment is documented with written notes and ______.",
+      "answer": "photographs",
+      "explanation": "The lecturer lists photographs and written notes.",
+      "options": []
+    },
+    {
+      "number": 40,
+      "section": "L4",
+      "type": "text",
+      "prompt": "The object is reviewed every ______.",
+      "answer": "year",
+      "explanation": "It is reviewed every year.",
+      "options": []
+    }
+  ]
+}

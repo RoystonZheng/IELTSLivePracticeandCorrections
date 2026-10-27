@@ -1,0 +1,648 @@
+{
+  "id": "original-academic-reading-01",
+  "title": "原创 Academic Reading 模考 01",
+  "sourceType": "original_practice",
+  "notice": "原创练习，不是雅思真题、考生回忆原文或官方授权试卷。40题、60分钟，文章长度接近学术类阅读练习。",
+  "durationMinutes": 60,
+  "passages": [
+    {
+      "id": "P1",
+      "title": "A Working Marsh in the City",
+      "subtitle": "An original practice passage inspired by urban ecology, not an IELTS recall",
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "In 2018, a coastal city converted a disused loading yard beside the Alder Creek into a fourteen-hectare public marsh. The site had once been sealed under concrete, so rain ran quickly into the street drains. Planners wanted a place that could hold some stormwater, provide habitat and give residents access to a landscape that had largely disappeared from the district. They did not describe the project as a substitute for the city’s flood-defence system. Instead, it was intended to be one part of a wider programme that also repaired drains and raised several vulnerable entrances. Before construction, the yard had become a place people crossed quickly rather than visited. Its conversion required removing damaged paving and testing the soil, then allowing native plants to establish over several growing seasons."
+        },
+        {
+          "label": "B",
+          "text": "The design team shaped the ground into terraces at three different elevations. The lowest terrace is frequently reached by brackish water, the middle terrace is wet after storms, and the upper terrace remains relatively dry. Each zone supports different plants. Sensors record water depth and salt levels, helping the gardeners decide where young plants are likely to survive. This arrangement matters because a single flat basin would provide fewer conditions for wildlife and would be more difficult to maintain after a very high tide. The terraces also let the designers observe gradual change. If salt reaches farther inland after a storm, a plant on the middle level may struggle, while one on the lowest level may continue to thrive."
+        },
+        {
+          "label": "C",
+          "text": "Some residents initially worried that the marsh would produce mosquitoes. The project team therefore avoided isolated pools: channels allow water to move in and out with the tides twice a day. A survey found fewer mosquito larvae at the site after restoration than in the abandoned yard’s blocked drains. Dragonflies and small fish also feed on larvae. The managers decided against broad pesticide spraying because it could harm those predators, although they continue to inspect the channels after storms. The survey counted larvae at several fixed points rather than relying on complaints alone. Inspectors repeated the count at similar times of year because temperature and rainfall can change mosquito populations independently of the project."
+        },
+        {
+          "label": "D",
+          "text": "A raised boardwalk lets visitors cross the central part without stepping on plants. Local teachers used it for thirty-two class visits in the first full school year. A smaller path near nesting birds is closed from April to July, while other viewing areas remain available. Signs ask visitors to stay on the boards and explain why even a short step into the reeds can damage new shoots. Volunteers lead occasional walks, but trained staff still inspect the structures and water controls. Teachers prepared questions before visiting and asked pupils to note evidence rather than merely name species. The class visits were educational uses of the space, not a claim that every part of the marsh should be open to crowds."
+        },
+        {
+          "label": "E",
+          "text": "During a major storm in 2022, a gauge on a street beside the marsh recorded water eighteen centimetres below the level measured at a comparable upstream street. The result attracted attention, but the engineers cautioned against treating it as proof that the marsh alone prevented flooding. Drainage pipes were improved in the same year, rainfall varied across the neighbourhood, and the two gauges were not a controlled experiment. The data support further monitoring rather than a simple claim of cause and effect. For later storms, the engineers plan to place more gauges and publish the observations together with rainfall data. Even an improved comparison will need care, since buildings and pavement direct water in complex ways."
+        },
+        {
+          "label": "F",
+          "text": "Wildlife surveys offer a similarly careful story. Observers recorded seven fish species in the creek in 2023, compared with three before construction. The wider river was also becoming cleaner over this period, so the increase cannot confidently be assigned to the new marsh alone. The team now compares data with other creeks that did not receive a restoration project. Such comparisons are slower than a celebratory headline, but they make the findings more useful to future designers. The team also records when surveys take place. A change in season or counting method could make two species lists look different even if the fish community had not changed very much."
+        },
+        {
+          "label": "G",
+          "text": "The largest long-term question is maintenance. Construction was funded by a one-off capital grant, while litter removal, sensor replacement and boardwalk repairs require money every year. A neighbourhood group helps with planting days and observations, yet it cannot replace the engineers responsible for flood controls. The council has set aside a small recurring budget and will review it annually. The marsh is therefore best understood as living infrastructure: its value depends on continued care as well as its initial design. A maintenance plan lists who should respond when a sensor fails, a path becomes unsafe or a channel fills with litter. Without assigned responsibilities, small problems could remain unnoticed until a storm exposes them."
+        }
+      ]
+    },
+    {
+      "id": "P2",
+      "title": "How a Port Learned to Keep Time",
+      "subtitle": "An original practice passage about changing time signals",
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "For most of the eighteenth century, people in the harbour town of Bellport did not expect every clock to agree. Church bells, the sun and a noon gun provided public cues, but these were sufficient mainly for local routines. A merchant could arrange to meet after the market bell without needing a minute-by-minute schedule. Ships were different: navigators needed a reliable time reference to estimate longitude. Their need for precision was one reason that new instruments began to enter port life. This was not simply a story of inaccurate people becoming accurate. Different activities demanded different degrees of agreement, and the time needed for an ordinary sale differed from the time needed for ocean navigation."
+        },
+        {
+          "label": "B",
+          "text": "Marine chronometers offered time that could travel with a vessel. Their early versions were expensive and demanded careful handling; a shock or neglected winding could undermine a reading. A captain compared the chronometer with a known local signal before departure and checked it again whenever possible. The instrument did not eliminate the need for public time. Rather, it made the quality of that public reference more important to a growing number of sailors. A skilled owner learned the instrument's usual rate of gain or loss and noted it in a log. Two instruments could disagree slightly without either being useless, provided the navigator understood how each behaved."
+        },
+        {
+          "label": "C",
+          "text": "In 1836, the Bellport observatory installed a large time ball on its roof. At one o’clock in the afternoon, an assistant dropped the ball so that crews in the harbour could compare their chronometers at the same visible moment. A flag had been tried earlier, but its movement was harder to distinguish against a busy skyline. The ball worked well in clear weather; fog or heavy rain could hide it completely. The observatory kept a log of missed signals and posted corrections at the quay. A messenger could carry a written correction to crews that missed a signal. This slower method was still valuable, because an apparently precise chronometer reading is misleading if it is compared with the wrong reference time."
+        },
+        {
+          "label": "D",
+          "text": "The arrival of the telegraph allowed time measured at a central observatory to reach many towns almost instantly. Railway companies pressed for a shared standard because a timetable written in several local solar times could confuse passengers and staff. Some Bellport shopkeepers objected, arguing that the new clock time no longer matched the sun above their own town. Others welcomed the predictability. The change was negotiated gradually, with public clocks and railway notices displaying both systems for several years. Printed timetables therefore became instruments of persuasion as well as information. A traveller who saw the same departure time posted in two towns began to expect clocks there to agree, even when older habits persisted."
+        },
+        {
+          "label": "E",
+          "text": "A municipal clock installed in 1896 was more than a practical device. Its four illuminated faces could be seen from the docks, the station and the market. Officials promised weekly inspection and displayed a notice whenever the mechanism required repair. Newspapers treated a stopped clock as evidence that the council had broken a public promise. The clock became a visible statement that common time belonged to everyone, even though the machinery behind that promise was still imperfect. The public notice mattered because it admitted an error rather than hiding it. Citizens could compare the official display with their own watches and decide whether the promised inspections were actually being carried out."
+        },
+        {
+          "label": "F",
+          "text": "Radio signals spread in the following century and gave clockmakers another way to check their work. They did not make every street clock unnecessary: people still needed an easily visible display, especially where radio receivers were rare or costly. The signal also had to be interpreted correctly by the equipment receiving it. Accurate timekeeping was thus a chain of measurements and maintenance, not a single invention that solved every earlier problem. Many households learned about radio time through ordinary broadcasts rather than specialist equipment. Yet a signal received late or recorded carelessly could still introduce error, reminding users that distribution was different from interpretation."
+        },
+        {
+          "label": "G",
+          "text": "Today, phones often obtain time from network services linked to satellite systems. This can make an ordinary display remarkably accurate, but a port still keeps independent references for safety. A failed network connection should not leave a rescue crew unable to coordinate its logs. Bellport’s old time ball is now operated for visitors once a week. It reminds them that a trusted clock depends on people, agreed standards and backup arrangements as much as on the device in front of them. The weekly demonstration is deliberately separate from the port's safety system. It offers a way to understand the earlier technology without asking modern crews to depend on a nineteenth-century device for emergency work."
+        }
+      ]
+    },
+    {
+      "id": "P3",
+      "title": "What a Seed Bank Can and Cannot Save",
+      "subtitle": "An original practice passage on crop diversity",
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "A field planted with one highly productive crop variety can yield a great deal under familiar conditions. It can also become vulnerable if a disease or drought affects that variety particularly badly. Seed banks preserve samples of different varieties so that breeders and farmers have more options in the future. This is a form of insurance, but it does not protect a harvest automatically: someone must identify useful traits, grow plants and make seed available in time. Some traditional varieties may yield less in a good year but offer useful tolerance in a difficult one. Deciding which seeds to keep is therefore not only about maximizing the next harvest; it is about retaining options."
+        },
+        {
+          "label": "B",
+          "text": "Many crop seeds are described as orthodox, meaning that they tolerate careful drying and cold storage. Staff first reduce their moisture content, seal them in suitable containers and place them at a low temperature. The method slows deterioration, but does not stop it forever. The bank records the original source of each sample and checks storage conditions continuously. A freezer full of anonymous packets would be far less useful than a smaller collection with clear records. Staff also label every container so that two similar-looking samples cannot be confused. A routine inventory check finds damaged seals early, before moisture enters and makes an entire packet less useful for later study."
+        },
+        {
+          "label": "C",
+          "text": "Other plants produce seeds that cannot survive the same treatment. These are sometimes called recalcitrant seeds. For such species, a living field collection may be maintained, or tiny pieces of tissue may be preserved using cryopreservation. Both approaches demand specialist care. A field collection can be damaged by the same storm that threatens farmers, while a tissue sample may require laboratory work before it becomes a healthy plant again. A field collection is visible and can be studied as a growing plant, which is an advantage. It also requires land, labour and protection from pests every season, unlike a packet kept safely in cold storage."
+        },
+        {
+          "label": "D",
+          "text": "Stored seeds must be tested for viability. A small sample is taken from a packet and a germination test measures how many seeds still grow. If the rate falls too low, staff plant some seeds to produce a fresh generation. That regeneration step is not neutral: selecting only the fastest-growing plants can cause genetic drift, gradually changing the collection. Managers therefore set rules for sample size and for recording which plants contribute to the new seed. Managers cannot test every seed without consuming the collection they hope to protect. They balance the information gained from a test against the number of seeds removed, and schedule further tests according to earlier results."
+        },
+        {
+          "label": "E",
+          "text": "Records are as important as the containers. Metadata may include the collection site, climate, farmer’s description and conditions under which a sample may be shared. Some communities require consent before their locally developed varieties are used in research or commercial breeding. A bank that ignores these terms could lose trust even if its scientific storage work is excellent. Sharing seeds responsibly requires legal and social care alongside biological knowledge. A detailed record may also explain how a farmer used a variety or which name a community gave it. Such information is not a substitute for consent, but it helps future users ask better questions."
+        },
+        {
+          "label": "F",
+          "text": "Consider a fictional farming district called Northfield. After an unusually dry season, its farmers asked for varieties that had previously grown under limited rainfall. The seed bank could identify candidate packets because it had recorded where they came from. However, the packets contained only small quantities. Farmers had to multiply the seed over several growing cycles before it could cover many fields. Storage created an option; local production turned that option into a practical response. The district tried several candidates in small plots before choosing which to multiply. That step mattered because a variety remembered as drought-tolerant elsewhere might respond differently to Northfield's soil or farming practices."
+        },
+        {
+          "label": "G",
+          "text": "A seed bank is consequently one part of a broader system. Researchers, extension workers and farmers must test whether stored varieties suit current soil, weather and food needs. Keeping diversity in farmers’ fields also allows plants to continue adapting outside a freezer. The strongest strategy combines safe storage, accurate metadata, respectful access rules and continued cultivation. None of these measures removes uncertainty, but together they leave more choices open when conditions change. There is no single shelf on which every future food problem can be solved. Still, a well-run bank can make a crisis less irreversible by keeping choices available to the people who must make decisions."
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "passage": "P1",
+      "type": "tfng",
+      "prompt": "The restored marsh was built on a former loading yard.",
+      "options": [],
+      "answer": "TRUE",
+      "evidence": "A",
+      "explanation": "The site is described as a disused loading yard."
+    },
+    {
+      "number": 2,
+      "passage": "P1",
+      "type": "tfng",
+      "prompt": "All three terraces receive brackish water at every high tide.",
+      "options": [],
+      "answer": "FALSE",
+      "evidence": "B",
+      "explanation": "Only the lowest terrace is frequently reached by brackish water."
+    },
+    {
+      "number": 3,
+      "passage": "P1",
+      "type": "tfng",
+      "prompt": "Managers used broad pesticide spraying to control mosquito larvae.",
+      "options": [],
+      "answer": "FALSE",
+      "evidence": "C",
+      "explanation": "They decided against broad pesticide spraying."
+    },
+    {
+      "number": 4,
+      "passage": "P1",
+      "type": "tfng",
+      "prompt": "The 2022 gauge readings prove that the marsh alone prevented flooding.",
+      "options": [],
+      "answer": "FALSE",
+      "evidence": "E",
+      "explanation": "The drainage upgrades and different rainfall prevent that causal conclusion."
+    },
+    {
+      "number": 5,
+      "passage": "P1",
+      "type": "tfng",
+      "prompt": "Volunteers have replaced all paid maintenance staff.",
+      "options": [],
+      "answer": "FALSE",
+      "evidence": "D and G",
+      "explanation": "Trained staff still inspect the structures and flood controls."
+    },
+    {
+      "number": 6,
+      "passage": "P1",
+      "type": "tfng",
+      "prompt": "The marsh increased the sales of nearby cafés.",
+      "options": [],
+      "answer": "NOT GIVEN",
+      "evidence": "A-G",
+      "explanation": "The passage does not report café sales."
+    },
+    {
+      "number": 7,
+      "passage": "P1",
+      "type": "text",
+      "prompt": "The restored site covers fourteen ______.",
+      "options": [],
+      "answer": "hectares",
+      "evidence": "A",
+      "explanation": "The missing word appears in the cited paragraph."
+    },
+    {
+      "number": 8,
+      "passage": "P1",
+      "type": "text",
+      "prompt": "Water moves through the channels with the ______ twice daily.",
+      "options": [],
+      "answer": "tides",
+      "evidence": "C",
+      "explanation": "The missing word appears in the cited paragraph."
+    },
+    {
+      "number": 9,
+      "passage": "P1",
+      "type": "text",
+      "prompt": "The path by the nesting birds is closed from ______ to July.",
+      "options": [],
+      "answer": "April",
+      "evidence": "D",
+      "explanation": "The missing word appears in the cited paragraph."
+    },
+    {
+      "number": 10,
+      "passage": "P1",
+      "type": "text",
+      "prompt": "The later survey recorded ______ fish species.",
+      "options": [],
+      "answer": "seven",
+      "evidence": "F",
+      "explanation": "The missing word appears in the cited paragraph."
+    },
+    {
+      "number": 11,
+      "passage": "P1",
+      "type": "mcq",
+      "prompt": "Why do the engineers avoid a simple conclusion about the 2022 storm?",
+      "options": [
+        "A. The gauge was broken.",
+        "B. Other changes occurred at the same time.",
+        "C. The marsh had not been built.",
+        "D. No street water level was measured."
+      ],
+      "answer": "B",
+      "evidence": "E",
+      "explanation": "Drainage pipes were upgraded in the same year."
+    },
+    {
+      "number": 12,
+      "passage": "P1",
+      "type": "mcq",
+      "prompt": "Why was broad pesticide spraying rejected?",
+      "options": [
+        "A. It was too expensive.",
+        "B. Residents asked for more mosquitoes.",
+        "C. It might harm animals that eat larvae.",
+        "D. The water never contains larvae."
+      ],
+      "answer": "C",
+      "evidence": "C",
+      "explanation": "It could harm predators such as dragonflies and fish."
+    },
+    {
+      "number": 13,
+      "passage": "P1",
+      "type": "mcq",
+      "prompt": "What is the passage’s main long-term concern?",
+      "options": [
+        "A. Funding and carrying out continuing maintenance.",
+        "B. Finding an entirely new location.",
+        "C. Removing every plant from the terraces.",
+        "D. Preventing teachers from visiting."
+      ],
+      "answer": "A",
+      "evidence": "G",
+      "explanation": "Maintenance needs a recurring budget after the capital grant."
+    },
+    {
+      "number": 14,
+      "passage": "P2",
+      "type": "heading",
+      "prompt": "Choose the best heading for paragraph A.",
+      "options": [
+        "i. Local time cues before precision mattered",
+        "ii. Portable precision for ships",
+        "iii. A public visual signal with limits",
+        "iv. Pressure for a shared network time",
+        "v. A clock as a civic promise",
+        "vi. Radio replaces every clock",
+        "vii. Satellites end the need for backup",
+        "viii. A port abandons navigation"
+      ],
+      "answer": "i",
+      "evidence": "A",
+      "explanation": "This heading expresses the paragraph’s main idea."
+    },
+    {
+      "number": 15,
+      "passage": "P2",
+      "type": "heading",
+      "prompt": "Choose the best heading for paragraph B.",
+      "options": [
+        "i. Local time cues before precision mattered",
+        "ii. Portable precision for ships",
+        "iii. A public visual signal with limits",
+        "iv. Pressure for a shared network time",
+        "v. A clock as a civic promise",
+        "vi. Radio replaces every clock",
+        "vii. Satellites end the need for backup",
+        "viii. A port abandons navigation"
+      ],
+      "answer": "ii",
+      "evidence": "B",
+      "explanation": "This heading expresses the paragraph’s main idea."
+    },
+    {
+      "number": 16,
+      "passage": "P2",
+      "type": "heading",
+      "prompt": "Choose the best heading for paragraph C.",
+      "options": [
+        "i. Local time cues before precision mattered",
+        "ii. Portable precision for ships",
+        "iii. A public visual signal with limits",
+        "iv. Pressure for a shared network time",
+        "v. A clock as a civic promise",
+        "vi. Radio replaces every clock",
+        "vii. Satellites end the need for backup",
+        "viii. A port abandons navigation"
+      ],
+      "answer": "iii",
+      "evidence": "C",
+      "explanation": "This heading expresses the paragraph’s main idea."
+    },
+    {
+      "number": 17,
+      "passage": "P2",
+      "type": "heading",
+      "prompt": "Choose the best heading for paragraph D.",
+      "options": [
+        "i. Local time cues before precision mattered",
+        "ii. Portable precision for ships",
+        "iii. A public visual signal with limits",
+        "iv. Pressure for a shared network time",
+        "v. A clock as a civic promise",
+        "vi. Radio replaces every clock",
+        "vii. Satellites end the need for backup",
+        "viii. A port abandons navigation"
+      ],
+      "answer": "iv",
+      "evidence": "D",
+      "explanation": "This heading expresses the paragraph’s main idea."
+    },
+    {
+      "number": 18,
+      "passage": "P2",
+      "type": "heading",
+      "prompt": "Choose the best heading for paragraph E.",
+      "options": [
+        "i. Local time cues before precision mattered",
+        "ii. Portable precision for ships",
+        "iii. A public visual signal with limits",
+        "iv. Pressure for a shared network time",
+        "v. A clock as a civic promise",
+        "vi. Radio replaces every clock",
+        "vii. Satellites end the need for backup",
+        "viii. A port abandons navigation"
+      ],
+      "answer": "v",
+      "evidence": "E",
+      "explanation": "This heading expresses the paragraph’s main idea."
+    },
+    {
+      "number": 19,
+      "passage": "P2",
+      "type": "tfng",
+      "prompt": "Early marine chronometers were inexpensive.",
+      "options": [],
+      "answer": "FALSE",
+      "evidence": "B",
+      "explanation": "Their early versions were expensive."
+    },
+    {
+      "number": 20,
+      "passage": "P2",
+      "type": "tfng",
+      "prompt": "The time ball was dropped at one o’clock.",
+      "options": [],
+      "answer": "TRUE",
+      "evidence": "C",
+      "explanation": "The assistant dropped it at one o’clock."
+    },
+    {
+      "number": 21,
+      "passage": "P2",
+      "type": "tfng",
+      "prompt": "Bad weather could make the time ball impossible to see.",
+      "options": [],
+      "answer": "TRUE",
+      "evidence": "C",
+      "explanation": "Fog or heavy rain could hide it."
+    },
+    {
+      "number": 22,
+      "passage": "P2",
+      "type": "tfng",
+      "prompt": "All Bellport shopkeepers welcomed standard time immediately.",
+      "options": [],
+      "answer": "FALSE",
+      "evidence": "D",
+      "explanation": "Some objected while others welcomed it."
+    },
+    {
+      "number": 23,
+      "passage": "P2",
+      "type": "tfng",
+      "prompt": "Radio signals caused all public clocks to be removed.",
+      "options": [],
+      "answer": "FALSE",
+      "evidence": "F",
+      "explanation": "The passage explicitly says radio did not make street clocks unnecessary."
+    },
+    {
+      "number": 24,
+      "passage": "P2",
+      "type": "mcq",
+      "prompt": "Why did crews watch the time ball?",
+      "options": [
+        "A. To compare their chronometers.",
+        "B. To predict fog.",
+        "C. To advertise a market.",
+        "D. To measure ship speed."
+      ],
+      "answer": "A",
+      "evidence": "C",
+      "explanation": "They compared chronometers at the same visible moment."
+    },
+    {
+      "number": 25,
+      "passage": "P2",
+      "type": "mcq",
+      "prompt": "What pushed towns toward a shared standard time?",
+      "options": [
+        "A. New church bells.",
+        "B. The cost of flags.",
+        "C. An annual festival.",
+        "D. The need for clear railway timetables."
+      ],
+      "answer": "D",
+      "evidence": "D",
+      "explanation": "Railway timetables written in local times could confuse people."
+    },
+    {
+      "number": 26,
+      "passage": "P2",
+      "type": "mcq",
+      "prompt": "Why does the modern port keep independent time references?",
+      "options": [
+        "A. Satellites are always wrong.",
+        "B. To continue coordinating during network failures.",
+        "C. To sell old clocks.",
+        "D. To avoid recording rescue activity."
+      ],
+      "answer": "B",
+      "evidence": "G",
+      "explanation": "A network failure should not disrupt safety logs."
+    },
+    {
+      "number": 27,
+      "passage": "P3",
+      "type": "matching",
+      "prompt": "Preserving a tiny piece of plant material at extremely low temperature.",
+      "options": [
+        "A. dry and cold storage",
+        "B. living field collection",
+        "C. cryopreservation of tissue",
+        "D. germination test",
+        "E. metadata record",
+        "F. regeneration"
+      ],
+      "answer": "C",
+      "evidence": "C",
+      "explanation": "Cryopreservation is used for tissue."
+    },
+    {
+      "number": 28,
+      "passage": "P3",
+      "type": "matching",
+      "prompt": "Growing fresh seeds when viability declines.",
+      "options": [
+        "A. dry and cold storage",
+        "B. living field collection",
+        "C. cryopreservation of tissue",
+        "D. germination test",
+        "E. metadata record",
+        "F. regeneration"
+      ],
+      "answer": "F",
+      "evidence": "D",
+      "explanation": "Regeneration produces a fresh generation."
+    },
+    {
+      "number": 29,
+      "passage": "P3",
+      "type": "matching",
+      "prompt": "Recording where a variety was collected and how it may be shared.",
+      "options": [
+        "A. dry and cold storage",
+        "B. living field collection",
+        "C. cryopreservation of tissue",
+        "D. germination test",
+        "E. metadata record",
+        "F. regeneration"
+      ],
+      "answer": "E",
+      "evidence": "E",
+      "explanation": "Metadata covers origin and access terms."
+    },
+    {
+      "number": 30,
+      "passage": "P3",
+      "type": "matching",
+      "prompt": "Checking how many stored seeds still sprout.",
+      "options": [
+        "A. dry and cold storage",
+        "B. living field collection",
+        "C. cryopreservation of tissue",
+        "D. germination test",
+        "E. metadata record",
+        "F. regeneration"
+      ],
+      "answer": "D",
+      "evidence": "D",
+      "explanation": "A germination test measures viable growth."
+    },
+    {
+      "number": 31,
+      "passage": "P3",
+      "type": "matching",
+      "prompt": "Keeping a species alive as plants outdoors.",
+      "options": [
+        "A. dry and cold storage",
+        "B. living field collection",
+        "C. cryopreservation of tissue",
+        "D. germination test",
+        "E. metadata record",
+        "F. regeneration"
+      ],
+      "answer": "B",
+      "evidence": "C",
+      "explanation": "A living field collection maintains plants."
+    },
+    {
+      "number": 32,
+      "passage": "P3",
+      "type": "matching",
+      "prompt": "Sealing moisture-reduced seeds in containers at low temperature.",
+      "options": [
+        "A. dry and cold storage",
+        "B. living field collection",
+        "C. cryopreservation of tissue",
+        "D. germination test",
+        "E. metadata record",
+        "F. regeneration"
+      ],
+      "answer": "A",
+      "evidence": "B",
+      "explanation": "The orthodox-seed method uses drying and cold storage."
+    },
+    {
+      "number": 33,
+      "passage": "P3",
+      "type": "text",
+      "prompt": "Orthodox seeds can tolerate drying and storage at a low ______.",
+      "options": [],
+      "answer": "temperature",
+      "evidence": "B",
+      "explanation": "The missing word appears in the cited paragraph."
+    },
+    {
+      "number": 34,
+      "passage": "P3",
+      "type": "text",
+      "prompt": "A ______ test measures how many seeds still grow.",
+      "options": [],
+      "answer": "germination",
+      "evidence": "D",
+      "explanation": "The missing word appears in the cited paragraph."
+    },
+    {
+      "number": 35,
+      "passage": "P3",
+      "type": "text",
+      "prompt": "Selection during regeneration may cause genetic ______.",
+      "options": [],
+      "answer": "drift",
+      "evidence": "D",
+      "explanation": "The missing word appears in the cited paragraph."
+    },
+    {
+      "number": 36,
+      "passage": "P3",
+      "type": "text",
+      "prompt": "Some communities require ______ before their varieties are used.",
+      "options": [],
+      "answer": "consent",
+      "evidence": "E",
+      "explanation": "The missing word appears in the cited paragraph."
+    },
+    {
+      "number": 37,
+      "passage": "P3",
+      "type": "text",
+      "prompt": "In Northfield, the small seed supply had to be multiplied by ______.",
+      "options": [],
+      "answer": "farmers",
+      "evidence": "F",
+      "explanation": "The missing word appears in the cited paragraph."
+    },
+    {
+      "number": 38,
+      "passage": "P3",
+      "type": "mcq",
+      "prompt": "Which problem can affect a living field collection?",
+      "options": [
+        "A. It cannot be observed.",
+        "B. It always loses its records.",
+        "C. It may be damaged by a storm.",
+        "D. It needs no specialist care."
+      ],
+      "answer": "C",
+      "evidence": "C",
+      "explanation": "The same storm can damage it."
+    },
+    {
+      "number": 39,
+      "passage": "P3",
+      "type": "mcq",
+      "prompt": "What did the Northfield example mainly show?",
+      "options": [
+        "A. Storage creates an option that still needs local multiplication.",
+        "B. Every bank has enough seed for all farms.",
+        "C. Metadata has no practical value.",
+        "D. Drought never changes crop choices."
+      ],
+      "answer": "A",
+      "evidence": "F",
+      "explanation": "Stored seed must be multiplied before wide practical use."
+    },
+    {
+      "number": 40,
+      "passage": "P3",
+      "type": "mcq",
+      "prompt": "What is the author’s overall view of seed banks?",
+      "options": [
+        "A. They eliminate crop risk by themselves.",
+        "B. They should replace all field farming.",
+        "C. They are useful only for research museums.",
+        "D. They are one part of a broader diversity strategy."
+      ],
+      "answer": "D",
+      "evidence": "G",
+      "explanation": "They work best with records, access rules and cultivation."
+    }
+  ]
+}
