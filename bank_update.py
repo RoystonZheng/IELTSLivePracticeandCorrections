@@ -23,7 +23,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Event, Semaphore, Thread
 from urllib.error import HTTPError
-from urllib.parse import urljoin, urlparse
+from urllib.parse import unquote, urljoin, urlparse
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
@@ -387,6 +387,7 @@ AI_SLOT = Semaphore(1)
 
 def make_handler():
     from ai_bridge import build_case, cli_available, run_codex
+    from pdf_import import MAX_PDF_BYTES, parse_pdf
 
     class Handler(SimpleHTTPRequestHandler):
         def __init__(self, *args, **kwargs):
@@ -421,7 +422,7 @@ def make_handler():
             super().do_GET()
 
         def do_POST(self) -> None:
-            if self.path != "/api/feedback":
+            if self.path not in {"/api/feedback", "/api/import-pdf"}:
                 self.send_json(404, {"error": "接口不存在"})
                 return
             origin = urlparse(self.headers.get("Origin", ""))
@@ -430,8 +431,26 @@ def make_handler():
                              and origin.port == self.server.server_port)
             except ValueError:
                 origin_ok = False
-            if not self.local_request() or not origin_ok or not self.headers.get("Content-Type", "").startswith("application/json"):
+            content_type = self.headers.get("Content-Type", "")
+            expected_type = "application/pdf" if self.path == "/api/import-pdf" else "application/json"
+            if not self.local_request() or not origin_ok or not content_type.startswith(expected_type):
                 self.send_json(403, {"error": "仅允许当前本地页面提交"})
+                return
+            if self.path == "/api/import-pdf":
+                try:
+                    size = int(self.headers.get("Content-Length", "0"))
+                    if not 1 <= size <= MAX_PDF_BYTES:
+                        raise ValueError("PDF 须小于 20 MB")
+                    skill = self.headers.get("X-IELTS-Skill", "")
+                    filename = unquote(self.headers.get("X-IELTS-Filename", "paper.pdf"))
+                    result = parse_pdf(self.rfile.read(size), skill, filename)
+                except ValueError as exc:
+                    self.send_json(400, {"error": str(exc)[:200]})
+                    return
+                except RuntimeError as exc:
+                    self.send_json(503, {"error": str(exc)[:200]})
+                    return
+                self.send_json(200, result)
                 return
             try:
                 size = int(self.headers.get("Content-Length", "0"))
