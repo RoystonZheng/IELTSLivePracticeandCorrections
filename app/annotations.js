@@ -2,6 +2,7 @@
 'use strict';
 
 const COLORS = ['yellow', 'green', 'pink'];
+const COLOR_NAMES = {yellow:'黄色', green:'绿色', pink:'粉色'};
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
 function validRecords(records, length) {
@@ -26,7 +27,7 @@ function renderMarkedText(source, records) {
     const classes = ['annot-mark'];
     if (highlight) classes.push('annot-highlight', `annot-${highlight.color}`);
     if (note) classes.push('annot-note-mark');
-    html += `<span class="${classes.join(' ')}"${highlight ? ` data-annot-highlight="${escapeHtml(highlight.id)}"` : ''}${note ? ` data-annot-note="${escapeHtml(note.id)}"` : ''} title="${note ? `笔记：${escapeHtml(note.text)}；单击删除` : '单击取消高光'}">${part}</span>`;
+    html += `<span class="${classes.join(' ')}"${highlight ? ` data-annot-highlight="${escapeHtml(highlight.id)}"` : ''}${note ? ` data-annot-note="${escapeHtml(note.id)}"` : ''} title="${note ? `笔记：${escapeHtml(note.text)}；单击查看操作` : `${COLOR_NAMES[highlight.color]}高光；单击查看操作`}">${part}</span>`;
   }
   return html;
 }
@@ -37,6 +38,9 @@ function create({getAttempt, persist, toast}) {
   let editorTarget = null;
   let toolbar;
   let editor;
+  let markMenu;
+  let markTarget = null;
+  let drawerOpenKind = null;
 
   function entries(kind, key, sourceLength) {
     const attempt = getAttempt(kind);
@@ -48,13 +52,43 @@ function create({getAttempt, persist, toast}) {
     return `<span class="annot-text" data-annot-kind="${escapeHtml(kind)}" data-annot-key="${escapeHtml(key)}" data-annot-source="${escapeHtml(text)}">${renderMarkedText(text, entries(kind, key, text.length))}</span>`;
   }
 
-  function notesHtml(kind, prefix) {
+  function allNotes(kind) {
     const attempt = getAttempt(kind);
-    const matches = key => Array.isArray(prefix) ? prefix.some(item => key === item || key.startsWith(`${item}:opt:`)) : key.startsWith(prefix);
-    const scope = Array.isArray(prefix) ? `data-annot-keys="${escapeHtml(JSON.stringify(prefix))}"` : `data-annot-prefix="${escapeHtml(prefix)}"`;
-    const items = Object.entries(attempt?.annotations || {}).filter(([key]) => matches(key))
-      .flatMap(([key, records]) => (Array.isArray(records) ? records : []).filter(item => item?.type === 'note' && item.text).map(item => ({key, ...item})));
-    return `<details class="annot-notes-panel" data-annot-notes-panel data-annot-kind="${escapeHtml(kind)}" ${scope}><summary>选词笔记（${items.length}）</summary>${items.length ? items.map(item => `<div class="annot-note-item"><small>${escapeHtml(item.quote || '')}</small><p>${escapeHtml(item.text)}</p><button type="button" data-annot-edit="${escapeHtml(item.id)}" data-annot-key="${escapeHtml(item.key)}">编辑</button><button type="button" data-annot-delete="${escapeHtml(item.id)}" data-annot-key="${escapeHtml(item.key)}">删除</button></div>`).join('') : '<p class="annot-empty">选中原文或题干，点击“笔记”即可记录。</p>'}</details>`;
+    const inline = Object.entries(attempt?.annotations || {}).flatMap(([key, records]) =>
+      (Array.isArray(records) ? records : []).filter(item => item?.type === 'note' && item.text).map(item => ({key, ...item})));
+    const passages = kind === 'reading' ? Object.entries(attempt?.notes || {}).filter(([,value]) => String(value).trim()) : [];
+    return {inline, passages, count:inline.length + passages.length};
+  }
+
+  function locationLabel(kind, key) {
+    const parts = key.split(':');
+    if (parts[0] === 'p') return `Passage ${parts[1].replace(/\D/g,'')} · 段落 ${parts[2] || ''}`;
+    if (parts[0] === 'q') return `第 ${parts[1]} 题${parts[2] === 'opt' ? ` · 选项 ${parts[3]}` : ''}`;
+    if (parts[0] === 'ref') return `原文第 ${Number(parts[1]) + 1} 行`;
+    return key;
+  }
+
+  function noteListHtml(kind) {
+    const {inline, passages, count} = allNotes(kind);
+    if (!count) return '<p class="annot-empty">还没有笔记。选中原文或题干，点击“笔记”即可记录。</p>';
+    return `${passages.map(([id, value]) => `<article class="annot-note-item"><small>Passage ${escapeHtml(id.replace(/\D/g,''))} · 整篇笔记</small><p>${escapeHtml(value)}</p></article>`).join('')}${inline.map(item => `<article class="annot-note-item"><small>${escapeHtml(locationLabel(kind,item.key))} · “${escapeHtml(item.quote || '')}”</small><p>${escapeHtml(item.text)}</p><button type="button" data-annot-edit="${escapeHtml(item.id)}" data-annot-key="${escapeHtml(item.key)}">编辑</button><button type="button" data-annot-delete="${escapeHtml(item.id)}" data-annot-key="${escapeHtml(item.key)}">删除</button></article>`).join('')}`;
+  }
+
+  function drawerHtml(kind, currentPassage = '') {
+    const open = drawerOpenKind === kind;
+    const count = allNotes(kind).count;
+    const quickNote = kind === 'reading' && currentPassage ? `<label class="annot-quick-note">Passage ${escapeHtml(currentPassage.replace(/\D/g,''))} 整篇笔记<textarea data-passage-note="${escapeHtml(currentPassage)}" placeholder="记下本篇思路，自动保存">${escapeHtml(getAttempt(kind)?.notes?.[currentPassage] || '')}</textarea></label>` : '';
+    return `<button type="button" class="annot-drawer-toggle" data-annot-drawer-toggle="${escapeHtml(kind)}" aria-controls="annot-drawer" aria-expanded="${open}">✎ 全部笔记 <span data-annot-note-count>${count}</span></button><aside id="annot-drawer" class="annot-drawer" data-annot-drawer-kind="${escapeHtml(kind)}" aria-label="全部笔记" ${open ? '' : 'hidden'}><header><strong>全部笔记 <span data-annot-note-count>${count}</span></strong><button type="button" data-annot-drawer-close aria-label="收起笔记">收起 ×</button></header><div class="annot-drawer-scroll">${quickNote}<div data-annot-note-list>${noteListHtml(kind)}</div></div></aside>`;
+  }
+
+  function refreshDrawer(kind) {
+    const drawer = document.querySelector('[data-annot-drawer-kind]');
+    if (!drawer || drawer.dataset.annotDrawerKind !== kind) return;
+    const scroll = drawer.querySelector('.annot-drawer-scroll');
+    const scrollTop = scroll.scrollTop;
+    drawer.querySelector('[data-annot-note-list]').innerHTML = noteListHtml(kind);
+    scroll.scrollTop = scrollTop;
+    document.querySelectorAll('[data-annot-note-count]').forEach(node => { node.textContent = allNotes(kind).count; });
   }
 
   function refresh(kind, key) {
@@ -63,15 +97,7 @@ function create({getAttempt, persist, toast}) {
         element.innerHTML = renderMarkedText(element.dataset.annotSource, entries(kind, key, element.dataset.annotSource.length));
       }
     });
-    document.querySelectorAll('[data-annot-notes-panel]').forEach(panel => {
-      const scope = panel.dataset.annotKeys ? JSON.parse(panel.dataset.annotKeys) : panel.dataset.annotPrefix;
-      if (panel.dataset.annotKind !== kind || !(Array.isArray(scope) ? scope.some(item => key === item || key.startsWith(`${item}:opt:`)) : key.startsWith(scope))) return;
-      const replacement = document.createElement('div');
-      replacement.innerHTML = notesHtml(kind, scope);
-      const next = replacement.firstElementChild;
-      next.open = panel.open;
-      panel.replaceWith(next);
-    });
+    refreshDrawer(kind);
   }
 
   function update(kind, key, fn) {
@@ -106,7 +132,9 @@ function create({getAttempt, persist, toast}) {
     while (start < end && /\s/.test(source[start])) start++;
     while (end > start && /\s/.test(source[end - 1])) end--;
     if (end <= start || end > source.length) return null;
-    return {kind, key:startElement.dataset.annotKey, start, end, quote:source.slice(start, end), rect:range.getBoundingClientRect()};
+    const key = startElement.dataset.annotKey;
+    const current = entries(kind,key,source.length).find(item => item.type === 'highlight' && item.start <= start && item.end >= end);
+    return {kind, key, start, end, quote:source.slice(start, end), color:current?.color || null, rect:range.getBoundingClientRect()};
   }
 
   function position(node, rect) {
@@ -118,6 +146,8 @@ function create({getAttempt, persist, toast}) {
 
   function hideToolbar() { if (toolbar) toolbar.hidden = true; selected = null; }
   function hideEditor() { if (editor) editor.hidden = true; editorTarget = null; }
+  function hideMarkMenu() { if (markMenu) markMenu.hidden = true; markTarget = null; }
+  function dismiss() { hideToolbar(); hideEditor(); hideMarkMenu(); }
 
   function showToolbar(data) {
     if (!toolbar) {
@@ -125,13 +155,38 @@ function create({getAttempt, persist, toast}) {
       toolbar.className = 'annot-toolbar';
       toolbar.setAttribute('role', 'toolbar');
       toolbar.setAttribute('aria-label', '选中文字后的高光和笔记工具');
-      toolbar.innerHTML = `<span>高光</span>${COLORS.map(color => `<button type="button" class="annot-color annot-${color}" data-annot-color="${color}" aria-label="${{yellow:'黄色',green:'绿色',pink:'粉色'}[color]}高光" title="${{yellow:'黄色',green:'绿色',pink:'粉色'}[color]}高光"></button>`).join('')}<button type="button" class="annot-note-button" data-annot-new-note>＋ 笔记</button>`;
+      toolbar.innerHTML = `<span data-annot-color-label>高光</span>${COLORS.map(color => `<button type="button" class="annot-color annot-${color}" data-annot-color="${color}" aria-label="${COLOR_NAMES[color]}高光" title="${COLOR_NAMES[color]}高光">${COLOR_NAMES[color][0]}</button>`).join('')}<button type="button" class="annot-note-button" data-annot-new-note>＋ 笔记</button>`;
       document.body.appendChild(toolbar);
     }
+    hideMarkMenu();
     selected = data;
     toolbar.hidden = false;
-    toolbar.querySelectorAll('[data-annot-color]').forEach(button => button.classList.toggle('chosen', button.dataset.annotColor === chosenColor));
+    toolbar.querySelector('[data-annot-color-label]').textContent = data.color ? `当前：${COLOR_NAMES[data.color]}` : '选择高光';
+    toolbar.querySelectorAll('[data-annot-color]').forEach(button => button.classList.toggle('chosen', button.dataset.annotColor === (data.color || chosenColor)));
     position(toolbar, data.rect);
+  }
+
+  function showMarkMenu(mark) {
+    const container = mark.closest('.annot-text');
+    const kind = container?.dataset.annotKind;
+    const key = container?.dataset.annotKey;
+    if (!kind || !getAttempt(kind) || getAttempt(kind).submittedAt) return;
+    const records = entries(kind,key,container.dataset.annotSource.length);
+    const highlight = records.find(item => item.id === mark.dataset.annotHighlight);
+    const note = records.find(item => item.id === mark.dataset.annotNote);
+    if (!highlight && !note) return;
+    if (!markMenu) {
+      markMenu = document.createElement('div');
+      markMenu.className = 'annot-mark-menu';
+      markMenu.setAttribute('role', 'group');
+      markMenu.setAttribute('aria-label', '标注操作');
+      document.body.appendChild(markMenu);
+    }
+    hideToolbar();
+    markTarget = {kind,key,highlightId:highlight?.id,noteId:note?.id,rect:mark.getBoundingClientRect()};
+    markMenu.innerHTML = `${highlight ? `<span class="annot-current-color annot-${highlight.color}">当前高光：${COLOR_NAMES[highlight.color]}</span><button type="button" data-annot-remove-type="highlight">取消高光</button>` : ''}${note ? `<p>笔记：${escapeHtml(note.text)}</p><button type="button" data-annot-edit-mark>编辑笔记</button><button type="button" data-annot-remove-type="note">删除笔记</button>` : ''}`;
+    markMenu.hidden = false;
+    position(markMenu, markTarget.rect);
   }
 
   function showEditor(target, value = '') {
@@ -181,7 +236,7 @@ function create({getAttempt, persist, toast}) {
   }
 
   document.addEventListener('mouseup', event => {
-    if (event.target.closest('.annot-toolbar,.annot-editor')) return;
+    if (event.target.closest('.annot-toolbar,.annot-editor,.annot-mark-menu,.annot-drawer')) return;
     const data = selectionData();
     if (data) showToolbar(data);
     else hideToolbar();
@@ -191,10 +246,27 @@ function create({getAttempt, persist, toast}) {
     if (data && event.target.closest('.annot-text')) { event.preventDefault(); showToolbar(data); }
   });
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') { hideToolbar(); hideEditor(); }
+    if (event.key === 'Escape') dismiss();
     if ((event.metaKey || event.ctrlKey) && event.key === 'Enter' && !editor?.hidden && editor?.contains(document.activeElement)) saveNote();
   });
   document.addEventListener('click', event => {
+    const drawerToggle = event.target.closest('[data-annot-drawer-toggle]');
+    if (drawerToggle) {
+      const kind = drawerToggle.dataset.annotDrawerToggle;
+      const drawer = document.querySelector('[data-annot-drawer-kind]');
+      drawerOpenKind = drawerOpenKind === kind ? null : kind;
+      drawer.hidden = drawerOpenKind !== kind;
+      drawerToggle.setAttribute('aria-expanded', String(!drawer.hidden));
+      hideMarkMenu();
+      return;
+    }
+    if (event.target.closest('[data-annot-drawer-close]')) {
+      const drawer = document.querySelector('[data-annot-drawer-kind]');
+      drawerOpenKind = null;
+      drawer.hidden = true;
+      document.querySelector('[data-annot-drawer-toggle]')?.setAttribute('aria-expanded','false');
+      return;
+    }
     const color = event.target.closest('[data-annot-color]');
     if (color) { addHighlight(color.dataset.annotColor); return; }
     if (event.target.closest('[data-annot-new-note]')) {
@@ -203,25 +275,41 @@ function create({getAttempt, persist, toast}) {
     }
     if (event.target.closest('[data-annot-save]')) { saveNote(); return; }
     if (event.target.closest('[data-annot-cancel]')) { hideEditor(); return; }
+    const removeAction = event.target.closest('[data-annot-remove-type]');
+    if (removeAction && markTarget) {
+      const type = removeAction.dataset.annotRemoveType;
+      const id = type === 'highlight' ? markTarget.highlightId : markTarget.noteId;
+      if (id) { remove(markTarget.kind, markTarget.key, id); toast(type === 'highlight' ? '高光已取消' : '笔记已删除'); }
+      hideMarkMenu();
+      return;
+    }
+    if (event.target.closest('[data-annot-edit-mark]') && markTarget) {
+      const {kind,key,noteId,rect} = markTarget;
+      const record = getAttempt(kind)?.annotations?.[key]?.find(item => item.id === noteId);
+      hideMarkMenu();
+      if (record) showEditor({kind,key,...record,rect},record.text);
+      return;
+    }
     const edit = event.target.closest('[data-annot-edit]');
     if (edit) {
-      const panel = edit.closest('[data-annot-notes-panel]');
-      const record = getAttempt(panel.dataset.annotKind)?.annotations?.[edit.dataset.annotKey]?.find(item => item.id === edit.dataset.annotEdit);
-      if (record) showEditor({kind:panel.dataset.annotKind, key:edit.dataset.annotKey, ...record, rect:edit.getBoundingClientRect()}, record.text);
+      const drawer = edit.closest('[data-annot-drawer-kind]');
+      const kind = drawer?.dataset.annotDrawerKind;
+      const record = getAttempt(kind)?.annotations?.[edit.dataset.annotKey]?.find(item => item.id === edit.dataset.annotEdit);
+      if (record) showEditor({kind, key:edit.dataset.annotKey, ...record, rect:edit.getBoundingClientRect()}, record.text);
       return;
     }
     const del = event.target.closest('[data-annot-delete]');
-    if (del) { const kind = del.closest('[data-annot-notes-panel]').dataset.annotKind; if (getAttempt(kind)) remove(kind, del.dataset.annotKey, del.dataset.annotDelete); return; }
+    if (del) { const kind = del.closest('[data-annot-drawer-kind]')?.dataset.annotDrawerKind; if (getAttempt(kind)) remove(kind, del.dataset.annotKey, del.dataset.annotDelete); return; }
     const mark = event.target.closest('.annot-mark');
     if (mark && window.getSelection()?.isCollapsed) {
       event.preventDefault();
-      const container = mark.closest('.annot-text');
-      const id = mark.dataset.annotNote || mark.dataset.annotHighlight;
-      if (id && getAttempt(container.dataset.annotKind)) { remove(container.dataset.annotKind, container.dataset.annotKey, id); toast(mark.dataset.annotNote ? '笔记已删除' : '高光已取消'); }
+      showMarkMenu(mark);
+      return;
     }
+    if (!event.target.closest('.annot-mark-menu')) hideMarkMenu();
   });
 
-  return {textHtml, notesHtml};
+  return {textHtml, drawerHtml, refreshDrawer, dismiss};
 }
 
 const api = {create, renderMarkedText, validRecords};

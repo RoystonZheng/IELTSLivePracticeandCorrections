@@ -49,7 +49,7 @@ test('imported reading practice annotates reference, question, and options', () 
   const annotated = [];
   const window = {IELTS_ANNOTATIONS_INSTANCE:{
     textHtml(kind, key, value) { annotated.push([kind, key, value]); return `<i data-key="${key}">${value}</i>`; },
-    notesHtml() { return '<aside>notes</aside>'; }
+    drawerHtml() { return '<aside data-annot-drawer-kind="pdf">notes</aside>'; }
   }};
   const context = {window, document:{getElementById() { return main; }},
     localStorage:{getItem() { return JSON.stringify([paper]); }, setItem() {}}, setTimeout, clearTimeout};
@@ -58,5 +58,6 @@ test('imported reading practice annotates reference, question, and options', () 
   assert.match(main.innerHTML, /data-key="ref:1"/);
   assert.match(main.innerHTML, /data-key="q:1"/);
   assert.match(main.innerHTML, /data-key="q:1:opt:A"/);
+  assert.match(main.innerHTML, /data-annot-drawer-kind="pdf"/);
   assert.deepEqual(annotated.map(item => item[0]), ['pdf','pdf','pdf','pdf','pdf']);
 });

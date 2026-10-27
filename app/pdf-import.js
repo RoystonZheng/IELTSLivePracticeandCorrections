@@ -25,6 +25,7 @@ function questionStatus(paper, question) {
   return normalize(paper.answers?.[question.number]) === normalize(question.answer) ? 'right' : 'wrong';
 }
 function render() {
+  window.IELTS_ANNOTATIONS_INSTANCE?.dismiss?.();
   if (draft) return renderPreview();
   if (activePaper()) return renderPractice(activePaper());
   renderLibrary();
@@ -92,8 +93,8 @@ function renderPractice(paper) {
   const shown = wrongOnly && submitted ? paper.questions.filter(q => questionStatus(paper,q) === 'wrong') : paper.questions;
   main.innerHTML = `<div class="page-head"><div><p class="kicker">Imported PDF practice</p><h1>${esc(paper.title)}</h1><p class="lede">${skillName(paper.skill)} · ${paper.pageCount} 页 · ${paper.questions.length} 题。${submitted ? '作答已提交，可逐题查看。' : '作答自动保存在当前浏览器。'}</p></div></div>
   <div class="toolbar"><button class="btn secondary" data-pdf-action="back">← 我的试卷</button>${submitted ? `<button class="btn secondary" data-pdf-action="toggle-wrong">${wrongOnly?'显示全部':'只看错题'}</button><button class="btn secondary" data-pdf-action="restart">重新作答</button>` : `<button class="btn" data-pdf-action="submit">提交作答</button>`}</div>
-  ${submitted ? `<div class="notice blue">${scored ? `有标准答案的客观题：${correct} / ${scored} 答对。` : '没有可自动评分的标准答案。'} ${paper.questions.length - scored} 题未参与自动评分。写作、口语不使用文字精确匹配评分。</div>` : `<div class="notice">导入的 PDF 不包含听力音频；请自行打开音频作答。图片和复杂排版请对照原文件。${annotate ? '选中或双击原文、题干和选项可做三色高光或笔记；单击标注可取消。' : ''}${scored ? `当前有 ${scored} 题填写了标准答案。` : ''}</div>`}
-  <div class="pdf-practice-layout"><details class="panel pdf-reference" open><summary>PDF 提取原文</summary><pre>${annotate ? paper.referenceText.split('\n').map((line,index) => annotations.textHtml('pdf',`ref:${index}`,line)).join('\n') : esc(paper.referenceText)}</pre>${annotate ? annotations.notesHtml('pdf','ref:') : ''}</details><div class="pdf-questions">${shown.length ? shown.map(q => questionHtml(paper,q,submitted)).join('') : '<div class="empty">没有错题。</div>'}${annotate ? annotations.notesHtml('pdf',paper.questions.map(q=>`q:${q.number}`)) : ''}</div></div>`;
+  ${submitted ? `<div class="notice blue">${scored ? `有标准答案的客观题：${correct} / ${scored} 答对。` : '没有可自动评分的标准答案。'} ${paper.questions.length - scored} 题未参与自动评分。写作、口语不使用文字精确匹配评分。</div>` : `<div class="notice">导入的 PDF 不包含听力音频；请自行打开音频作答。图片和复杂排版请对照原文件。${annotate ? '选中或双击原文、题干和选项可做三色高光或笔记；单击标注后选择取消。' : ''}${scored ? `当前有 ${scored} 题填写了标准答案。` : ''}</div>`}
+  <div class="pdf-practice-layout"><details class="panel pdf-reference" open><summary>PDF 提取原文</summary><pre>${annotate ? paper.referenceText.split('\n').map((line,index) => annotations.textHtml('pdf',`ref:${index}`,line)).join('\n') : esc(paper.referenceText)}</pre></details><div class="pdf-questions">${shown.length ? shown.map(q => questionHtml(paper,q,submitted)).join('') : '<div class="empty">没有错题。</div>'}</div></div>${annotate ? annotations.drawerHtml('pdf') : ''}`;
 }
 function questionHtml(paper, q, submitted) {
   const value = paper.answers?.[q.number] || '';
