@@ -84,30 +84,34 @@ function saveDraft() {
 }
 function renderPractice(paper) {
   const submitted = Boolean(paper.submittedAt);
+  const annotate = canScore(paper) && !submitted;
+  const annotations = window.IELTS_ANNOTATIONS_INSTANCE;
   const keyed = paper.questions.filter(q => normalize(q.answer));
   const scored = canScore(paper) ? keyed.length : 0;
   const correct = paper.questions.filter(q => questionStatus(paper,q) === 'right').length;
   const shown = wrongOnly && submitted ? paper.questions.filter(q => questionStatus(paper,q) === 'wrong') : paper.questions;
   main.innerHTML = `<div class="page-head"><div><p class="kicker">Imported PDF practice</p><h1>${esc(paper.title)}</h1><p class="lede">${skillName(paper.skill)} · ${paper.pageCount} 页 · ${paper.questions.length} 题。${submitted ? '作答已提交，可逐题查看。' : '作答自动保存在当前浏览器。'}</p></div></div>
   <div class="toolbar"><button class="btn secondary" data-pdf-action="back">← 我的试卷</button>${submitted ? `<button class="btn secondary" data-pdf-action="toggle-wrong">${wrongOnly?'显示全部':'只看错题'}</button><button class="btn secondary" data-pdf-action="restart">重新作答</button>` : `<button class="btn" data-pdf-action="submit">提交作答</button>`}</div>
-  ${submitted ? `<div class="notice blue">${scored ? `有标准答案的客观题：${correct} / ${scored} 答对。` : '没有可自动评分的标准答案。'} ${paper.questions.length - scored} 题未参与自动评分。写作、口语不使用文字精确匹配评分。</div>` : `<div class="notice">导入的 PDF 不包含听力音频；请自行打开音频作答。图片和复杂排版请对照原文件。${scored ? `当前有 ${scored} 题填写了标准答案。` : ''}</div>`}
-  <div class="pdf-practice-layout"><details class="panel pdf-reference" open><summary>PDF 提取原文</summary><pre>${esc(paper.referenceText)}</pre></details><div class="pdf-questions">${shown.length ? shown.map(q => questionHtml(paper,q,submitted)).join('') : '<div class="empty">没有错题。</div>'}</div></div>`;
+  ${submitted ? `<div class="notice blue">${scored ? `有标准答案的客观题：${correct} / ${scored} 答对。` : '没有可自动评分的标准答案。'} ${paper.questions.length - scored} 题未参与自动评分。写作、口语不使用文字精确匹配评分。</div>` : `<div class="notice">导入的 PDF 不包含听力音频；请自行打开音频作答。图片和复杂排版请对照原文件。${annotate ? '选中或双击原文、题干和选项可做三色高光或笔记；单击标注可取消。' : ''}${scored ? `当前有 ${scored} 题填写了标准答案。` : ''}</div>`}
+  <div class="pdf-practice-layout"><details class="panel pdf-reference" open><summary>PDF 提取原文</summary><pre>${annotate ? paper.referenceText.split('\n').map((line,index) => annotations.textHtml('pdf',`ref:${index}`,line)).join('\n') : esc(paper.referenceText)}</pre>${annotate ? annotations.notesHtml('pdf','ref:') : ''}</details><div class="pdf-questions">${shown.length ? shown.map(q => questionHtml(paper,q,submitted)).join('') : '<div class="empty">没有错题。</div>'}${annotate ? annotations.notesHtml('pdf',paper.questions.map(q=>`q:${q.number}`)) : ''}</div></div>`;
 }
 function questionHtml(paper, q, submitted) {
   const value = paper.answers?.[q.number] || '';
   const status = questionStatus(paper,q);
   const options = q.options || [];
+  const annotate = canScore(paper) && !submitted;
+  const annotations = window.IELTS_ANNOTATIONS_INSTANCE;
   let control;
   if (submitted) {
     control = `<p>你的作答：<strong>${esc(value || '未作答')}</strong></p>${canScore(paper) && q.answer ? `<p>标准答案：<strong>${esc(q.answer)}</strong> · <span class="answer-pill ${status}">${status === 'right' ? '正确' : '需订正'}</span></p>` : '<p class="small muted">无自动评分</p>'}`;
   } else if (options.length) {
-    control = `<div class="q-control">${options.map((option,index) => { const key = option.match(/^\s*([A-D])[.)]/i)?.[1].toUpperCase() || String.fromCharCode(65+index); return `<label><input type="radio" name="pdf-q-${q.number}" data-pdf-answer="${q.number}" value="${key}" ${value===key?'checked':''}>${esc(option)}</label>`; }).join('')}</div>`;
+    control = `<div class="q-control">${options.map((option,index) => { const key = option.match(/^\s*([A-D])[.)]/i)?.[1].toUpperCase() || String.fromCharCode(65+index); return `<label><input type="radio" name="pdf-q-${q.number}" data-pdf-answer="${q.number}" value="${key}" ${value===key?'checked':''}>${annotate ? annotations.textHtml('pdf',`q:${q.number}:opt:${key}`,option) : esc(option)}</label>`; }).join('')}</div>`;
   } else if (paper.skill === 'writing' || paper.skill === 'speaking') {
     control = `<textarea class="draft" data-pdf-answer="${q.number}" placeholder="在这里输入你的作答">${esc(value)}</textarea>`;
   } else {
     control = `<input class="pdf-answer-input" data-pdf-answer="${q.number}" value="${esc(value)}" autocomplete="off" placeholder="输入答案">`;
   }
-  return `<article class="review-card ${submitted && status==='wrong'?'wrong':''}"><h3>${q.number}. ${esc(q.prompt)}</h3><p class="small muted">PDF 第 ${q.page} 页</p>${control}</article>`;
+  return `<article class="review-card ${submitted && status==='wrong'?'wrong':''}"><h3>${q.number}. ${annotate ? annotations.textHtml('pdf',`q:${q.number}`,q.prompt) : esc(q.prompt)}</h3><p class="small muted">PDF 第 ${q.page} 页</p>${control}</article>`;
 }
 
 main.addEventListener('click', event => {
@@ -124,7 +128,7 @@ main.addEventListener('click', event => {
   if (action === 'save-draft' && draft) saveDraft();
   if (action === 'submit') { const paper = activePaper(); if (paper && confirm('提交这份 PDF 练习？')) { paper.submittedAt = Date.now(); save(); render(); } }
   if (action === 'toggle-wrong') { wrongOnly = !wrongOnly; render(); }
-  if (action === 'restart' && confirm('清空这份 PDF 练习的作答记录并重新开始？')) { const paper = activePaper(); paper.answers = {}; paper.submittedAt = null; wrongOnly = false; save(); render(); }
+  if (action === 'restart' && confirm('清空这份 PDF 练习的作答与标注记录并重新开始？')) { const paper = activePaper(); paper.answers = {}; paper.annotations = {}; paper.submittedAt = null; wrongOnly = false; save(); render(); }
 });
 main.addEventListener('input', event => {
   const el = event.target;
@@ -147,5 +151,5 @@ main.addEventListener('change', event => {
   }
 });
 
-window.IELTS_PDF_IMPORT = {render};
+window.IELTS_PDF_IMPORT = {render, getActivePaper:activePaper, persist:save};
 })();
