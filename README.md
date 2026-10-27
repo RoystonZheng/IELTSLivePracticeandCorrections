@@ -25,7 +25,7 @@
 ## 使用
 
 ```bash
-git clone https://github.com/RoystonZheng/-.git ielts-practice-desk
+git clone https://github.com/RoystonZheng/IELTSLivePracticeandCorrections.git ielts-practice-desk
 cd ielts-practice-desk
 python3 bank_update.py --serve
 ```
