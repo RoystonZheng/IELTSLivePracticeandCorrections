@@ -24,10 +24,11 @@ let activeAudio = null;
 const historyStorageKey = 'ielts-season-history-v1';
 let mode = 'library';
 let subjectPart = 'all';
-const subjectParts = {reading:['Section A','Section B','Section C','Section D'],listening:['Part 1','Part 2','Part 3'],writing:['Task 1','Task 2'],speaking:['Part 1','Part 2','Part 3']};
+const subjectParts = {reading:['Passage 1','Passage 2','Passage 3','篇次未核实'],listening:['Part 1','Part 2','Part 3'],writing:['Task 1','Task 2'],speaking:['Part 1','Part 2','Part 3']};
 function matchesPart(item, part) {
   if (part === 'all') return true;
   const value = item.section || item.part || item.task || '';
+  if (part === '篇次未核实') return !value;
   return value === part || (value === 'Part 2 / Part 3' && (part === 'Part 2' || part === 'Part 3'));
 }
 
@@ -133,7 +134,7 @@ function detail(item) {
 function reportRow(item) {
   const label = item.date ? `${item.kind==='third_party_dated_topic'?'来源标注考试':'来源发布'} ${item.date}` : `来源月份 ${item.month}`;
   const title = item.title || '未命名资料';
-  const type = item.section || item.task || item.part || 'Part / Section 未核实';
+  const type = item.section || item.task || item.part || (skill==='reading'?'Passage 未核实':'Part / Section 未核实');
   const appearance = item.reportedAppearances?.[0];
   const where = appearance ? `来源标注出现于 ${appearance.date}${appearance.venue?` · ${appearance.venue}`:''}（未独立核验）`
     : item.reportedPeriod ? `来源标注考试周 ${item.reportedPeriod}；具体场次和考点未核实`
@@ -156,10 +157,13 @@ function render(main, sourceIndex, nextCapabilities = {}) {
   const current = content.seasonId === index.season.id;
   if (mode === 'subject') {
     const title=skills.find(entry=>entry.id===skill).name;
+    const readingBreakdown = skill==='reading' && subjectPart==='all'
+      ? `<div class="notice blue">本期共有 ${index.reading.length} 条阅读话题出现记录：${subjectParts.reading.map(part=>`${part} ${index.reading.filter(item=>matchesPart(item,part)).length} 条`).join('、')}。它们来自不同文章和考试周，不能据此认定是同一套试卷。</div>` : '';
     root.innerHTML=`<div class="page-head"><div><p class="kicker">Current season · ${escapeHtml(title)}</p><h1>${escapeHtml(title)}${subjectPart==='all'?'整套模考':` · ${escapeHtml(subjectPart)}`}</h1><p class="lede">${escapeHtml(index.season.label)}。先选整套或单个部分，再查看有完整题目及来源证据的题组。</p></div></div>
-      <div class="season-skill-tabs subject-part-tabs" role="tablist" aria-label="${escapeHtml(title)}部分选择"><button type="button" role="tab" aria-selected="${subjectPart==='all'}" class="${subjectPart==='all'?'active':''}" data-subject-part="all">整套模考</button>${subjectParts[skill].map(part=>`<button type="button" role="tab" aria-selected="${subjectPart===part}" class="${subjectPart===part?'active':''}" data-subject-part="${escapeHtml(part)}">${escapeHtml(part)}</button>`).join('')}</div>
+      <div class="season-skill-tabs subject-part-tabs" role="tablist" aria-label="${escapeHtml(title)}部分选择"><button type="button" role="tab" aria-selected="${subjectPart==='all'}" class="${subjectPart==='all'?'active':''}" data-subject-part="all">整套模考</button>${subjectParts[skill].map(part=>`<button type="button" role="tab" aria-selected="${subjectPart===part}" class="${subjectPart===part?'active':''}" data-subject-part="${escapeHtml(part)}">${escapeHtml(part)}${skill==='reading'?` · ${(index.reading||[]).filter(item=>matchesPart(item,part)).length}`:''}</button>`).join('')}</div>
+      ${readingBreakdown}
       ${chosen?detail(chosen):`<div class="section-title"><h2>${subjectPart==='all'?'当季完整模考':'可作答的当季题目'}</h2></div>${subjectPart==='all'?'<div class="empty">当前尚未收齐有来源和公开分发权的完整试卷，无法组成真实当季整套模考。</div>':items.length?`<div class="season-practice-grid">${items.map(practiceCard).join('')}</div>`:'<div class="empty">这个部分暂无可公开分发的完整题目，暂不能开始作答。</div>'}
-      <div class="section-title"><h2>公开出现记录与来源 · ${reports.length}</h2></div><p class="small muted">链接标题可能只是话题摘要；没有完整原题、答案或音频的记录不会自动变成模考。标注了 Part / Passage 的线索可按来源分组查看，其余请到“公开题库”查看。</p><div class="link-list">${reports.map(reportRow).join('')||'<div class="empty">本部分暂无已核实分组的公开记录。</div>'}</div>${subjectPart!=='all'&&(index[skill]||[]).some(item=>!item.section&&!item.part&&!item.task)?'<p class="small muted">还有未标明 Part / Section 的记录，可在“公开题库”查看。</p>':''}`}
+      <div class="section-title"><h2>公开出现记录与来源 · ${reports.length}</h2></div><p class="small muted">链接标题可能只是话题摘要；没有完整原题、答案或音频的记录不会自动变成模考。${skill==='reading'?'按来源标注的 Passage 分组；未标明篇次的线索可在“篇次未核实”查看。':'标注了 Part / Task 的线索可按来源分组查看，其余请到“公开题库”查看。'}</p><div class="link-list">${reports.map(reportRow).join('')||'<div class="empty">本部分暂无已核实分组的公开记录。</div>'}</div>${skill!=='reading'&&subjectPart!=='all'&&(index[skill]||[]).some(item=>!item.section&&!item.part&&!item.task)?'<p class="small muted">还有未标明 Part / Section 的记录，可在“公开题库”查看。</p>':''}`}
       <div id="season-status" role="status" aria-live="polite"></div>`;
     return;
   }

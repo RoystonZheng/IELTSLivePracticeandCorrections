@@ -72,6 +72,8 @@ git push origin main
 - [官方免费练习入口](question-bank/official-free-practice.md)：不属于当期考后回忆。
 - [网页入口](app/index.html)：主页四科模考入口、各科 Part / Section 选择、公开题库四科页内切换、练习记录四科页内切换。旧版原创练习数据暂保留以便查看已有历史记录，不在当前模考入口展示。
 
+阅读页按来源明确标出的 Passage 1、2、3 分组；没有篇次信息的记录归入“篇次未核实”。一周考情文章常列出多篇不同场次的文章，因此分组只表示来源报告的位置，不能把同一周的任意三条拼成一套 40 题模考。完整模考还需要同一场考试的三篇文章、40 道题及可核对的答案。
+
 更新程序读取日期和考点标注的写作话题、口语话题目录，以及公开可直接阅读的国内机构考情文章。听力和阅读按文章中的话题标题逐条建索引；同一篇周报可以形成多条记录。页面先显示话题及出处，只有点“核对来源”才会打开原站。题干、答案、阅读原文和听力音频不会从第三方网站批量复制到仓库。每条记录标明来源和地域证据：`site_reported_venue` 表示考点是第三方网站自述，文章类线索需回原文确认。**这些条目不能拼接成一套中国考场原卷，也不能保证覆盖所有城市或场次。** 来源短时失败、未发布月份和未来月份会在网页及 `manifest.json` 中显示。
 
 来源目录目前接入 [雅圈写作日期目录](https://www.yaquan.site/ielts/writing)、[新航道考情目录](https://cq.xhd.cn/ielts/ysjj/)、[托你的福周度考情目录](https://tuonidefu.com.cn/blogs)、[Joe Speaking 大陆口语话题目录](https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec)，口语主站不可用时使用 [ZipIELTS 话题目录](https://www.zipielts.com/library)；官网样题见[雅思中文官网](https://www.chinaielts.org/prepare/ielts-practice-tests/mocks-academic)。爱雅思会员引导来源已从索引及更新流程移除。IELTS Actual Tests 虽可免费练习，但[使用条款](https://ieltsactualtests.com/terms-of-service)禁止抓取和再分发其练习库，不能整库导入本仓库。当前自动更新依赖上述已接入的公开来源，不能保证覆盖市面所有网站。第三方链接可能失效或更正，详情以源站为准。
