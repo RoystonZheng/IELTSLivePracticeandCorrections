@@ -386,8 +386,9 @@ AI_SLOT = Semaphore(1)
 
 
 def make_handler():
-    from ai_bridge import build_case, cli_available, run_codex
+    from ai_bridge import build_case, build_spoken_case, cli_available, run_codex
     from pdf_import import MAX_PDF_BYTES, parse_pdf
+    from speech_analysis import MAX_AUDIO_BYTES, SUFFIXES, speech_available, transcribe_audio
 
     class Handler(SimpleHTTPRequestHandler):
         def __init__(self, *args, **kwargs):
@@ -417,12 +418,13 @@ def make_handler():
                 if not self.local_request():
                     self.send_json(403, {"error": "仅允许本机访问"})
                 else:
-                    self.send_json(200, {"codexCli": cli_available(), "mode": "local_optional"})
+                    self.send_json(200, {"codexCli": cli_available(), "speechToText": speech_available(),
+                                         "mode": "local_optional"})
                 return
             super().do_GET()
 
         def do_POST(self) -> None:
-            if self.path not in {"/api/feedback", "/api/import-pdf"}:
+            if self.path not in {"/api/feedback", "/api/import-pdf", "/api/speaking-audio"}:
                 self.send_json(404, {"error": "接口不存在"})
                 return
             origin = urlparse(self.headers.get("Origin", ""))
@@ -432,8 +434,14 @@ def make_handler():
             except ValueError:
                 origin_ok = False
             content_type = self.headers.get("Content-Type", "")
-            expected_type = "application/pdf" if self.path == "/api/import-pdf" else "application/json"
-            if not self.local_request() or not origin_ok or not content_type.startswith(expected_type):
+            media_type = content_type.split(";", 1)[0].strip().lower()
+            if self.path == "/api/import-pdf":
+                type_ok = media_type == "application/pdf"
+            elif self.path == "/api/speaking-audio":
+                type_ok = media_type in SUFFIXES
+            else:
+                type_ok = media_type == "application/json"
+            if not self.local_request() or not origin_ok or not type_ok:
                 self.send_json(403, {"error": "仅允许当前本地页面提交"})
                 return
             if self.path == "/api/import-pdf":
@@ -451,6 +459,35 @@ def make_handler():
                     self.send_json(503, {"error": str(exc)[:200]})
                     return
                 self.send_json(200, result)
+                return
+            if self.path == "/api/speaking-audio":
+                try:
+                    size = int(self.headers.get("Content-Length", "0"))
+                    if not 1 <= size <= MAX_AUDIO_BYTES:
+                        raise ValueError("录音须小于 15 MB")
+                    topic_id = self.headers.get("X-IELTS-Topic", "")
+                    if len(topic_id) > 100:
+                        raise ValueError("口语话题无效")
+                    if not AI_SLOT.acquire(blocking=False):
+                        self.send_json(429, {"error": "已有一条反馈正在生成，请稍后重试"})
+                        return
+                    try:
+                        evidence = transcribe_audio(self.rfile.read(size), media_type)
+                        case = build_spoken_case(topic_id, evidence)
+                        result = run_codex(case)
+                    finally:
+                        AI_SLOT.release()
+                except ValueError as exc:
+                    self.send_json(400, {"error": str(exc)[:200]})
+                    return
+                except RuntimeError as exc:
+                    self.send_json(503, {"error": str(exc)[:200]})
+                    return
+                except OSError:
+                    self.send_json(503, {"error": "本地语音组件或 Codex CLI 启动失败"})
+                    return
+                self.send_json(200, {"feedback": result, "transcript": evidence["transcript"],
+                                     "timing": case["audioTiming"]})
                 return
             try:
                 size = int(self.headers.get("Content-Length", "0"))

@@ -98,6 +98,17 @@ def build_case(payload: dict) -> dict:
     raise ValueError("不支持的反馈类型")
 
 
+def build_spoken_case(topic_id: str, evidence: dict) -> dict:
+    """Use only server-generated audio evidence, never client-supplied metrics."""
+    case = build_case({"kind": "speaking", "topicId": topic_id,
+                       "answer": evidence["transcript"]})
+    case["note"] = "Locally transcribed recording. Timing is approximate; raw audio is not available to Codex."
+    case["audioTiming"] = {key: evidence[key] for key in (
+        "durationSeconds", "speechSeconds", "wordCount", "wordsPerMinute",
+        "pauseCount", "longPauseCount")}
+    return case
+
+
 def prompt_for(case: dict) -> str:
     task = case["kind"]
     common = (
@@ -120,6 +131,18 @@ def prompt_for(case: dict) -> str:
             "estimatedBand is a cautious practice estimate on half-band steps, not an official mark. "
             "For correction, revise only one representative weak sentence while preserving the writer's meaning. "
             "If the draft is too short, say that the estimate is particularly uncertain. "
+        )
+    elif task == "speaking" and "audioTiming" in case:
+        rules = (
+            "This answer came from a recorded response transcribed locally. Evaluate Fluency and Coherence "
+            "using the approximate duration, pace and pause counts as well as the transcript. "
+            "Evaluate Lexical Resource and Grammatical Range and Accuracy from the transcript. "
+            "Include Pronunciation in criteria with estimate null: the model did not receive the audio, "
+            "and transcription accuracy does not establish pronunciation quality. "
+            "estimatedBand is a cautious partial practice estimate from the three assessable criteria, "
+            "not a full IELTS Speaking band. Explain this clearly in limitations. "
+            "Treat word timings as approximate and do not infer accent, stress or intonation. "
+            "In correction, faithfully improve one short excerpt without inventing a personal story. "
         )
     else:
         rules = (
@@ -158,6 +181,28 @@ def validate_feedback(value: object) -> dict:
     return value
 
 
+def enforce_speaking_limits(case: dict, feedback: dict) -> dict:
+    if case["kind"] != "speaking":
+        return feedback
+    pronunciation = next((item for item in feedback["criteria"]
+                          if "pronunciation" in item["name"].lower() or "发音" in item["name"]), None)
+    explanation = "Codex 未收到原始音频，无法可靠评估发音、重音和语调。"
+    if pronunciation:
+        pronunciation["estimate"] = None
+        pronunciation["feedback"] = explanation
+    else:
+        item = {"name": "Pronunciation / 发音", "estimate": None, "feedback": explanation}
+        if len(feedback["criteria"]) == 6:
+            feedback["criteria"][-1] = item
+        else:
+            feedback["criteria"].append(item)
+    boundary = ("录音评分仅根据本地转写和近似节奏数据，缺少发音维度，非完整雅思口语分数。"
+                if "audioTiming" in case else
+                "文字评分没有录音证据，无法评估真实停顿和发音，非完整雅思口语分数。")
+    feedback["limitations"] = (feedback["limitations"] + " " + boundary)[:2000]
+    return feedback
+
+
 def run_codex(case: dict) -> dict:
     executable = cli_path()
     if not executable or not cli_available():
@@ -175,6 +220,6 @@ def run_codex(case: dict) -> dict:
         if process.returncode != 0 or not output.is_file():
             raise RuntimeError("Codex CLI 未返回有效反馈，请检查登录状态和网络")
         try:
-            return validate_feedback(json.loads(output.read_text(encoding="utf-8")))
+            return enforce_speaking_limits(case, validate_feedback(json.loads(output.read_text(encoding="utf-8"))))
         except (json.JSONDecodeError, ValueError) as exc:
             raise RuntimeError("Codex CLI 返回格式无法解析") from exc
