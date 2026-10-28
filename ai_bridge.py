@@ -1,4 +1,4 @@
-"""Optional localhost-only Codex CLI feedback for the original practice tasks."""
+"""Optional localhost-only Codex CLI feedback for trusted local practice tasks."""
 from __future__ import annotations
 
 import json
@@ -54,6 +54,36 @@ def build_case(payload: dict) -> dict:
     if not isinstance(payload, dict):
         raise ValueError("请求格式错误")
     kind = payload.get("kind")
+    if kind in {"season-reading", "season-listening", "season-writing"}:
+        skill = kind.removeprefix("season-")
+        current = read_data("public-index.json")
+        seasonal = read_data("season-content.json")
+        if seasonal["seasonId"] != current["season"]["id"]:
+            raise ValueError("当季练习已换期，请更新题库")
+        item_id = payload.get("itemId")
+        item = next((x for x in seasonal[skill] if x["id"] == item_id), None)
+        if not item:
+            raise ValueError("当季练习题无效")
+        if skill == "writing":
+            answer = limited_text(payload.get("answer", ""), 10000, 80)
+            return {"kind": "writing", "taskId": item_id, "question": item["prompt"],
+                    "table": item.get("table"), "minimumWords": item["minimumWords"],
+                    "candidateAnswer": answer}
+        question_id = payload.get("questionId")
+        question = next((x for x in item["questions"] if x["id"] == question_id), None)
+        if not question:
+            raise ValueError("当季题号无效")
+        answer = limited_text(payload.get("answer", ""), 200)
+        case = {"kind": skill, "questionNumber": question_id, "question": question["prompt"],
+                "candidateAnswer": answer, "correctAnswer": question["answer"],
+                "acceptedAnswers": question.get("accepted", []),
+                "existingExplanation": question["explanation"]}
+        if skill == "reading":
+            case["passageEvidence"] = [{"label": chr(65 + i), "text": paragraph}
+                                       for i, paragraph in enumerate(item["paragraphs"])]
+        else:
+            case["audioTranscript"] = " ".join(item["sentences"])
+        return case
     if kind in {"reading", "listening"}:
         number = payload.get("questionNumber")
         if isinstance(number, bool) or not isinstance(number, int) or not 1 <= number <= 40:
@@ -92,9 +122,16 @@ def build_case(payload: dict) -> dict:
         if not topic:
             raise ValueError("口语话题无效或已换期")
         answer = limited_text(payload.get("answer", ""), 8000, 40)
-        return {"kind": kind, "topic": topic["title"], "part": topic["part"],
+        case = {"kind": kind, "topic": topic["title"], "part": topic["part"],
                 "candidateTranscript": answer,
                 "note": "This is a transcript, not audio. Pauses and pronunciation are unavailable."}
+        seasonal = read_data("season-content.json")
+        if seasonal["seasonId"] == bank["season"]["id"]:
+            authored = next((item for item in seasonal["speaking"]
+                             if item["sourceUrl"] == topic["url"] and item["sourceTitle"] == topic["title"]), None)
+            if authored:
+                case["practiceQuestions"] = authored["questions"]
+        return case
     raise ValueError("不支持的反馈类型")
 
 

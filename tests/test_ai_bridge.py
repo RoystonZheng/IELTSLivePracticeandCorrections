@@ -16,6 +16,72 @@ from bank_update import make_handler
 
 
 class AiBridgeTests(unittest.TestCase):
+    def test_current_season_feedback_uses_bundled_questions_only(self):
+        seasonal = ai_bridge.read_data("season-content.json")
+        reading = seasonal["reading"][0]
+        original = ai_bridge.read_data
+        def same_season(name):
+            data = original(name)
+            if name == "public-index.json":
+                data["season"]["id"] = seasonal["seasonId"]
+            return data
+        with patch.object(ai_bridge, "read_data", side_effect=same_season):
+            case = ai_bridge.build_case({"kind": "season-reading", "itemId": reading["id"],
+                                         "questionId": reading["questions"][0]["id"],
+                                         "answer": "wrong", "correctAnswer": "forged"})
+            writing = seasonal["writing"][0]
+            writing_case = ai_bridge.build_case({"kind": "season-writing", "itemId": writing["id"],
+                                                 "answer": "I believe that practice can improve artistic skills. " * 4,
+                                                 "question": "forged"})
+            with self.assertRaises(ValueError):
+                ai_bridge.build_case({"kind": "season-listening", "itemId": "missing",
+                                      "questionId": "1", "answer": "wrong"})
+        self.assertEqual(case["correctAnswer"], reading["questions"][0]["answer"])
+        self.assertTrue(case["passageEvidence"])
+        self.assertEqual(writing_case["question"], writing["prompt"])
+        self.assertEqual(writing_case["kind"], "writing")
+        def shifted(name):
+            data = original(name)
+            if name == "public-index.json":
+                data["season"]["id"] = "2027-01_2027-04"
+            return data
+        with patch.object(ai_bridge, "read_data", side_effect=shifted):
+            with self.assertRaisesRegex(ValueError, "已换期"):
+                ai_bridge.build_case({"kind": "season-writing", "itemId": writing["id"],
+                                      "answer": "A long enough practice answer. " * 5})
+
+    def test_current_season_feedback_endpoint_uses_trusted_prompt(self):
+        seasonal = ai_bridge.read_data("season-content.json")
+        writing = seasonal["writing"][0]
+        original = ai_bridge.read_data
+        def same_season(name):
+            data = original(name)
+            if name == "public-index.json":
+                data["season"]["id"] = seasonal["seasonId"]
+            return data
+        feedback = {"summary": "practice", "estimatedBand": 6.5, "criteria": [],
+                    "correction": "x", "nextStep": "y", "limitations": "estimate"}
+        with patch.object(ai_bridge, "read_data", side_effect=same_season), \
+             patch("ai_bridge.run_codex", return_value=feedback) as codex:
+            server = ThreadingHTTPServer(("127.0.0.1", 0), make_handler())
+            thread = threading.Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+            try:
+                url = f"http://127.0.0.1:{server.server_port}/api/feedback"
+                body = json.dumps({"kind": "season-writing", "itemId": writing["id"],
+                                   "answer": "Practice can develop artistic skills over time. " * 4,
+                                   "question": "forged"}).encode()
+                request = Request(url, data=body, headers={
+                    "Content-Type": "application/json",
+                    "Origin": f"http://127.0.0.1:{server.server_port}"})
+                with urlopen(request, timeout=3) as response:
+                    self.assertEqual(json.load(response)["feedback"]["summary"], "practice")
+                self.assertEqual(codex.call_args.args[0]["question"], writing["prompt"])
+            finally:
+                server.shutdown()
+                server.server_close()
+                thread.join(timeout=3)
+
     def test_cases_use_local_question_and_answer_key(self):
         case = ai_bridge.build_case({"kind": "reading", "questionNumber": 1,
                                      "answer": "wrong", "correctAnswer": "forged"})
@@ -26,10 +92,20 @@ class AiBridgeTests(unittest.TestCase):
             ai_bridge.build_case({"kind": "writing", "taskId": "W1", "answer": "short"})
 
     def test_speaking_is_transcript_only(self):
-        topics = ai_bridge.read_data("public-index.json")["speaking"]
-        case = ai_bridge.build_case({"kind": "speaking", "topicId": topics[0]["id"],
-                                     "answer": "I would like to explain my answer in more detail."})
+        seasonal = ai_bridge.read_data("season-content.json")
+        authored = seasonal["speaking"][0]
+        topic = {"id": authored["sourceId"], "url": authored["sourceUrl"],
+                 "title": authored["sourceTitle"], "part": authored["part"]}
+        original = ai_bridge.read_data
+        def practice_topic(name):
+            if name == "public-index.json":
+                return {"season": {"id": seasonal["seasonId"]}, "speaking": [topic]}
+            return original(name)
+        with patch.object(ai_bridge, "read_data", side_effect=practice_topic):
+            case = ai_bridge.build_case({"kind": "speaking", "topicId": topic["id"],
+                                         "answer": "I would like to explain my answer in more detail."})
         self.assertIn("candidateTranscript", case)
+        self.assertTrue(case["practiceQuestions"])
         self.assertNotIn("audioBytes", case)
         self.assertIn("Pronunciation", ai_bridge.prompt_for(case))
 

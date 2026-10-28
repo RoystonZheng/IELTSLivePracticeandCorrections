@@ -22,6 +22,33 @@ prefix = 'window.IELTS_BANK = '
 assert js.startswith(prefix) and js.rstrip().endswith(';')
 bundle = json.loads(js[len(prefix):].strip().removesuffix(';'))
 assert bundle == {'publicIndex': index, 'readingTest': test, 'listeningTest': listening, 'writingTest': writing}
+season_content = json.loads((APP / 'data/season-content.json').read_text(encoding='utf-8'))
+season_js = (APP / 'season-content.js').read_text(encoding='utf-8')
+season_prefix = 'window.IELTS_SEASON_CONTENT = '
+assert season_js.startswith(season_prefix) and season_js.rstrip().endswith(';')
+assert json.loads(season_js[len(season_prefix):].strip().removesuffix(';')) == season_content
+assert season_content['seasonId']
+for field in ('reading', 'listening', 'writing', 'speaking'):
+    authored = season_content[field]
+    assert len({item['id'] for item in authored}) == len(authored), field
+    for item in authored:
+        assert item['title'] and item.get('sourceUrl', '').startswith('https://'), item['id']
+        if field in ('reading', 'listening'):
+            assert item['questions'], item['id']
+            assert all(q['id'] and q['prompt'] and q['answer'] and q['explanation'] for q in item['questions'])
+            assert all(all(isinstance(a, str) and a.strip() for a in q.get('accepted', []))
+                       for q in item['questions'])
+            if field == 'reading':
+                assert item['paragraphs']
+            else:
+                assert item['sentences']
+                assert len(item['sentences']) == len(item['sentenceAudio'])
+                assert (APP / item['audio']).stat().st_size > 1000
+                assert all((APP / audio).stat().st_size > 1000 for audio in item['sentenceAudio'])
+        if field == 'writing':
+            assert item['prompt'] and item['minimumWords'] in (150, 250) and item['sourceTitle']
+        if field == 'speaking':
+            assert item['questions'] and item['sourceTitle']
 
 checked = date.fromisoformat(index['checkedAt'])
 season = season_for(checked)

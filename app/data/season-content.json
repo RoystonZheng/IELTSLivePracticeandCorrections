@@ -1,0 +1,460 @@
+{
+  "seasonId": "2026-09_2026-12",
+  "notice": "以下练习由本项目独立编写，借用当期资料中的宽泛话题；文章、录音、图表数据和题干都不是考场原题或来源网站试卷。",
+  "reading": [
+    {
+      "id": "sr-food-2026",
+      "month": "2026-09",
+      "title": "When a Town Preserves Its Harvest",
+      "basis": "当季阅读回忆中出现的食品保存主题",
+      "sourceUrl": "https://simplyielts.com/recent-ielts-exam-questions-september-2026/",
+      "paragraphs": [
+        "A community kitchen in the fictional town of Bellmere was built to reduce the amount of fruit thrown away after the autumn harvest. Local farms often sold their best fruit immediately, while smaller or oddly shaped pieces remained unsold. Volunteers first collected this surplus and turned it into jam. The work began as a weekend activity, but demand from nearby schools soon made a permanent kitchen necessary.",
+        "The organisers did not claim that every preserved jar was cheaper than fresh fruit. Glass containers, electricity and staff training all had costs. Their main goal was to make seasonal food available for longer and to help farmers earn something from crops that might otherwise be wasted. A local college measured the project over two years and found that waste fell, although transport emissions increased slightly because collection vans visited several farms.",
+        "The kitchen now teaches residents how to preserve food safely at home. Instructors emphasise clean equipment, accurate temperatures and clear labels showing when food was prepared. They also explain that preservation does not improve poor-quality ingredients. The project has therefore shifted from making products alone to sharing practical knowledge."
+      ],
+      "questions": [
+        {
+          "id": "1",
+          "type": "tfng",
+          "prompt": "Bellmere farmers sold all of their fruit before the kitchen opened.",
+          "answer": "FALSE",
+          "explanation": "Paragraph 1 says some fruit remained unsold."
+        },
+        {
+          "id": "2",
+          "type": "text",
+          "prompt": "Which local organisation measured the project?",
+          "answer": "college",
+          "explanation": "Paragraph 2 names a local college.",
+          "accepted": [
+            "a local college",
+            "local college"
+          ]
+        },
+        {
+          "id": "3",
+          "type": "mcq",
+          "prompt": "What was the organisers’ main aim?",
+          "options": [
+            "A. To make every jar cheaper than fresh fruit",
+            "B. To extend the use of seasonal food and reduce waste",
+            "C. To replace all farm shops"
+          ],
+          "answer": "B",
+          "explanation": "Paragraph 2 states the main goal."
+        },
+        {
+          "id": "4",
+          "type": "tfng",
+          "prompt": "Transport emissions fell during the two-year study.",
+          "answer": "FALSE",
+          "explanation": "Paragraph 2 says they increased slightly."
+        },
+        {
+          "id": "5",
+          "type": "text",
+          "prompt": "What should labels show about the food?",
+          "answer": "when it was prepared",
+          "explanation": "Paragraph 3 requires labels showing when food was prepared.",
+          "accepted": [
+            "the date it was prepared",
+            "preparation date"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sr-park-2026",
+      "month": "2026-10",
+      "title": "A Park Designed With Its Neighbours",
+      "basis": "当季阅读重建练习中出现的城市公园改造主题",
+      "sourceUrl": "https://ieltsactualtests.com/reading/2026-oct-hf-1",
+      "paragraphs": [
+        "For years, Alder Park was crossed mainly by commuters taking a shortcut to the station. The city council proposed replacing an unused car park with a garden, a small play area and a wider path. At the first public meeting, residents supported more trees but worried that a narrow entrance would make the park difficult for wheelchair users.",
+        "Designers revised the plan after observing how people actually moved through the space. They placed benches near the main path, kept one quiet corner away from the play area and widened both entrances. The new planting uses species that need relatively little watering once established. A volunteer group agreed to record which plants survive their first two summers, rather than assuming that every choice would succeed.",
+        "The council will judge the project using several measures: visitor counts, maintenance costs and short interviews with nearby residents. It will also compare temperatures on the new path with those on an exposed pavement outside the park. These measurements cannot prove that the park alone changed the whole neighbourhood, but they can reveal whether the redesign makes this particular route more comfortable."
+      ],
+      "questions": [
+        {
+          "id": "1",
+          "type": "mcq",
+          "prompt": "Why did commuters previously use Alder Park?",
+          "options": [
+            "A. To reach the station more quickly",
+            "B. To visit a museum",
+            "C. To avoid a river crossing"
+          ],
+          "answer": "A",
+          "explanation": "Paragraph 1 calls it a shortcut to the station."
+        },
+        {
+          "id": "2",
+          "type": "text",
+          "prompt": "What did residents want improved for wheelchair users?",
+          "answer": "entrance",
+          "explanation": "Paragraph 1 mentions the narrow entrance.",
+          "accepted": [
+            "the entrance",
+            "entrances"
+          ]
+        },
+        {
+          "id": "3",
+          "type": "tfng",
+          "prompt": "All benches were placed beside the play area.",
+          "answer": "NOT GIVEN",
+          "explanation": "Paragraph 2 says benches are near the main path, but does not say all are by the play area."
+        },
+        {
+          "id": "4",
+          "type": "text",
+          "prompt": "How many summers will volunteers monitor the plants?",
+          "answer": "two",
+          "explanation": "Paragraph 2 says the first two summers.",
+          "accepted": [
+            "2",
+            "two summers"
+          ]
+        },
+        {
+          "id": "5",
+          "type": "mcq",
+          "prompt": "What is a limitation of the temperature comparison?",
+          "options": [
+            "A. It cannot measure the park path",
+            "B. It cannot establish a neighbourhood-wide effect by itself",
+            "C. It requires a laboratory"
+          ],
+          "answer": "B",
+          "explanation": "Paragraph 3 limits what the measurements can prove."
+        }
+      ]
+    }
+  ],
+  "listening": [
+    {
+      "id": "sl-museum-2026",
+      "month": "2026-09",
+      "title": "Museum Membership Enquiry",
+      "basis": "当季听力回忆中出现的博物馆咨询场景",
+      "sourceUrl": "https://simplyielts.com/recent-ielts-exam-questions-september-2026/",
+      "sentences": [
+        "Good morning, Riverside Museum. How can I help you?",
+        "I would like to join as a member before the new photography exhibition opens.",
+        "An annual adult membership costs thirty-six pounds, and a student membership costs twenty-four pounds.",
+        "Members can enter from nine thirty in the morning, half an hour before general visitors.",
+        "The photography exhibition is in the east gallery, beside the museum café.",
+        "Please bring your student card to the front desk if you choose the student membership."
+      ],
+      "questions": [
+        {
+          "id": "1",
+          "prompt": "What type of exhibition is opening?",
+          "answer": "photography",
+          "explanation": "The visitor asks about a photography exhibition."
+        },
+        {
+          "id": "2",
+          "prompt": "How much is annual adult membership in pounds?",
+          "answer": "36",
+          "explanation": "The receptionist says thirty-six pounds.",
+          "accepted": [
+            "thirty-six",
+            "thirty six"
+          ]
+        },
+        {
+          "id": "3",
+          "prompt": "At what time can members enter?",
+          "answer": "9:30",
+          "explanation": "Members can enter from nine thirty.",
+          "accepted": [
+            "9.30",
+            "9:30 am",
+            "9.30 am",
+            "nine thirty"
+          ]
+        },
+        {
+          "id": "4",
+          "prompt": "Which gallery holds the exhibition?",
+          "answer": "east",
+          "explanation": "It is in the east gallery.",
+          "accepted": [
+            "east gallery",
+            "the east gallery"
+          ]
+        },
+        {
+          "id": "5",
+          "prompt": "What should a student bring?",
+          "answer": "student card",
+          "explanation": "The receptionist asks for a student card.",
+          "accepted": [
+            "a student card",
+            "their student card"
+          ]
+        }
+      ],
+      "audio": "audio/season/sl-museum-2026.m4a",
+      "sentenceAudio": [
+        "audio/season/sl-museum-2026-01.m4a",
+        "audio/season/sl-museum-2026-02.m4a",
+        "audio/season/sl-museum-2026-03.m4a",
+        "audio/season/sl-museum-2026-04.m4a",
+        "audio/season/sl-museum-2026-05.m4a",
+        "audio/season/sl-museum-2026-06.m4a"
+      ]
+    },
+    {
+      "id": "sl-festival-2026",
+      "month": "2026-09",
+      "title": "Finding Your Way Around a Music Festival",
+      "basis": "当季听力回忆中出现的音乐节场地指引场景",
+      "sourceUrl": "https://simplyielts.com/recent-ielts-exam-questions-september-2026/",
+      "sentences": [
+        "Welcome to the Hillfield Music Festival. The main entrance is on River Road.",
+        "After you pass the ticket desk, walk straight ahead to the information tent.",
+        "The small acoustic stage is on your left, next to the book stall.",
+        "For the main stage, turn right at the information tent and follow the wide path.",
+        "The first-aid point is behind the main stage, not beside the food trucks.",
+        "Bicycles can be left at the north gate, but cars must use the field outside the site."
+      ],
+      "questions": [
+        {
+          "id": "1",
+          "prompt": "Which road has the main entrance?",
+          "answer": "River Road",
+          "explanation": "The opening sentence names River Road.",
+          "accepted": [
+            "river rd",
+            "River Rd"
+          ]
+        },
+        {
+          "id": "2",
+          "prompt": "What is straight ahead after the ticket desk?",
+          "answer": "information tent",
+          "explanation": "The information tent is directly ahead.",
+          "accepted": [
+            "the information tent"
+          ]
+        },
+        {
+          "id": "3",
+          "prompt": "What is beside the acoustic stage?",
+          "answer": "book stall",
+          "explanation": "The stage is next to the book stall.",
+          "accepted": [
+            "the book stall"
+          ]
+        },
+        {
+          "id": "4",
+          "prompt": "Where is the first-aid point?",
+          "answer": "behind the main stage",
+          "explanation": "The announcement places it behind the main stage.",
+          "accepted": [
+            "behind main stage"
+          ]
+        },
+        {
+          "id": "5",
+          "prompt": "Where can visitors leave bicycles?",
+          "answer": "north gate",
+          "explanation": "Bicycle parking is at the north gate.",
+          "accepted": [
+            "the north gate"
+          ]
+        }
+      ],
+      "audio": "audio/season/sl-festival-2026.m4a",
+      "sentenceAudio": [
+        "audio/season/sl-festival-2026-01.m4a",
+        "audio/season/sl-festival-2026-02.m4a",
+        "audio/season/sl-festival-2026-03.m4a",
+        "audio/season/sl-festival-2026-04.m4a",
+        "audio/season/sl-festival-2026-05.m4a",
+        "audio/season/sl-festival-2026-06.m4a"
+      ]
+    }
+  ],
+  "writing": [
+    {
+      "id": "sw-art-2026",
+      "month": "2026-10",
+      "sourceId": "W-20261027-001",
+      "task": "Task 2",
+      "title": "Art and natural talent",
+      "minimumWords": 250,
+      "prompt": "Some people believe that only those born with exceptional talent can create worthwhile art. Others think artistic skill can be developed through practice and teaching. Discuss both views and give your own opinion.",
+      "sourceTitle": "是否只有天生拥有特殊天赋的人才可以创作艺术",
+      "sourceUrl": "https://www.yaquan.site/paper/e18556c6-acdc-4d8b-b375-32f50602a303"
+    },
+    {
+      "id": "sw-service-2026",
+      "month": "2026-10",
+      "sourceId": "W-20261020-002",
+      "task": "Task 2",
+      "title": "Community service for young people",
+      "minimumWords": 250,
+      "prompt": "Some people think young adults should complete a period of unpaid community service. To what extent do you agree or disagree with making this compulsory?",
+      "sourceTitle": "应当要求所有年轻人从事一段时间的无偿工作来帮助社区居民",
+      "sourceUrl": "https://www.yaquan.site/paper/e7ffbb77-daa3-42a8-8a52-ded9e20c0ece"
+    },
+    {
+      "id": "sw-tea-2026",
+      "month": "2026-10",
+      "sourceId": "W-20261025-022",
+      "task": "Task 1",
+      "title": "Tea and coffee imports",
+      "minimumWords": 150,
+      "prompt": "The table shows invented figures for tea and coffee imports in four countries in 2015 and 2025, measured in thousand tonnes. Summarise the main features and make relevant comparisons.",
+      "table": {
+        "columns": [
+          "Country",
+          "Tea 2015",
+          "Tea 2025",
+          "Coffee 2015",
+          "Coffee 2025"
+        ],
+        "rows": [
+          [
+            "Canada",
+            32,
+            39,
+            74,
+            88
+          ],
+          [
+            "United Kingdom",
+            112,
+            105,
+            51,
+            64
+          ],
+          [
+            "United States",
+            96,
+            121,
+            402,
+            455
+          ],
+          [
+            "Germany",
+            83,
+            91,
+            196,
+            214
+          ]
+        ]
+      },
+      "sourceTitle": "加拿大、英国、美国和德国的茶叶与咖啡进口量",
+      "sourceUrl": "https://www.yaquan.site/paper/09487329-094a-48bb-bfdb-f305477e2a75"
+    },
+    {
+      "id": "sw-tourists-2026",
+      "month": "2026-10",
+      "sourceId": "W-20261020-023",
+      "task": "Task 1",
+      "title": "Overseas visitors to the UK",
+      "minimumWords": 150,
+      "prompt": "The table shows invented numbers of overseas visitors, in millions, travelling to London and to other parts of the UK in four years. Summarise the information and make relevant comparisons.",
+      "table": {
+        "columns": [
+          "Destination",
+          "2010",
+          "2015",
+          "2020",
+          "2025"
+        ],
+        "rows": [
+          [
+            "London",
+            12.1,
+            15.6,
+            8.4,
+            19.2
+          ],
+          [
+            "Other UK regions",
+            9.3,
+            11.4,
+            5.7,
+            13.8
+          ]
+        ]
+      },
+      "sourceTitle": "前往伦敦以及英国其他地区的海外游客数量",
+      "sourceUrl": "https://www.yaquan.site/paper/cd012eb1-5e6b-4d46-a786-5ef308cdccd1"
+    }
+  ],
+  "speaking": [
+    {
+      "id": "ss-work-2026",
+      "sourceId": "S-2026-09_2026-12-p1-001",
+      "part": "Part 1",
+      "title": "Work or studies",
+      "questions": [
+        "What part of your work or studies do you enjoy most?",
+        "How has your daily routine changed since you started?",
+        "What skill would you like to improve next?"
+      ],
+      "sourceTitle": "Work or studies",
+      "sourceUrl": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec"
+    },
+    {
+      "id": "ss-home-2026",
+      "sourceId": "S-2026-09_2026-12-p1-002",
+      "part": "Part 1",
+      "title": "Home and accommodation",
+      "questions": [
+        "What is your favourite room at home, and why?",
+        "Would you like to live in a different type of home in the future?",
+        "How important is the area around your home?"
+      ],
+      "sourceTitle": "Home/accommodation",
+      "sourceUrl": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec"
+    },
+    {
+      "id": "ss-hometown-2026",
+      "sourceId": "S-2026-09_2026-12-p1-003",
+      "part": "Part 1",
+      "title": "Hometown",
+      "questions": [
+        "What would you show a first-time visitor to your hometown?",
+        "Has your hometown changed much in recent years?",
+        "Would you like to live there in the future?"
+      ],
+      "sourceTitle": "Hometown",
+      "sourceUrl": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec"
+    },
+    {
+      "id": "ss-noise-2026",
+      "sourceId": "S-2026-09_2026-12-p23-038",
+      "part": "Part 2 / Part 3",
+      "title": "A noisy place",
+      "questions": [
+        "Describe a noisy place you have visited. Say where it was, why you went there, what you heard and how you felt.",
+        "Why do some people enjoy noisy public events?",
+        "What can cities do to reduce unwanted noise?"
+      ],
+      "sourceTitle": "A noisy place you have been to",
+      "sourceUrl": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec"
+    },
+    {
+      "id": "ss-law-2026",
+      "sourceId": "S-2026-09_2026-12-p23-062",
+      "part": "Part 2 / Part 3",
+      "title": "A new law",
+      "questions": [
+        "Describe a law you would introduce. Say what it would change, who would be affected and why you think it is needed.",
+        "How should new laws be explained to the public?",
+        "Should schools teach children about laws?"
+      ],
+      "sourceTitle": "A new law you would like to introduce in your country",
+      "sourceUrl": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec"
+    }
+  ]
+}
