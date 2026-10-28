@@ -21,7 +21,7 @@ from datetime import date, datetime, timedelta
 from html import unescape
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from threading import Event, Semaphore, Thread
+from threading import Event, Lock, Semaphore, Thread
 from urllib.error import HTTPError
 from urllib.parse import unquote, urljoin, urlparse
 from urllib.request import Request, urlopen
@@ -382,6 +382,17 @@ def due_for_daily_refresh(now: datetime, last_run: date) -> bool:
     return local.hour >= 8 and local.date() != last_run
 
 
+def generate_current_practice() -> None:
+    """Refresh independent practice after the source index, when local Codex is available."""
+    import subprocess
+    command = [sys.executable, str(APP / "scripts" / "generate_season_practice.py")]
+    if os.getenv("IELTS_GENERATION_ENABLED", "1") == "0":
+        command.append("--rollover-only")
+    result = subprocess.run(command, check=False)
+    if result.returncode:
+        print(f"Current-season practice generation failed (exit {result.returncode}); existing practice retained.", file=sys.stderr)
+
+
 AI_SLOT = Semaphore(1)
 
 
@@ -520,6 +531,11 @@ def serve(host: str, port: int) -> None:
         update_once()
     except Exception as exc:
         print(f"Startup refresh failed: {exc}", file=sys.stderr)
+    refresh_lock = Lock()
+    def startup_generate() -> None:
+        with refresh_lock:
+            generate_current_practice()
+    Thread(target=startup_generate, daemon=True).start()
     stop = Event()
     started = datetime.now(TZ)
     last_run = started.date() if started.hour >= 8 else started.date() - timedelta(days=1)
@@ -530,7 +546,9 @@ def serve(host: str, port: int) -> None:
             now = datetime.now(TZ)
             if due_for_daily_refresh(now, last_run):
                 try:
-                    update_once(now.date())
+                    with refresh_lock:
+                        update_once(now.date())
+                        generate_current_practice()
                 except Exception as exc:
                     print(f"08:00 refresh failed: {exc}", file=sys.stderr)
                 last_run = now.date()
@@ -551,6 +569,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--once", action="store_true", help="refresh the current collection season and exit")
     parser.add_argument("--serve", action="store_true", help="refresh now, serve locally, and refresh daily at 08:00 China time")
+    parser.add_argument("--index-only", action="store_true", help="refresh source links without generating practice (for CI)")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8766)
     args = parser.parse_args()
@@ -558,6 +577,8 @@ def main() -> None:
         serve(args.host, args.port)
     else:
         update_once()
+        if not args.index_only:
+            generate_current_practice()
 
 
 if __name__ == "__main__":

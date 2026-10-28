@@ -1,6 +1,6 @@
 {
   "seasonId": "2026-09_2026-12",
-  "notice": "以下练习由本项目独立编写，借用当期资料中的宽泛话题；文章、录音、图表数据和题干都不是考场原题或来源网站试卷。",
+  "notice": "以下为根据本期公开话题自动生成的独立练习。题目和答案经过程序检查，但没有逐题人工核验；不是考场原题或来源网站试卷。",
   "reading": [
     {
       "id": "sr-food-2026",
@@ -128,6 +128,61 @@
           ],
           "answer": "B",
           "explanation": "Paragraph 3 limits what the measurements can prove."
+        }
+      ]
+    },
+    {
+      "id": "auto-r-202609-bc37df87971ad068",
+      "month": "2026-10",
+      "title": "Who Gets to Create Art?",
+      "sourceKey": "bc37df87971ad068",
+      "sourceSkill": "writing",
+      "sourceTitle": "是否只有天生拥有特殊天赋的人才可以创作艺术",
+      "sourceUrl": "https://www.yaquan.site/paper/e18556c6-acdc-4d8b-b375-32f50602a303",
+      "basis": "由本期写作公开话题延伸的独立阅读练习",
+      "generatedAt": "2026-10-28",
+      "generationMethod": "codex-cli",
+      "paragraphs": [
+        "People often assume that memorable art can only be produced by individuals born with exceptional talent. Certainly, natural ability may help someone notice colour, rhythm or shape more quickly than others. However, this advantage does not guarantee meaningful work. In the fictional town of Bellmere, a community study found that many admired local artists had shown no unusual skill as children. What they shared instead was sustained curiosity: they regularly observed ordinary life, experimented with unfamiliar materials and remained interested even when their early results were disappointing.",
+        "Practice is especially important because artistic techniques can be learned. A beginner may initially struggle to control a brush, structure a story or perform a melody, but repeated effort gradually improves these abilities. For example, Mara Venn, an invented ceramic artist, began attending evening classes at the age of forty-two. Her first bowls were uneven, yet five years of deliberate practice enabled her to develop a distinctive style. Her progress suggests that technical weakness is not a permanent barrier, provided that learners receive useful guidance and continue working through frustration.",
+        "The environment also influences whether creative potential develops. Schools sometimes treat art as less valuable than science or mathematics, while families may discourage children from pursuing activities that appear financially uncertain. By contrast, supportive communities provide affordable spaces, patient teachers and opportunities to display unfinished work without embarrassment. Such conditions encourage creative confidence, which allows people to take risks and express personal ideas. Talent may remain invisible when individuals lack time, materials or encouragement, so judging ability without considering opportunity can be deeply misleading.",
+        "This does not mean that everyone will become a celebrated painter, musician or writer. People differ in their interests, ambitions and rates of improvement, just as they do in sport or language learning. Nevertheless, artistic creation should not be reserved for a supposedly gifted minority. Its value includes enjoyment, communication and self-understanding, not merely public recognition. Society should therefore widen access to arts education and praise persistence alongside achievement. Natural talent can offer a useful beginning, but curiosity, opportunity and disciplined effort are more reliable foundations for a lasting creative life."
+      ],
+      "questions": [
+        {
+          "id": "1",
+          "type": "text",
+          "prompt": "What quality did the admired local artists share?",
+          "answer": "sustained curiosity",
+          "explanation": "The answer appears near the end of the first paragraph, after the Bellmere community study is described."
+        },
+        {
+          "id": "2",
+          "type": "text",
+          "prompt": "What enabled Mara Venn to develop a distinctive style?",
+          "answer": "deliberate practice",
+          "explanation": "The answer appears in the second paragraph in the sentence describing her improvement over five years."
+        },
+        {
+          "id": "3",
+          "type": "text",
+          "prompt": "What do supportive conditions encourage?",
+          "answer": "creative confidence",
+          "explanation": "The answer appears in the third paragraph immediately after the examples of affordable spaces, patient teachers and display opportunities."
+        },
+        {
+          "id": "4",
+          "type": "text",
+          "prompt": "What may remain invisible when people lack resources or encouragement?",
+          "answer": "Talent",
+          "explanation": "The answer is the first word of the final sentence in the third paragraph."
+        },
+        {
+          "id": "5",
+          "type": "text",
+          "prompt": "What should society widen access to?",
+          "answer": "arts education",
+          "explanation": "The answer appears in the fourth paragraph in the sentence recommending how society should support artistic creation."
         }
       ]
     }
@@ -278,6 +333,80 @@
         "audio/season/sl-festival-2026-05.m4a",
         "audio/season/sl-festival-2026-06.m4a"
       ]
+    },
+    {
+      "id": "auto-l-202609-b23e956dde2090ca",
+      "month": "2026-10",
+      "title": "Community Art Workshop Announcement",
+      "sourceKey": "b23e956dde2090ca",
+      "sourceSkill": "writing",
+      "sourceTitle": "是否只有天生拥有特殊天赋的人才可以创作艺术",
+      "sourceUrl": "https://www.yaquan.site/paper/e18556c6-acdc-4d8b-b375-32f50602a303",
+      "basis": "由本期写作公开话题延伸的独立听力练习",
+      "generatedAt": "2026-10-28",
+      "generationMethod": "codex-cli",
+      "sentences": [
+        "Good evening, everyone, and welcome to the Riverside Community Centre’s monthly talk on creativity and art.",
+        "Tonight, painter Lena Morris will challenge the common belief that only naturally gifted people can produce meaningful artwork.",
+        "Lena began drawing at the age of thirty-two, after a bicycle accident forced her to spend six weeks at home.",
+        "Her first pictures were simple pencil sketches of everyday objects, including a coffee cup, an old shoe, and a houseplant.",
+        "She says that regular practice, patient observation, and a willingness to make mistakes helped her improve more than talent did.",
+        "During tonight’s session, Lena will demonstrate a technique called blind contour drawing, in which artists study an object without looking down at their paper.",
+        "After the demonstration, participants will have twenty minutes to create a picture inspired by a personal memory.",
+        "All essential materials are provided, although you may bring your own sketchbook if you prefer.",
+        "The workshop is suitable for complete beginners, and nobody will be asked to display their work without permission.",
+        "Please meet beside the information desk at seven fifteen, where our volunteer Marcus will guide you to Studio Three."
+      ],
+      "questions": [
+        {
+          "id": "1",
+          "type": "text",
+          "prompt": "Where is the monthly talk being held?",
+          "answer": "Riverside Community Centre",
+          "explanation": "The location is stated in the first sentence when the speaker welcomes everyone to the Riverside Community Centre."
+        },
+        {
+          "id": "2",
+          "type": "text",
+          "prompt": "How old was Lena when she began drawing?",
+          "answer": "thirty-two",
+          "explanation": "The third sentence says that Lena began drawing at the age of thirty-two."
+        },
+        {
+          "id": "3",
+          "type": "text",
+          "prompt": "What kind of sketches did Lena first create?",
+          "answer": "pencil sketches",
+          "explanation": "The fourth sentence describes her first pictures as simple pencil sketches of everyday objects."
+        },
+        {
+          "id": "4",
+          "type": "text",
+          "prompt": "How long will participants have to create a picture?",
+          "answer": "twenty minutes",
+          "explanation": "The seventh sentence explains that participants will have twenty minutes for the activity."
+        },
+        {
+          "id": "5",
+          "type": "text",
+          "prompt": "Where should participants meet before the workshop?",
+          "answer": "information desk",
+          "explanation": "The final sentence asks participants to meet beside the information desk."
+        }
+      ],
+      "audio": "audio/season/auto-l-202609-b23e956dde2090ca.m4a",
+      "sentenceAudio": [
+        "audio/season/auto-l-202609-b23e956dde2090ca-01.m4a",
+        "audio/season/auto-l-202609-b23e956dde2090ca-02.m4a",
+        "audio/season/auto-l-202609-b23e956dde2090ca-03.m4a",
+        "audio/season/auto-l-202609-b23e956dde2090ca-04.m4a",
+        "audio/season/auto-l-202609-b23e956dde2090ca-05.m4a",
+        "audio/season/auto-l-202609-b23e956dde2090ca-06.m4a",
+        "audio/season/auto-l-202609-b23e956dde2090ca-07.m4a",
+        "audio/season/auto-l-202609-b23e956dde2090ca-08.m4a",
+        "audio/season/auto-l-202609-b23e956dde2090ca-09.m4a",
+        "audio/season/auto-l-202609-b23e956dde2090ca-10.m4a"
+      ]
     }
   ],
   "writing": [
@@ -388,6 +517,21 @@
       },
       "sourceTitle": "前往伦敦以及英国其他地区的海外游客数量",
       "sourceUrl": "https://www.yaquan.site/paper/cd012eb1-5e6b-4d46-a786-5ef308cdccd1"
+    },
+    {
+      "id": "auto-w-202609-2dccca28ad946fbe",
+      "month": "2026-10",
+      "title": "IELTS Writing Task 2 Practice: Commercial Sponsorship in Sport",
+      "sourceKey": "2dccca28ad946fbe",
+      "sourceSkill": "writing",
+      "sourceTitle": "大公司借助大型体育赛事推广产品,有人认为这整体上对体育产生负面影响",
+      "sourceUrl": "https://www.yaquan.site/paper/4a5be5ea-a8e7-4be5-a539-021caba3bbcc",
+      "basis": "由本期写作公开话题延伸的独立写作练习",
+      "generatedAt": "2026-10-28",
+      "generationMethod": "codex-cli",
+      "task": "Task 2",
+      "minimumWords": 250,
+      "prompt": "Major sporting competitions increasingly depend on sponsorship from multinational companies, which often use these events to advertise their brands and products. Some people argue that this commercial involvement harms sport, while others believe it provides important benefits.\n\nDiscuss both views and give your own opinion.\n\nGive reasons for your answer and include any relevant examples from your own knowledge or experience.\n\nWrite at least 250 words."
     }
   ],
   "speaking": [
@@ -455,6 +599,26 @@
       ],
       "sourceTitle": "A new law you would like to introduce in your country",
       "sourceUrl": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec"
+    },
+    {
+      "id": "auto-s-202609-692775de32ee8512",
+      "month": "2026-09",
+      "title": "Your Neighbourhood",
+      "sourceKey": "692775de32ee8512",
+      "sourceSkill": "speaking",
+      "sourceTitle": "The area you live in",
+      "sourceUrl": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec",
+      "basis": "由本期口语公开话题延伸的独立口语练习",
+      "generatedAt": "2026-10-28",
+      "generationMethod": "codex-cli",
+      "part": "Part 1",
+      "questions": [
+        "What do you like most about your neighbourhood?",
+        "Is there anything you would change about it?",
+        "Do you think you will continue living there in the future?"
+      ]
     }
-  ]
+  ],
+  "generatedForCheckedAt": "2026-10-28",
+  "generationPolicyVersion": 1
 }

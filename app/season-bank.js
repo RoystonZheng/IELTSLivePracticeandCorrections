@@ -1,7 +1,7 @@
 (() => {
 'use strict';
 
-const content = window.IELTS_SEASON_CONTENT;
+let content = window.IELTS_SEASON_CONTENT;
 const skills = [
   {id:'reading',name:'阅读',icon:'▣'},
   {id:'listening',name:'听力',icon:'♫'},
@@ -234,5 +234,10 @@ document.addEventListener('change', event => {
   if (saved[item.id].feedback) delete saved[item.id].feedback[event.target.dataset.seasonAnswer];
   persist();
 });
-window.IELTS_SEASON_BANK = {render,deactivate:()=>{root=null;stopAudio();}};
+window.IELTS_SEASON_BANK = {render,replaceContent:next=>{
+  if (!next?.seasonId || JSON.stringify(next)===JSON.stringify(content)) return false;
+  content=next;
+  window.IELTS_SEASON_CONTENT=next;
+  return true;
+},deactivate:()=>{root=null;stopAudio();}};
 })();

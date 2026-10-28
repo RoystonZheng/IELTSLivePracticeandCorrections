@@ -28,10 +28,13 @@ season_prefix = 'window.IELTS_SEASON_CONTENT = '
 assert season_js.startswith(season_prefix) and season_js.rstrip().endswith(';')
 assert json.loads(season_js[len(season_prefix):].strip().removesuffix(';')) == season_content
 assert season_content['seasonId']
+assert season_content['seasonId'] == index['season']['id'], 'stale seasonal practice'
 for field in ('reading', 'listening', 'writing', 'speaking'):
     authored = season_content[field]
     assert len({item['id'] for item in authored}) == len(authored), field
     for item in authored:
+        if item.get('generationMethod') == 'codex-cli':
+            assert item['month'] in index['season']['months'], item['id']
         assert item['title'] and item.get('sourceUrl', '').startswith('https://'), item['id']
         if field in ('reading', 'listening'):
             assert item['questions'], item['id']
