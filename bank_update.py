@@ -712,17 +712,17 @@ def make_handler():
 
 
 def serve(host: str, port: int) -> None:
-    # Running locally refreshes immediately, then again at/after 08:00 China time each day.
-    try:
-        update_once()
-    except Exception as exc:
-        print(f"Startup refresh failed: {exc}", file=sys.stderr)
+    # Bind before refreshing so slow sources do not keep the local page unavailable.
     stop = Event()
-    started = datetime.now(TZ)
-    last_run = started.date() if started.hour >= 8 else started.date() - timedelta(days=1)
+    server = ThreadingHTTPServer((host, port), make_handler())
 
     def schedule() -> None:
-        nonlocal last_run
+        try:
+            update_once()
+        except Exception as exc:
+            print(f"Startup refresh failed: {exc}", file=sys.stderr)
+        started = datetime.now(TZ)
+        last_run = started.date() if started.hour >= 8 else started.date() - timedelta(days=1)
         while not stop.wait(30):
             now = datetime.now(TZ)
             if due_for_daily_refresh(now, last_run):
@@ -733,7 +733,6 @@ def serve(host: str, port: int) -> None:
                 last_run = now.date()
 
     Thread(target=schedule, daemon=True).start()
-    server = ThreadingHTTPServer((host, port), make_handler())
     print(f"Open http://{host}:{port}/app/index.html", flush=True)
     try:
         server.serve_forever()

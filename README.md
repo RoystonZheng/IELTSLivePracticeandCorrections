@@ -31,7 +31,7 @@ cd ielts-practice-desk
 python3 bank_update.py --serve
 ```
 
-打开终端提示的 `http://127.0.0.1:8766/app/index.html`。启动时会立即联网更新；保持这个命令运行，每天北京时间 08:00 起再检查一次。页面打开期间会定期读取更新后的目录。网络失败时会保留**同一资料期**已经收录的记录。只想更新文件时运行 `python3 bank_update.py --once`；不联网时可以直接打开 `app/index.html`，使用仓库内最近一次提交的目录。需要可选的本机评分时必须用 `bank_update.py --serve` 启动；直接打开 HTML 文件或使用普通静态服务器只会显示无 AI 模式。
+打开终端提示的 `http://127.0.0.1:8766/app/index.html`；如果要使用 8767 端口，运行 `python3 bank_update.py --serve --port 8767`。本地地址只有服务运行时才能访问。服务启动后先提供仓库内已有的资料，联网更新在后台进行；保持命令运行，每天北京时间 08:00 起再检查一次。页面打开期间会定期读取更新后的目录。网络失败时会保留**同一资料期**已经收录的记录。只想更新文件时运行 `python3 bank_update.py --once`；不联网时可以直接打开 `app/index.html`，使用仓库内最近一次提交的目录。需要可选的本机评分时必须用 `bank_update.py --serve` 启动；直接打开 HTML 文件或使用普通静态服务器只会显示无 AI 模式。
 
 ## 可选 Codex CLI 反馈
 
