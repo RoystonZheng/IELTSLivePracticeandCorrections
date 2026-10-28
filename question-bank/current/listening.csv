@@ -1,23 +1,2 @@
 id,month,date,title,url,kind,geography,sourceId
-L-2026-09-01,2026-09,,2026-09 Listening reconstruction 1,https://ieltsactualtests.com/listening/2026-sep-hf-1,third_party_reconstruction,global_unattributed,ieltsa-2026-09-listening
-L-2026-09-02,2026-09,,2026-09 Listening reconstruction 2,https://ieltsactualtests.com/listening/2026-sep-hf-2,third_party_reconstruction,global_unattributed,ieltsa-2026-09-listening
-L-2026-09-03,2026-09,,2026-09 Listening reconstruction 3,https://ieltsactualtests.com/listening/2026-sep-hf-3,third_party_reconstruction,global_unattributed,ieltsa-2026-09-listening
-L-2026-09-04,2026-09,,2026-09 Listening reconstruction 4,https://ieltsactualtests.com/listening/2026-sep-hf-4,third_party_reconstruction,global_unattributed,ieltsa-2026-09-listening
-L-2026-09-05,2026-09,,2026-09 Listening reconstruction 5,https://ieltsactualtests.com/listening/2026-sep-hf-5,third_party_reconstruction,global_unattributed,ieltsa-2026-09-listening
-L-2026-09-06,2026-09,,2026-09 Listening reconstruction 6,https://ieltsactualtests.com/listening/2026-sep-hf-6,third_party_reconstruction,global_unattributed,ieltsa-2026-09-listening
-L-2026-09-07,2026-09,,2026-09 Listening reconstruction 7,https://ieltsactualtests.com/listening/2026-sep-hf-7,third_party_reconstruction,global_unattributed,ieltsa-2026-09-listening
-L-2026-10-01,2026-10,,2026-10 Listening reconstruction 1,https://ieltsactualtests.com/listening/2026-oct-hf-1,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-02,2026-10,,2026-10 Listening reconstruction 2,https://ieltsactualtests.com/listening/2026-oct-hf-2,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-03,2026-10,,2026-10 Listening reconstruction 3,https://ieltsactualtests.com/listening/2026-oct-hf-3,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-04,2026-10,,2026-10 Listening reconstruction 4,https://ieltsactualtests.com/listening/2026-oct-hf-4,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-05,2026-10,,2026-10 Listening reconstruction 5,https://ieltsactualtests.com/listening/2026-oct-hf-5,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-06,2026-10,,2026-10 Listening reconstruction 6,https://ieltsactualtests.com/listening/2026-oct-hf-6,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-07,2026-10,,2026-10 Listening reconstruction 7,https://ieltsactualtests.com/listening/2026-oct-hf-7,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-08,2026-10,,2026-10 Listening reconstruction 8,https://ieltsactualtests.com/listening/2026-oct-hf-8,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-09,2026-10,,2026-10 Listening reconstruction 9,https://ieltsactualtests.com/listening/2026-oct-hf-9,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-10,2026-10,,2026-10 Listening reconstruction 10,https://ieltsactualtests.com/listening/2026-oct-hf-10,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-11,2026-10,,2026-10 Listening reconstruction 11,https://ieltsactualtests.com/listening/2026-oct-hf-11,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-12,2026-10,,2026-10 Listening reconstruction 12,https://ieltsactualtests.com/listening/2026-oct-hf-12,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-13,2026-10,,2026-10 Listening reconstruction 13,https://ieltsactualtests.com/listening/2026-oct-hf-13,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-14,2026-10,,2026-10 Listening reconstruction 14,https://ieltsactualtests.com/listening/2026-oct-hf-14,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
-L-2026-10-15,2026-10,,2026-10 Listening reconstruction 15,https://ieltsactualtests.com/listening/2026-oct-hf-15,third_party_reconstruction,global_unattributed,ieltsa-2026-10-listening
+L-M-2026-09-16-listening-reading,2026-09,2026-09-16,2026-09-16 听力与阅读考生回忆,https://aiieltsmentor.com/jijing/2026-09-16-listening-reading,candidate_recall_article,mainland_or_asia_mixed_verify_article,mentor

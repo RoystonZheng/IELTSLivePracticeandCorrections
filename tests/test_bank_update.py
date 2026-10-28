@@ -2,8 +2,12 @@ from __future__ import annotations
 
 import unittest
 from datetime import date, datetime
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
 from zoneinfo import ZoneInfo
 
+import bank_update
 from bank_update import collect, due_for_daily_refresh, parse_joe_speaking, parse_zip_speaking, parse_tuonidefu, parse_yaquan, season_for
 
 
@@ -14,10 +18,6 @@ def fake_fetch(url: str) -> str:
                 '<h2 lang="en">Work or studies</h2></article>'
                 '<article><div><span>海外</span><span>话题 2</span><span>Part 1</span></div>'
                 '<h2 lang="en">Travel</h2></article>')
-    if '/recalls/2026-09' in url:
-        return '<a href="/reading/2026-sep-hf-1"></a><a href="/listening/2026-sep-hf-1"></a>'
-    if '/recalls/2027-01' in url:
-        return '<a href="/reading/2027-jan-hf-1"></a><a href="/listening/2027-jan-hf-1"></a>'
     if 'yaquan.site' in url:
         return ('<a href="/paper/old">old</a><span>Task 2 · 2026.9.16北京</span>'
                 '<a href="/paper/new">new</a><span>Task 1 · 2027.1.2上海</span>'
@@ -35,13 +35,29 @@ class SeasonTests(unittest.TestCase):
 
     def test_rollover_clears_previous_season(self):
         old = collect(date(2026, 12, 31), fake_fetch)
-        self.assertEqual([x['month'] for x in old['reading']], ['2026-09'])
+        self.assertEqual(old['reading'], [])
         new = collect(date(2027, 1, 2), fake_fetch, old)
         self.assertEqual(new['season']['id'], '2027-01_2027-04')
-        self.assertEqual([x['month'] for x in new['reading']], ['2027-01'])
+        self.assertEqual(new['reading'], [])
         self.assertEqual([x['month'] for x in new['writing']], ['2027-01'])
         self.assertEqual([x['title'] for x in new['speaking']], ['Work or studies'])
         self.assertFalse(any('2026' in x['url'] for field in ('reading','listening','writing','speaking','recallLeads') for x in new[field]))
+
+    def test_rollover_clears_local_season_questions_and_audio(self):
+        with TemporaryDirectory() as directory:
+            app = Path(directory)
+            (app / 'data').mkdir()
+            (app / 'audio/season').mkdir(parents=True)
+            content = app / 'data/season-content.json'
+            content.write_text('{"seasonId":"2026-09_2026-12","reading":[{"id":"old"}]}', encoding='utf-8')
+            stale = app / 'audio/season/old.m4a'
+            stale.write_bytes(b'old')
+            with patch.object(bank_update, 'APP', app):
+                self.assertTrue(bank_update.sync_season_content({'season': {'id': '2027-01_2027-04'}}))
+                self.assertFalse(bank_update.sync_season_content({'season': {'id': '2027-01_2027-04'}}))
+            self.assertFalse(stale.exists())
+            self.assertIn('2027-01_2027-04', content.read_text(encoding='utf-8'))
+            self.assertIn('"reading":[]', (app / 'season-content.js').read_text(encoding='utf-8'))
 
     def test_same_season_failure_retains_previous_source(self):
         old = collect(date(2026, 9, 16), fake_fetch)
@@ -64,6 +80,8 @@ class SeasonTests(unittest.TestCase):
     def test_future_writing_is_not_published(self):
         items = parse_yaquan(fake_fetch('https://www.yaquan.site'), season_for(date(2027, 1, 2)), date(2027, 1, 2))
         self.assertEqual([x['url'] for x in items], ['https://www.yaquan.site/paper/new'])
+        self.assertEqual(items[0]['reportedAppearances'][0]['venue'], '上海')
+        self.assertEqual(items[0]['reportedAppearances'][0]['verification'], 'third_party_report_only')
 
     def test_daily_run_beijing_time(self):
         tz = ZoneInfo('Asia/Shanghai')

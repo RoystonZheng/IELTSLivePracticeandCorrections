@@ -15,12 +15,26 @@ import speech_analysis
 from bank_update import make_handler
 
 
+def licensed_season_fixture():
+    """In-memory fixture only; no third-party question content is shipped."""
+    return {"seasonId": "2026-09_2026-12",
+            "reading": [{"id": "fixture-reading", "paragraphs": ["An authorised sample passage."],
+                         "questions": [{"id": "1", "prompt": "What passage?", "answer": "sample",
+                                        "explanation": "The passage says sample."}]}],
+            "listening": [],
+            "writing": [{"id": "fixture-writing", "prompt": "Describe a sample chart for this test fixture.",
+                         "minimumWords": 150}],
+            "speaking": []}
+
+
 class AiBridgeTests(unittest.TestCase):
     def test_current_season_feedback_uses_bundled_questions_only(self):
-        seasonal = ai_bridge.read_data("season-content.json")
+        seasonal = licensed_season_fixture()
         reading = seasonal["reading"][0]
         original = ai_bridge.read_data
         def same_season(name):
+            if name == "season-content.json":
+                return seasonal
             data = original(name)
             if name == "public-index.json":
                 data["season"]["id"] = seasonal["seasonId"]
@@ -41,6 +55,8 @@ class AiBridgeTests(unittest.TestCase):
         self.assertEqual(writing_case["question"], writing["prompt"])
         self.assertEqual(writing_case["kind"], "writing")
         def shifted(name):
+            if name == "season-content.json":
+                return seasonal
             data = original(name)
             if name == "public-index.json":
                 data["season"]["id"] = "2027-01_2027-04"
@@ -51,10 +67,12 @@ class AiBridgeTests(unittest.TestCase):
                                       "answer": "A long enough practice answer. " * 5})
 
     def test_current_season_feedback_endpoint_uses_trusted_prompt(self):
-        seasonal = ai_bridge.read_data("season-content.json")
+        seasonal = licensed_season_fixture()
         writing = seasonal["writing"][0]
         original = ai_bridge.read_data
         def same_season(name):
+            if name == "season-content.json":
+                return seasonal
             data = original(name)
             if name == "public-index.json":
                 data["season"]["id"] = seasonal["seasonId"]
@@ -92,20 +110,11 @@ class AiBridgeTests(unittest.TestCase):
             ai_bridge.build_case({"kind": "writing", "taskId": "W1", "answer": "short"})
 
     def test_speaking_is_transcript_only(self):
-        seasonal = ai_bridge.read_data("season-content.json")
-        authored = seasonal["speaking"][0]
-        topic = {"id": authored["sourceId"], "url": authored["sourceUrl"],
-                 "title": authored["sourceTitle"], "part": authored["part"]}
-        original = ai_bridge.read_data
-        def practice_topic(name):
-            if name == "public-index.json":
-                return {"season": {"id": seasonal["seasonId"]}, "speaking": [topic]}
-            return original(name)
-        with patch.object(ai_bridge, "read_data", side_effect=practice_topic):
-            case = ai_bridge.build_case({"kind": "speaking", "topicId": topic["id"],
-                                         "answer": "I would like to explain my answer in more detail."})
+        topic = ai_bridge.read_data("public-index.json")["speaking"][0]
+        case = ai_bridge.build_case({"kind": "speaking", "topicId": topic["id"],
+                                     "answer": "I would like to explain my answer in more detail."})
         self.assertIn("candidateTranscript", case)
-        self.assertTrue(case["practiceQuestions"])
+        self.assertNotIn("practiceQuestions", case)
         self.assertNotIn("audioBytes", case)
         self.assertIn("Pronunciation", ai_bridge.prompt_for(case))
 

@@ -21,6 +21,15 @@ let wrongOnly = false;
 let saved = {};
 let capabilities = {};
 let activeAudio = null;
+const historyStorageKey = 'ielts-season-history-v1';
+let mode = 'library';
+let subjectPart = 'all';
+const subjectParts = {reading:['Section A','Section B','Section C','Section D'],listening:['Part 1','Part 2','Part 3'],writing:['Task 1','Task 2'],speaking:['Part 1','Part 2','Part 3']};
+function matchesPart(item, part) {
+  if (part === 'all') return true;
+  const value = item.section || item.part || item.task || '';
+  return value === part || (value === 'Part 2 / Part 3' && (part === 'Part 2' || part === 'Part 3'));
+}
 
 function storageKey() { return `ielts-season-practice-${index.season.id}-v1`; }
 function load() {
@@ -31,6 +40,18 @@ function persist() {
   try { localStorage.setItem(storageKey(),JSON.stringify(saved)); }
   catch { status('浏览器存储空间不足，作答可能没有保存。'); }
 }
+function recordAttempt(item) {
+  const at=Date.now();
+  const answers=structuredClone(saved[item.id]?.answers||{});
+  const questions=item.questions||[];
+  const score=questions.filter(q=>isCorrect(q,answers[q.id]||'')).length;
+  const entry={id:`season-${item.id}-${at}`,type:'season',skill,mode:'single',title:item.title,at,
+    seasonId:index.season.id,item:structuredClone(item),answers,draft:saved[item.id]?.draft||'',
+    score:questions.length?score:null,total:questions.length||null};
+  try {const history=JSON.parse(localStorage.getItem(historyStorageKey)||'[]');history.unshift(entry);localStorage.setItem(historyStorageKey,JSON.stringify(history));status('已保存本次作答到练习记录。');}
+  catch {status('无法保存练习记录，请检查浏览器存储空间。');}
+}
+function historyEntries(){try{return JSON.parse(localStorage.getItem(historyStorageKey)||'[]');}catch{return [];}}
 function status(message) {
   const slot = document.getElementById('season-status');
   if (slot) slot.textContent = message;
@@ -47,8 +68,8 @@ function sourceLabel(item) {
 }
 function practiceCard(item) {
   return `<button type="button" class="season-practice-card" data-season-item="${escapeHtml(item.id)}">
-    <span class="season-card-top"><span class="badge blue">${escapeHtml(item.task || item.part || '独立编写')}</span><small>${escapeHtml(sourceLabel(item))}</small></span>
-    <strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.basis || '依据当季公开话题独立编写')}</span>
+    <span class="season-card-top"><span class="badge blue">${escapeHtml(item.task || item.part || '来源题')}</span><small>${escapeHtml(sourceLabel(item))}</small></span>
+    <strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.basis || '当季来源题目')}</span>
     <small>在本站阅读题目并练习 →</small>
   </button>`;
 }
@@ -91,6 +112,7 @@ function writingDetail(item) {
     <label class="season-writing-label" for="season-draft">你的作文 · 建议至少 ${item.minimumWords} 词</label>
     <textarea id="season-draft" class="draft" data-season-draft placeholder="Write your answer here...">${escapeHtml(draft)}</textarea>
     <p class="small muted">已写 <span id="season-word-count">${wordCount(draft)}</span> 词 · 自动保存在当前浏览器。${capabilities.codexCli?'可用自己的 Codex CLI 获取练习估分。':'未连接 Codex CLI 时可正常写作，不提供估分。'}</p>
+    <button type="button" class="btn secondary" data-season-save-writing>保存本次写作到记录</button>
     ${capabilities.codexCli?'<button type="button" class="btn" data-season-ai-writing>获取 AI 练习评分</button>':''}${saved[item.id]?.writingFeedback?feedbackView(saved[item.id].writingFeedback):''}`;
 }
 function feedbackView(feedback) {
@@ -105,15 +127,19 @@ function detail(item) {
   const source = sourceItem(item);
   const link = source?.url || item.sourceUrl;
   const body = skill==='reading'?readingDetail(item):skill==='listening'?listeningDetail(item):skill==='writing'?writingDetail(item):speakingDetail(item);
-  return `<section class="panel season-detail"><div class="season-detail-head"><div><span class="badge blue">${escapeHtml(item.task || item.part || '当季主题练习')}</span><h2>${escapeHtml(item.title)}</h2></div><button type="button" class="btn secondary" data-season-close>返回题库</button></div>
-    <p class="small muted">${escapeHtml(item.basis || '依据当季公开话题独立编写')} · 非考场原题、非原站试卷。${link?`<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">核对话题来源 ↗</a>`:''}</p>${body}</section>`;
+  return `<section class="panel season-detail"><div class="season-detail-head"><div><span class="badge blue">${escapeHtml(item.task || item.part || '当季来源题')}</span><h2>${escapeHtml(item.title)}</h2></div><button type="button" class="btn secondary" data-season-close>返回题库</button></div>
+    <p class="small muted">${escapeHtml(item.basis || '当季来源题目')}。${link?`<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">核对题目来源 ↗</a>`:''}</p>${body}</section>`;
 }
 function reportRow(item) {
-  const label = item.date || item.month;
+  const label = item.date ? `${item.kind==='third_party_dated_topic'?'来源标注考试':'来源发布'} ${item.date}` : `来源月份 ${item.month}`;
   const title = item.title || '未命名资料';
-  const type = item.task || item.part || (skill==='reading'?'阅读重建入口':'听力重建入口');
-  const region = item.venueReported?`第三方标注考点：${item.venueReported}`:({global_unattributed:'未核验国内考点',site_reported_mainland:'第三方大陆话题目录'}[item.geography]||'地域需回源站核对');
-  return `<a class="link-row season-report-row" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer"><span><strong>${escapeHtml(title)}</strong><small>${escapeHtml(label)} · ${escapeHtml(type)} · ${escapeHtml(region)}</small></span><span class="arrow">↗</span></a>`;
+  const type = item.section || item.task || item.part || 'Part / Section 未核实';
+  const appearance = item.reportedAppearances?.[0];
+  const where = appearance ? `来源标注出现于 ${appearance.date}${appearance.venue?` · ${appearance.venue}`:''}（未独立核验）`
+    : item.geography==='site_reported_mainland' ? '来源列为中国大陆话题；具体场次和考点未核实' : '具体出现场次和考点未核实';
+  const body=`<span><strong>${escapeHtml(title)}</strong><small>${escapeHtml(label)} · ${escapeHtml(type)} · ${escapeHtml(where)}</small></span>`;
+  if(mode==='subject'&&skill==='speaking')return `<div class="link-row season-report-row">${body}<span class="source-row-actions"><a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">来源 ↗</a><button type="button" class="btn secondary" data-season-open-speaking="${escapeHtml(item.id)}">录音练习</button></span></div>`;
+  return `<a class="link-row season-report-row" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${body}<span class="arrow">↗</span></a>`;
 }
 function render(main, sourceIndex, nextCapabilities = {}) {
   root = main;
@@ -121,17 +147,26 @@ function render(main, sourceIndex, nextCapabilities = {}) {
   const changed = index?.season.id !== sourceIndex.season.id;
   index = sourceIndex;
   if (changed) { selected = null; showAnswers = false; wrongOnly = false; load(); }
-  const items = authoredItems();
+  const items = authoredItems().filter(item=>mode==='library'||matchesPart(item,subjectPart));
   const chosen = items.find(item=>item.id===selected);
-  const reports = index[skill] || [];
+  const reports = (index[skill] || []).filter(item=>mode==='library'||matchesPart(item,subjectPart));
   const current = content.seasonId === index.season.id;
-  root.innerHTML = `<div class="page-head"><div><p class="kicker">Current season · Four skills</p><h1>${escapeHtml(index.season.label)}当季题库</h1><p class="lede">先看本期能在站内打开的题目，再查完整公开线索目录。听、说、读、写均随仓库提供；新季开始时旧季练习不会冒充本期题。</p></div><span class="badge blue">核对 ${escapeHtml(index.checkedAt)}</span></div>
-    <div class="notice blue">${current?escapeHtml(content.notice):'新资料期已开始，原期资料已退出当前练习区。本期公开线索在下方持续更新；独立编写的站内题目待核对后上架。'} 来源目录只证明第三方有相关报告，不证明覆盖全国考点。</div>
+  if (mode === 'subject') {
+    const title=skills.find(entry=>entry.id===skill).name;
+    root.innerHTML=`<div class="page-head"><div><p class="kicker">Current season · ${escapeHtml(title)}</p><h1>${escapeHtml(title)}${subjectPart==='all'?'整套模考':` · ${escapeHtml(subjectPart)}`}</h1><p class="lede">${escapeHtml(index.season.label)}。先选整套或单个部分，再查看有完整题目及来源证据的题组。</p></div></div>
+      <div class="season-skill-tabs subject-part-tabs" role="tablist" aria-label="${escapeHtml(title)}部分选择"><button type="button" role="tab" aria-selected="${subjectPart==='all'}" class="${subjectPart==='all'?'active':''}" data-subject-part="all">整套模考</button>${subjectParts[skill].map(part=>`<button type="button" role="tab" aria-selected="${subjectPart===part}" class="${subjectPart===part?'active':''}" data-subject-part="${escapeHtml(part)}">${escapeHtml(part)}</button>`).join('')}</div>
+      ${chosen?detail(chosen):`<div class="section-title"><h2>${subjectPart==='all'?'当季完整模考':'可作答的当季题目'}</h2></div>${subjectPart==='all'?'<div class="empty">当前尚未收齐有来源和公开分发权的完整试卷，无法组成真实当季整套模考。</div>':items.length?`<div class="season-practice-grid">${items.map(practiceCard).join('')}</div>`:'<div class="empty">这个部分暂无可公开分发的完整题目，暂不能开始作答。</div>'}
+      <div class="section-title"><h2>公开出现记录与来源 · ${reports.length}</h2></div><p class="small muted">链接标题可能只是话题摘要；没有完整原题、答案或音频的记录不会自动变成模考。${skill==='reading'||skill==='listening'?'目前公开线索无法可靠归入具体 Part / Section。':''}</p><div class="link-list">${reports.map(reportRow).join('')||'<div class="empty">本部分暂无已核实分组的公开记录。</div>'}</div>${subjectPart!=='all'&&(index[skill]||[]).some(item=>!item.section&&!item.part&&!item.task)?'<p class="small muted">还有未标明 Part / Section 的记录，可在“公开题库”查看。</p>':''}`}
+      <div id="season-status" role="status" aria-live="polite"></div>`;
+    return;
+  }
+  root.innerHTML = `<div class="page-head"><div><p class="kicker">Current season · Four skills</p><h1>${escapeHtml(index.season.label)}当季题库</h1><p class="lede">查看本期听、说、读、写的公开记录及来源；具体日期、考点只在来源有报告时标注。</p></div><span class="badge blue">核对 ${escapeHtml(index.checkedAt)}</span></div>
+    <div class="notice blue">${current?escapeHtml(content.notice):'新资料期已开始，原期资料已退出当前练习区。本期公开记录在下方持续更新。'} 来源目录只证明第三方有相关报告，不证明覆盖全国考点。</div>
     <div class="season-skill-tabs" role="tablist" aria-label="当季四科题库">${skills.map(entry=>`<button type="button" role="tab" aria-selected="${skill===entry.id}" class="${skill===entry.id?'active':''}" data-season-tab="${entry.id}"><span>${entry.icon}</span>${entry.name}<small>${(index[entry.id]||[]).length} 条线索</small></button>`).join('')}</div>
     <div id="season-status" role="status" aria-live="polite"></div>
-    ${chosen?detail(chosen):`<div class="section-title"><h2>站内可练习 · ${items.length} 题组</h2><span class="small muted">独立编写 · 随仓库下载</span></div>
-    ${items.length?`<div class="season-practice-grid">${items.map(practiceCard).join('')}</div>`:'<div class="empty">本期暂无经核对的站内练习题组；下面仍可查看本期资料线索。</div>'}
-    <details class="season-reports" open><summary>本期${skills.find(entry=>entry.id===skill).name}公开线索 · ${reports.length} 条</summary><p class="small muted">这里收录标题、日期与来源；部分来源仅有主题，完整第三方试卷需到原站查看。</p><input id="season-search" type="search" placeholder="筛选标题或日期" aria-label="筛选当季题库"><div class="link-list">${reports.map(reportRow).join('')}</div></details>`}`;
+    ${chosen?detail(chosen):`<div class="section-title"><h2>可分发的完整题目 · ${items.length} 题组</h2><span class="small muted">仅收录有授权和出现证据的来源题</span></div>
+    ${items.length?`<div class="season-practice-grid">${items.map(practiceCard).join('')}</div>`:'<div class="empty">本期暂无获授权、可随仓库分发的完整题目；下方仅是来源记录，不是站内模考题。</div>'}
+    <details class="season-reports" open><summary>本期${skills.find(entry=>entry.id===skill).name}公开线索 · ${reports.length} 条</summary><p class="small muted">这里收录来源标题、日期与出现地点的报告；标题可能只是话题摘要。完整试题请回源站核对。</p><input id="season-search" type="search" placeholder="筛选标题或日期" aria-label="筛选当季题库"><div class="link-list">${reports.map(reportRow).join('')}</div></details>`}`;
 }
 function selectedItem() { return authoredItems().find(item=>item.id===selected); }
 function stopAudio() {
@@ -186,12 +221,15 @@ async function requestFeedback(button, item, questionId) {
 }
 document.addEventListener('click', event => {
   if (!root?.contains(event.target)) return;
+  const part = event.target.closest('[data-subject-part]');
+  if (part) { stopAudio(); subjectPart=part.dataset.subjectPart; window.dispatchEvent(new CustomEvent('ielts:subject-part',{detail:{skill,part:subjectPart}})); selected=null; showAnswers=false; wrongOnly=false; render(root,index,capabilities); return; }
   const tab = event.target.closest('[data-season-tab]');
   if (tab) { stopAudio(); skill=tab.dataset.seasonTab; selected=null; showAnswers=false; wrongOnly=false; if(root)render(root,index,capabilities); return; }
   const card = event.target.closest('[data-season-item]');
   if (card) { stopAudio(); selected=card.dataset.seasonItem; showAnswers=false; wrongOnly=false; if(root)render(root,index,capabilities); root?.scrollIntoView({block:'start'}); return; }
   if (event.target.closest('[data-season-close]')) { selected=null; showAnswers=false; wrongOnly=false; stopAudio(); if(root)render(root,index,capabilities); return; }
-  if (event.target.closest('[data-season-check]')) { showAnswers=true; if(root)render(root,index,capabilities); return; }
+  if (event.target.closest('[data-season-check]')) { const item=selectedItem();if(item)recordAttempt(item);showAnswers=true; if(root)render(root,index,capabilities); return; }
+  if (event.target.closest('[data-season-save-writing]')) {const item=selectedItem();if(item?.prompt&&saved[item.id]?.draft?.trim())recordAttempt(item);else status('请先写下作文再保存。');return;}
   if (event.target.closest('[data-season-wrong-only]')) { wrongOnly=!wrongOnly; if(root)render(root,index,capabilities); return; }
   const aiQuestion=event.target.closest('[data-season-ai-question]');
   if (aiQuestion) { const item=selectedItem(); if(item)requestFeedback(aiQuestion,item,aiQuestion.dataset.seasonAiQuestion); return; }
@@ -234,7 +272,7 @@ document.addEventListener('change', event => {
   if (saved[item.id].feedback) delete saved[item.id].feedback[event.target.dataset.seasonAnswer];
   persist();
 });
-window.IELTS_SEASON_BANK = {render,replaceContent:next=>{
+window.IELTS_SEASON_BANK = {renderLibrary:(main,sourceIndex,nextCapabilities)=>{mode='library';return render(main,sourceIndex,nextCapabilities);},renderSubject:(main,sourceIndex,nextCapabilities,nextSkill,nextPart)=>{if(skill!==nextSkill)selected=null;mode='subject';skill=nextSkill;subjectPart=nextPart||'all';return render(main,sourceIndex,nextCapabilities);},historyEntries,replaceContent:next=>{
   if (!next?.seasonId || JSON.stringify(next)===JSON.stringify(content)) return false;
   content=next;
   window.IELTS_SEASON_CONTENT=next;

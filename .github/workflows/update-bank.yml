@@ -18,7 +18,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
         with:
@@ -26,54 +26,20 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
-      - name: Check generation credential
-        id: generation-key
-        env:
-          IELTS_GENERATION_API_KEY: ${{ secrets.IELTS_GENERATION_API_KEY }}
-        run: |
-          if [ -n "$IELTS_GENERATION_API_KEY" ]; then
-            echo 'available=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'available=false' >> "$GITHUB_OUTPUT"
-          fi
       - name: Refresh current season
-        run: python3 bank_update.py --once --index-only
-      - uses: actions/setup-node@v4
-        if: steps.generation-key.outputs.available == 'true'
-        with:
-          node-version: '22'
-      - name: Prepare independent practice generation
-        if: steps.generation-key.outputs.available == 'true'
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq espeak-ng ffmpeg
-          npm install -g @openai/codex@0.145.0
-      - name: Generate current-season practice groups
-        id: generate
-        if: steps.generation-key.outputs.available == 'true'
-        continue-on-error: true
-        env:
-          OPENAI_API_KEY: ${{ secrets.IELTS_GENERATION_API_KEY }}
-          IELTS_GENERATION_MODEL: ${{ vars.IELTS_GENERATION_MODEL }}
-        run: python3 app/scripts/generate_season_practice.py --max-new-per-skill 1
-      - name: Clear old season without generation credential
-        if: steps.generation-key.outputs.available != 'true'
-        run: python3 app/scripts/generate_season_practice.py --rollover-only
+        run: python3 bank_update.py --once
       - name: Verify current data and rollover rules
         run: |
           python3 app/scripts/check_data.py
           python3 -m unittest discover -s tests -v
-      - name: Commit new index and practice when changed
+      - name: Commit current source index and season rollover
         run: |
-          git add -A -- app/data/public-index.json app/data/season-content.json app/bank.js app/season-content.js app/audio/season question-bank/current
+          git add -A -- app/data/public-index.json app/data/season-content.json app/bank.js app/season-content.js app/audio question-bank/current
           if git diff --cached --quiet; then
-            echo 'No source or practice change.'
+            echo 'No current-season change.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m "Update current IELTS sources and independent practice"
+          git commit -m "Update sourced IELTS records and season state"
           git push origin HEAD:main
-      - name: Report practice generation failure
-        if: ${{ steps.generate.outcome == 'failure' }}
-        run: exit 1

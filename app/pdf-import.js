@@ -67,7 +67,11 @@ function historyEntries() {
   return papers.flatMap(paper => {
     const attempts = [...(paper.attempts || [])];
     if (paper.submittedAt && !attempts.some(item => item.submittedAt === paper.submittedAt)) attempts.push({submittedAt:paper.submittedAt,answers:paper.answers || {},annotations:paper.annotations || {}});
-    return attempts.map(attempt => ({id:`pdf-${paper.id}-${attempt.submittedAt}`,type:'pdf',title:paper.title,at:attempt.submittedAt,paperId:paper.id,attempt,questions:paper.questions,referenceText:paper.referenceText}));
+    return attempts.map(attempt => {
+      const keyed=canScore(paper)?paper.questions.filter(q=>normalize(q.answer)):[];
+      const score=keyed.filter(q=>normalize(attempt.answers?.[q.id||q.number])===normalize(q.answer)).length;
+      return {id:`pdf-${paper.id}-${attempt.submittedAt}`,type:'pdf',skill:paper.skill,mode:(paper.groups||[]).length>1?'full':'single',title:paper.title,at:attempt.submittedAt,paperId:paper.id,attempt,questions:paper.questions,referenceText:paper.referenceText,score:keyed.length?score:null,total:keyed.length||null};
+    });
   });
 }
 function redoHistory(paperId) {

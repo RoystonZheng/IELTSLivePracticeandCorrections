@@ -21,7 +21,7 @@ from datetime import date, datetime, timedelta
 from html import unescape
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from threading import Event, Lock, Semaphore, Thread
+from threading import Event, Semaphore, Thread
 from urllib.error import HTTPError
 from urllib.parse import unquote, urljoin, urlparse
 from urllib.request import Request, urlopen
@@ -31,7 +31,6 @@ ROOT = Path(__file__).resolve().parent
 APP = ROOT / "app"
 ACTIVE = ROOT / "question-bank" / "current"
 TZ = ZoneInfo("Asia/Shanghai")
-IELTSA = "https://ieltsactualtests.com"
 YAQUAN = "https://www.yaquan.site/ielts/writing"
 MENTOR = "https://aiieltsmentor.com/jijing.html"
 XHD = "https://cq.xhd.cn/ielts/ysjj/"
@@ -39,6 +38,8 @@ TUONIDEFU = "https://tuonidefu.com.cn/blogs"
 JOE_SPEAKING = "https://joespeaking.com/zh-CN/ielts-speaking-questions"
 ZIP_SPEAKING = "https://www.zipielts.com/library"
 MONTH_CODES = ("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec")
+EMPTY_SEASON_NOTICE = ("本期只展示有来源的公开考后记录。未获得转载授权的题目、答案和音频不会打包到仓库；"
+                       "请到来源网站核对原题，或导入自己有权使用的试卷。")
 
 
 @dataclass(frozen=True)
@@ -88,18 +89,6 @@ def strip_tags(html: str) -> str:
     return unescape(re.sub(r"<[^>]+>", "", html)).strip()
 
 
-def parse_ieltsa(html: str, year: int, month: int, skill: str) -> list[dict]:
-    code = MONTH_CODES[month - 1]
-    path = rf"/{skill}/{year}-{code}-hf-(\d+)"
-    nums = sorted({int(n) for n in re.findall(r'href="' + path + r'"', html)})
-    return [{"id": f"{skill[0].upper()}-{year}-{month:02}-{n:02}",
-             "month": f"{year}-{month:02}", "date": None,
-             "title": f"{year}-{month:02} {skill.title()} reconstruction {n}",
-             "url": f"{IELTSA}/{skill}/{year}-{code}-hf-{n}",
-             "kind": "third_party_reconstruction", "geography": "global_unattributed",
-             "sourceId": f"ieltsa-{year}-{month:02}-{skill}"} for n in nums]
-
-
 def parse_yaquan(html: str, season: Season, today: date) -> list[dict]:
     items: list[dict] = []
     seen: set[str] = set()
@@ -115,11 +104,14 @@ def parse_yaquan(html: str, season: Season, today: date) -> list[dict]:
         if not season.start <= exam_date <= min(today, season.end) or url in seen:
             continue
         seen.add(url)
+        reported_venue = strip_tags(venue)
         items.append({"id": f"W-{exam_date:%Y%m%d}-{len(items)+1:03}",
                       "month": f"{exam_date:%Y-%m}", "date": exam_date.isoformat(),
-                      "task": f"Task {task}", "venueReported": strip_tags(venue),
+                      "task": f"Task {task}", "venueReported": reported_venue,
                       "title": strip_tags(title), "url": url,
                       "kind": "third_party_dated_topic", "geography": "site_reported_venue",
+                      "reportedAppearances": [{"date": exam_date.isoformat(), "venue": reported_venue or None,
+                                               "sourceUrl": url, "verification": "third_party_report_only"}],
                       "sourceId": "yaquan"})
     return sorted(items, key=lambda x: (x["date"], x["task"], x["url"]), reverse=True)
 
@@ -262,7 +254,7 @@ def collect(today: date, fetcher=fetch, previous: dict | None = None) -> dict:
     season = season_for(today)
     same_season = bool(previous and previous.get("season", {}).get("id") == season.id)
     result = {"schemaVersion": 3, "checkedAt": today.isoformat(), "season": season.as_dict(),
-              "scope": "中国大陆考生的公开回忆索引；听读重建练习可能来自全球，来源地点逐项标注。",
+              "scope": "中国大陆考生的公开考情线索；仅展示来源允许保存的简短元数据和链接。",
               "reading": [], "listening": [], "writing": [], "speaking": [], "recallLeads": [],
               "sourceStatus": [], "futureMonths": [m for m in season.months if m > f"{today:%Y-%m}"]}
 
@@ -288,14 +280,6 @@ def collect(today: date, fetcher=fetch, previous: dict | None = None) -> dict:
                                         "items": len(old), "retainedFromSameSeason": bool(old),
                                         "error": error[:200], "checkedAt": today.isoformat()})
 
-    for month_text in season.months:
-        if month_text > f"{today:%Y-%m}":
-            continue
-        year, month = map(int, month_text.split("-"))
-        url = f"{IELTSA}/recalls/{month_text}"
-        for skill in ("reading", "listening"):
-            run_source(f"ieltsa-{month_text}-{skill}", url,
-                       lambda html, y=year, m=month, s=skill: parse_ieltsa(html, y, m, s), skill)
     run_source("yaquan", YAQUAN, lambda html: parse_yaquan(html, season, today), "writing")
     run_source("mentor", MENTOR, lambda html: parse_mentor(html, season, today), "recallLeads")
     run_source("xhd", XHD, lambda html: parse_xhd(html, season, today), "recallLeads")
@@ -303,11 +287,18 @@ def collect(today: date, fetcher=fetch, previous: dict | None = None) -> dict:
     run_source("joe-speaking", speaking_url(season), lambda html: parse_joe_speaking(html, season), "speaking")
     if not result["speaking"]:
         run_source("zip-speaking", ZIP_SPEAKING, lambda html: parse_zip_speaking(html, season), "speaking")
+    for lead in result["recallLeads"]:
+        if lead.get("sourceId") == "mentor" and "listening-reading" in lead.get("url", ""):
+            for field, prefix in (("reading", "R"), ("listening", "L")):
+                result[field].append({**lead, "id": f"{prefix}-{lead['id']}",
+                                      "kind": "candidate_recall_article", "section": None,
+                                      "reportedAppearances": []})
     for field in ("reading", "listening", "writing", "speaking", "recallLeads"):
         key = "id" if field == "speaking" else "url"
         result[field] = list({x[key]: x for x in result[field]}.values())
+        for item in result[field]:
+            item.setdefault("reportedAppearances", [])
     result["sources"] = [
-        {"id": "ieltsa", "url": f"{IELTSA}/recalls", "description": "按月重建练习；地点不明，不能视为全国考点原卷。"},
         {"id": "yaquan", "url": YAQUAN, "description": "写作日期和考点由第三方网站标注，未独立逐条核验。"},
         {"id": "mentor", "url": MENTOR, "description": "按日期的考生回忆文章；部分含亚太场，需回原文核对地点。"},
         {"id": "xhd", "url": XHD, "description": "机构考情文章，可能涉及全国多地；不是完整原卷。"},
@@ -339,6 +330,25 @@ def csv_text(items: list[dict], columns: list[str]) -> str:
     return output.getvalue()
 
 
+def sync_season_content(index: dict) -> bool:
+    """Drop the old season's practice only when the source-index season changes."""
+    path = APP / "data" / "season-content.json"
+    try:
+        current = json.loads(path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        current = {}
+    if current.get("seasonId") == index["season"]["id"]:
+        return False
+    content = {"seasonId": index["season"]["id"], "notice": EMPTY_SEASON_NOTICE,
+               "reading": [], "listening": [], "writing": [], "speaking": []}
+    atomic_text(path, json.dumps(content, ensure_ascii=False, indent=2) + "\n")
+    atomic_text(APP / "season-content.js", "window.IELTS_SEASON_CONTENT = " +
+                json.dumps(content, ensure_ascii=False, separators=(",", ":")) + ";\n")
+    for audio in (APP / "audio" / "season").glob("*.m4a"):
+        audio.unlink()
+    return True
+
+
 def publish(index: dict) -> None:
     season = index["season"]
     for field in ("reading", "listening", "writing", "speaking", "recallLeads"):
@@ -363,6 +373,7 @@ def publish(index: dict) -> None:
                       ("writingTest", "writing-test.json")):
         bundle[key] = json.loads((APP / "data" / file).read_text(encoding="utf-8"))
     atomic_text(APP / "bank.js", "window.IELTS_BANK = " + json.dumps(bundle, ensure_ascii=False, separators=(",", ":")) + ";\n")
+    sync_season_content(index)
 
 
 def update_once(day: date | None = None, fetcher=fetch) -> dict:
@@ -380,17 +391,6 @@ def update_once(day: date | None = None, fetcher=fetch) -> dict:
 def due_for_daily_refresh(now: datetime, last_run: date) -> bool:
     local = now.astimezone(TZ)
     return local.hour >= 8 and local.date() != last_run
-
-
-def generate_current_practice() -> None:
-    """Refresh independent practice after the source index, when local Codex is available."""
-    import subprocess
-    command = [sys.executable, str(APP / "scripts" / "generate_season_practice.py")]
-    if os.getenv("IELTS_GENERATION_ENABLED", "1") == "0":
-        command.append("--rollover-only")
-    result = subprocess.run(command, check=False)
-    if result.returncode:
-        print(f"Current-season practice generation failed (exit {result.returncode}); existing practice retained.", file=sys.stderr)
 
 
 AI_SLOT = Semaphore(1)
@@ -531,11 +531,6 @@ def serve(host: str, port: int) -> None:
         update_once()
     except Exception as exc:
         print(f"Startup refresh failed: {exc}", file=sys.stderr)
-    refresh_lock = Lock()
-    def startup_generate() -> None:
-        with refresh_lock:
-            generate_current_practice()
-    Thread(target=startup_generate, daemon=True).start()
     stop = Event()
     started = datetime.now(TZ)
     last_run = started.date() if started.hour >= 8 else started.date() - timedelta(days=1)
@@ -546,9 +541,7 @@ def serve(host: str, port: int) -> None:
             now = datetime.now(TZ)
             if due_for_daily_refresh(now, last_run):
                 try:
-                    with refresh_lock:
-                        update_once(now.date())
-                        generate_current_practice()
+                    update_once(now.date())
                 except Exception as exc:
                     print(f"08:00 refresh failed: {exc}", file=sys.stderr)
                 last_run = now.date()
@@ -569,7 +562,6 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--once", action="store_true", help="refresh the current collection season and exit")
     parser.add_argument("--serve", action="store_true", help="refresh now, serve locally, and refresh daily at 08:00 China time")
-    parser.add_argument("--index-only", action="store_true", help="refresh source links without generating practice (for CI)")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8766)
     args = parser.parse_args()
@@ -577,8 +569,6 @@ def main() -> None:
         serve(args.host, args.port)
     else:
         update_once()
-        if not args.index_only:
-            generate_current_practice()
 
 
 if __name__ == "__main__":

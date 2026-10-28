@@ -27,14 +27,13 @@ season_js = (APP / 'season-content.js').read_text(encoding='utf-8')
 season_prefix = 'window.IELTS_SEASON_CONTENT = '
 assert season_js.startswith(season_prefix) and season_js.rstrip().endswith(';')
 assert json.loads(season_js[len(season_prefix):].strip().removesuffix(';')) == season_content
-assert season_content['seasonId']
-assert season_content['seasonId'] == index['season']['id'], 'stale seasonal practice'
+assert season_content['seasonId'] == index['season']['id']
 for field in ('reading', 'listening', 'writing', 'speaking'):
     authored = season_content[field]
     assert len({item['id'] for item in authored}) == len(authored), field
     for item in authored:
-        if item.get('generationMethod') == 'codex-cli':
-            assert item['month'] in index['season']['months'], item['id']
+        assert item.get('rights', {}).get('allowPublicRedistribution') is True, item['id']
+        assert item['rights'].get('evidence'), item['id']
         assert item['title'] and item.get('sourceUrl', '').startswith('https://'), item['id']
         if field in ('reading', 'listening'):
             assert item['questions'], item['id']
@@ -65,6 +64,12 @@ for field in ('reading', 'listening', 'writing', 'speaking', 'recallLeads'):
     assert len({x[unique_key] for x in items}) == len(items), field
     assert all(x['url'].startswith('https://') and x['month'] in season.months for x in items), field
     assert all(not x.get('date') or date.fromisoformat(x['date']) <= checked for x in items), field
+    assert all(isinstance(x.get('reportedAppearances'), list) for x in items), field
+    for item in items:
+        for report in item['reportedAppearances']:
+            assert date.fromisoformat(report['date']) <= checked
+            assert report['sourceUrl'] == item['url']
+            assert report['verification'] == 'third_party_report_only'
     with (ROOT / 'question-bank/current' / f'{field}.csv').open(encoding='utf-8', newline='') as f:
         rows = list(csv.DictReader(f))
     assert len(rows) == len(items), field
