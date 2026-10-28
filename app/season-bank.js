@@ -136,10 +136,13 @@ function reportRow(item) {
   const type = item.section || item.task || item.part || 'Part / Section 未核实';
   const appearance = item.reportedAppearances?.[0];
   const where = appearance ? `来源标注出现于 ${appearance.date}${appearance.venue?` · ${appearance.venue}`:''}（未独立核验）`
+    : item.reportedPeriod ? `来源标注考试周 ${item.reportedPeriod}；具体场次和考点未核实`
     : item.geography==='site_reported_mainland' ? '来源列为中国大陆话题；具体场次和考点未核实' : '具体出现场次和考点未核实';
-  const body=`<span><strong>${escapeHtml(title)}</strong><small>${escapeHtml(label)} · ${escapeHtml(type)} · ${escapeHtml(where)}</small></span>`;
+  const descriptor = item.kind==='reported_topic'?'话题线索 · ':'';
+  const source = item.sourceTitle ? `<small>出处：${escapeHtml(item.sourceTitle)}</small>` : '';
+  const body=`<span><strong>${escapeHtml(descriptor+title)}</strong><small>${escapeHtml(label)} · ${escapeHtml(type)} · ${escapeHtml(where)}</small>${source}</span>`;
   if(mode==='subject'&&skill==='speaking')return `<div class="link-row season-report-row">${body}<span class="source-row-actions"><a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">来源 ↗</a><button type="button" class="btn secondary" data-season-open-speaking="${escapeHtml(item.id)}">录音练习</button></span></div>`;
-  return `<a class="link-row season-report-row" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${body}<span class="arrow">↗</span></a>`;
+  return `<div class="link-row season-report-row">${body}<span class="source-row-actions"><a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">核对来源 ↗</a></span></div>`;
 }
 function render(main, sourceIndex, nextCapabilities = {}) {
   root = main;
@@ -156,7 +159,7 @@ function render(main, sourceIndex, nextCapabilities = {}) {
     root.innerHTML=`<div class="page-head"><div><p class="kicker">Current season · ${escapeHtml(title)}</p><h1>${escapeHtml(title)}${subjectPart==='all'?'整套模考':` · ${escapeHtml(subjectPart)}`}</h1><p class="lede">${escapeHtml(index.season.label)}。先选整套或单个部分，再查看有完整题目及来源证据的题组。</p></div></div>
       <div class="season-skill-tabs subject-part-tabs" role="tablist" aria-label="${escapeHtml(title)}部分选择"><button type="button" role="tab" aria-selected="${subjectPart==='all'}" class="${subjectPart==='all'?'active':''}" data-subject-part="all">整套模考</button>${subjectParts[skill].map(part=>`<button type="button" role="tab" aria-selected="${subjectPart===part}" class="${subjectPart===part?'active':''}" data-subject-part="${escapeHtml(part)}">${escapeHtml(part)}</button>`).join('')}</div>
       ${chosen?detail(chosen):`<div class="section-title"><h2>${subjectPart==='all'?'当季完整模考':'可作答的当季题目'}</h2></div>${subjectPart==='all'?'<div class="empty">当前尚未收齐有来源和公开分发权的完整试卷，无法组成真实当季整套模考。</div>':items.length?`<div class="season-practice-grid">${items.map(practiceCard).join('')}</div>`:'<div class="empty">这个部分暂无可公开分发的完整题目，暂不能开始作答。</div>'}
-      <div class="section-title"><h2>公开出现记录与来源 · ${reports.length}</h2></div><p class="small muted">链接标题可能只是话题摘要；没有完整原题、答案或音频的记录不会自动变成模考。${skill==='reading'||skill==='listening'?'目前公开线索无法可靠归入具体 Part / Section。':''}</p><div class="link-list">${reports.map(reportRow).join('')||'<div class="empty">本部分暂无已核实分组的公开记录。</div>'}</div>${subjectPart!=='all'&&(index[skill]||[]).some(item=>!item.section&&!item.part&&!item.task)?'<p class="small muted">还有未标明 Part / Section 的记录，可在“公开题库”查看。</p>':''}`}
+      <div class="section-title"><h2>公开出现记录与来源 · ${reports.length}</h2></div><p class="small muted">链接标题可能只是话题摘要；没有完整原题、答案或音频的记录不会自动变成模考。标注了 Part / Passage 的线索可按来源分组查看，其余请到“公开题库”查看。</p><div class="link-list">${reports.map(reportRow).join('')||'<div class="empty">本部分暂无已核实分组的公开记录。</div>'}</div>${subjectPart!=='all'&&(index[skill]||[]).some(item=>!item.section&&!item.part&&!item.task)?'<p class="small muted">还有未标明 Part / Section 的记录，可在“公开题库”查看。</p>':''}`}
       <div id="season-status" role="status" aria-live="polite"></div>`;
     return;
   }
@@ -166,7 +169,7 @@ function render(main, sourceIndex, nextCapabilities = {}) {
     <div id="season-status" role="status" aria-live="polite"></div>
     ${chosen?detail(chosen):`<div class="section-title"><h2>可分发的完整题目 · ${items.length} 题组</h2><span class="small muted">仅收录有授权和出现证据的来源题</span></div>
     ${items.length?`<div class="season-practice-grid">${items.map(practiceCard).join('')}</div>`:'<div class="empty">本期暂无获授权、可随仓库分发的完整题目；下方仅是来源记录，不是站内模考题。</div>'}
-    <details class="season-reports" open><summary>本期${skills.find(entry=>entry.id===skill).name}公开线索 · ${reports.length} 条</summary><p class="small muted">这里收录来源标题、日期与出现地点的报告；标题可能只是话题摘要。完整试题请回源站核对。</p><input id="season-search" type="search" placeholder="筛选标题或日期" aria-label="筛选当季题库"><div class="link-list">${reports.map(reportRow).join('')}</div></details>`}`;
+    <details class="season-reports" open><summary>本期${skills.find(entry=>entry.id===skill).name}公开线索 · ${reports.length} 条</summary><p class="small muted">逐条收录来源明确提到的话题、日期或考试周；未核实的场次和考点会标明。完整试题请回源站核对。</p><input id="season-search" type="search" placeholder="筛选标题或日期" aria-label="筛选当季题库"><div class="link-list">${reports.map(reportRow).join('')}</div></details>`}`;
 }
 function selectedItem() { return authoredItems().find(item=>item.id===selected); }
 function stopAudio() {

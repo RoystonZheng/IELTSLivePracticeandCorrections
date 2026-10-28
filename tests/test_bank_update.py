@@ -102,6 +102,56 @@ class SeasonTests(unittest.TestCase):
         items = parse_tuonidefu(html, season_for(date(2026,10,27)), date(2026,10,27))
         self.assertEqual([x['id'] for x in items], ['T-2'])
 
+    def test_weekly_topic_index_keeps_every_mentioned_topic_without_questions(self):
+        lead = {'id': 'T-999', 'month': '2026-10', 'date': '2026-10-19',
+                'title': '10月12日-10月18日雅思机考回忆', 'url': 'https://tuonidefu.com.cn/blogs/999',
+                'sourceId': 'tuonidefu'}
+        html = ('<p>不提供、不传播任何考试原题</p><h2>听力</h2>'
+                '<h3>Part 1</h3><p>1.租房咨询</p><p>2.旅行预订</p>'
+                '<h2>阅读</h2><h3>Passage 1</h3><p>1.The Ocean</p><p>2.The Cave</p>'
+                '<h2>写作</h2>')
+        parsed = bank_update.parse_weekly_recap_topics(html, lead)
+        self.assertEqual([x['title'] for x in parsed['listening']], ['租房咨询', '旅行预订'])
+        self.assertEqual([x['title'] for x in parsed['reading']], ['The Ocean', 'The Cave'])
+        self.assertEqual(len({x['id'] for x in parsed['reading']}), 2)
+        self.assertEqual(parsed['reading'][0]['reportedPeriod'], '2026-10-12—2026-10-18')
+        detailed = ('<p>不提供、不传播任何考试原题</p><h2>听力</h2>'
+                    '<h3>Section 2：志愿者工作</h3><p>11 What is the answer?</p><p>11.TRUE</p>'
+                    '<h2>阅读</h2><p>第一篇：The Pencil</p><p>1.题干内容 ____</p>'
+                    '<h2>写作</h2>')
+        parsed = bank_update.parse_weekly_recap_topics(detailed, lead)
+        self.assertEqual([x['title'] for x in parsed['listening']], ['志愿者工作'])
+        self.assertEqual([x['title'] for x in parsed['reading']], ['The Pencil'])
+
+    def test_multiple_topics_from_one_article_survive_collection(self):
+        page = ('<p>不提供、不传播任何考试原题</p><h2>听力</h2><h3>Part 1</h3>'
+                '<p>1.租房咨询</p><p>2.旅行预订</p><h2>阅读</h2><h3>Passage 1</h3>'
+                '<p>1.The Ocean</p><p>2.The Cave</p><h2>写作</h2>')
+        listing = ('<a href="/blogs/999" aria-label="阅读文章：10月12日-10月18日雅思机考回忆">'
+                   '<div create_timestamp="2026-10-19T01:00:00Z">')
+        def source(url: str) -> str:
+            if url == bank_update.TUONIDEFU:
+                return listing
+            if url.endswith('/blogs/999'):
+                return page
+            return fake_fetch(url)
+        result = collect(date(2026, 10, 20), source)
+        self.assertEqual(len(result['reading']), 2)
+        self.assertEqual(len(result['listening']), 2)
+        self.assertEqual(len({x['url'] for x in result['reading']}), 1)
+
+    def test_removed_membership_source_does_not_survive_same_season_refresh(self):
+        old = collect(date(2026, 10, 20), fake_fetch)
+        paid = {'id': 'M-old', 'month': '2026-10', 'date': '2026-10-20',
+                'title': 'Old member site', 'url': 'https://aiieltsmentor.com/jijing/old',
+                'sourceId': 'mentor'}
+        old['reading'].append(paid)
+        old['listening'].append(paid)
+        old['recallLeads'].append(paid)
+        refreshed = collect(date(2026, 10, 21), fake_fetch, old)
+        for field in ('reading', 'listening', 'recallLeads'):
+            self.assertFalse(any('aiieltsmentor' in x['url'] for x in refreshed[field]))
+
     def test_speaking_parser_keeps_mainland_topics_only(self):
         season = season_for(date(2026,10,27))
         items = parse_joe_speaking(fake_fetch('https://x/ielts-speaking-questions/2026-sep-dec'), season)

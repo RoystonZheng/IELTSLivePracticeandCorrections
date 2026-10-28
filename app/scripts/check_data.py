@@ -60,12 +60,17 @@ assert set(index['futureMonths']).issubset(season.months)
 assert index['sourceStatus']
 for field in ('reading', 'listening', 'writing', 'speaking', 'recallLeads'):
     items = index[field]
-    unique_key = 'id' if field == 'speaking' else 'url'
+    unique_key = 'id' if field in ('reading', 'listening', 'speaking') else 'url'
     assert len({x[unique_key] for x in items}) == len(items), field
     assert all(x['url'].startswith('https://') and x['month'] in season.months for x in items), field
     assert all(not x.get('date') or date.fromisoformat(x['date']) <= checked for x in items), field
     assert all(isinstance(x.get('reportedAppearances'), list) for x in items), field
     for item in items:
+        if item.get('kind') == 'reported_topic':
+            assert item.get('sourceTitle') and item.get('sourceId') and item.get('title'), item['id']
+            if item.get('reportedPeriod'):
+                start, end = item['reportedPeriod'].split('—')
+                assert season.start <= date.fromisoformat(start) <= date.fromisoformat(end) <= checked
         for report in item['reportedAppearances']:
             assert date.fromisoformat(report['date']) <= checked
             assert report['sourceUrl'] == item['url']

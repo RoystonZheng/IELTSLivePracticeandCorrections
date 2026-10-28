@@ -14,11 +14,11 @@
   "checkedAt": "2026-10-28",
   "scope": "中国大陆考生的公开考情线索；仅展示来源允许保存的简短元数据和链接。",
   "counts": {
-    "reading": 1,
-    "listening": 1,
+    "reading": 68,
+    "listening": 54,
     "writing": 44,
     "speaking": 92,
-    "recallLeads": 13
+    "recallLeads": 8
   },
   "sourceStatus": [
     {
@@ -26,13 +26,6 @@
       "url": "https://www.yaquan.site/ielts/writing",
       "status": "ok",
       "items": 44,
-      "checkedAt": "2026-10-28"
-    },
-    {
-      "id": "mentor",
-      "url": "https://aiieltsmentor.com/jijing.html",
-      "status": "ok",
-      "items": 5,
       "checkedAt": "2026-10-28"
     },
     {
@@ -54,6 +47,55 @@
       "url": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec",
       "status": "ok",
       "items": 92,
+      "checkedAt": "2026-10-28"
+    },
+    {
+      "id": "tuonidefu-T-450",
+      "url": "https://tuonidefu.com.cn/blogs/450",
+      "status": "ok",
+      "items": 20,
+      "checkedAt": "2026-10-28"
+    },
+    {
+      "id": "tuonidefu-T-438",
+      "url": "https://tuonidefu.com.cn/blogs/438",
+      "status": "ok",
+      "items": 22,
+      "checkedAt": "2026-10-28"
+    },
+    {
+      "id": "tuonidefu-T-441",
+      "url": "https://tuonidefu.com.cn/blogs/441",
+      "status": "ok",
+      "items": 21,
+      "checkedAt": "2026-10-28"
+    },
+    {
+      "id": "tuonidefu-T-428",
+      "url": "https://tuonidefu.com.cn/blogs/428",
+      "status": "ok",
+      "items": 5,
+      "checkedAt": "2026-10-28"
+    },
+    {
+      "id": "tuonidefu-T-421",
+      "url": "https://tuonidefu.com.cn/blogs/421",
+      "status": "ok",
+      "items": 12,
+      "checkedAt": "2026-10-28"
+    },
+    {
+      "id": "tuonidefu-T-409",
+      "url": "https://tuonidefu.com.cn/blogs/409",
+      "status": "ok",
+      "items": 10,
+      "checkedAt": "2026-10-28"
+    },
+    {
+      "id": "xhd-X-959846",
+      "url": "https://cq.xhd.cn/ielts/ysjj/959846.html",
+      "status": "ok",
+      "items": 32,
       "checkedAt": "2026-10-28"
     }
   ],

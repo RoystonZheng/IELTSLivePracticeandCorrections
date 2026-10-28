@@ -5,7 +5,7 @@
 ## 这个项目的优势
 
 - **当期资料会继续更新。** GitHub Actions 安排每天北京时间 08:00 检查公开来源，并在 08:17 备用重试；有变化才提交目录。本地服务启动时也会检查，保持运行后每天再检查。跨到新的四个月资料期，当前目录按新期资料重建。`git clone` 或 `git pull` 可以取得仓库最近一次已提交的目录。
-- **每条记录说明证据。** 写作记录附来源标注的考试日期、考点和原网页；口语话题标注来源所称的中国大陆范围。当前听读只有一篇明确涉及这两科的考后文章入口，具体场次、考点和 Part 尚未核实。标题可能是话题摘要，不等同于完整原题。
+- **每条记录说明证据。** 写作记录附来源标注的考试日期、考点和原网页；口语话题标注来源所称的中国大陆范围。听读会把公开周报、机构考情文章中明确提到的每个话题逐条列出，并显示来源文章、考试周及可确认的 Part / Passage。没有具体场次、考点的记录会标明未核实。标题是话题线索，不等同于完整原题。
 - **自己的 PDF 可以变成题目。** 上传带文字层的试卷，系统提取题干和选项；先核对、修改，再保存为可作答的个人练习。填入标准答案后，导入的阅读和听力题可以自动核对、筛选错题。这比只把 PDF 当作阅读文件多了一步实际做题和复盘。
 - **没接 AI 也能练习自己的试卷。** 导入有权使用的阅读、听力 PDF 和答案后，可以作答、核对、订正并查看记录。当前公开来源没有可打包的完整试卷时，系统不会拿自编题填充模考入口。
 - **阅读和听力可以直接标注。** 在导入的听读 PDF 练习中，选中一段文字或双击单词，会显示黄色、绿色、粉色高光选项与选词笔记。单击已有标注会打开操作菜单，再选择取消或删除。右侧“全部笔记”窗口可展开、收起和上下滚动。标注保存在当前浏览器。
@@ -72,9 +72,9 @@ git push origin main
 - [官方免费练习入口](question-bank/official-free-practice.md)：不属于当期考后回忆。
 - [网页入口](app/index.html)：主页四科模考入口、各科 Part / Section 选择、公开题库四科页内切换、练习记录四科页内切换。旧版原创练习数据暂保留以便查看已有历史记录，不在当前模考入口展示。
 
-更新程序读取日期和考点标注的写作话题、口语话题目录，以及国内机构的考情文章。明确标有听读的考后文章会出现在对应科目的索引中；文章不是完整题目。每条链接标明来源和地域证据：`site_reported_venue` 表示考点是第三方网站自述，文章类线索需回原文确认。**这些条目不能拼接成一套中国考场原卷，也不能保证覆盖所有城市或场次。** 来源短时失败、未发布月份和未来月份会在网页及 `manifest.json` 中显示。
+更新程序读取日期和考点标注的写作话题、口语话题目录，以及公开可直接阅读的国内机构考情文章。听力和阅读按文章中的话题标题逐条建索引；同一篇周报可以形成多条记录。页面先显示话题及出处，只有点“核对来源”才会打开原站。题干、答案、阅读原文和听力音频不会从第三方网站批量复制到仓库。每条记录标明来源和地域证据：`site_reported_venue` 表示考点是第三方网站自述，文章类线索需回原文确认。**这些条目不能拼接成一套中国考场原卷，也不能保证覆盖所有城市或场次。** 来源短时失败、未发布月份和未来月份会在网页及 `manifest.json` 中显示。
 
-来源目录目前接入 [雅圈写作日期目录](https://www.yaquan.site/ielts/writing)、[AI IELTS Mentor 考后文章](https://aiieltsmentor.com/jijing.html)、[新航道考情目录](https://cq.xhd.cn/ielts/ysjj/)、[托你的福周度考情目录](https://tuonidefu.com.cn/blogs)、[Joe Speaking 大陆口语话题目录](https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec)，口语主站不可用时使用 [ZipIELTS 话题目录](https://www.zipielts.com/library)；官网样题见[雅思中文官网](https://www.chinaielts.org/prepare/ielts-practice-tests/mocks-academic)。以前接入的 IELTS Actual Tests 在[使用条款](https://ieltsactualtests.com/terms-of-service)中明确禁止批量抓取和再分发，已移除自动采集及其条目。第三方链接可能失效或更正，详情以源站为准。
+来源目录目前接入 [雅圈写作日期目录](https://www.yaquan.site/ielts/writing)、[新航道考情目录](https://cq.xhd.cn/ielts/ysjj/)、[托你的福周度考情目录](https://tuonidefu.com.cn/blogs)、[Joe Speaking 大陆口语话题目录](https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec)，口语主站不可用时使用 [ZipIELTS 话题目录](https://www.zipielts.com/library)；官网样题见[雅思中文官网](https://www.chinaielts.org/prepare/ielts-practice-tests/mocks-academic)。爱雅思会员引导来源已从索引及更新流程移除。IELTS Actual Tests 虽可免费练习，但[使用条款](https://ieltsactualtests.com/terms-of-service)禁止抓取和再分发其练习库，不能整库导入本仓库。当前自动更新依赖上述已接入的公开来源，不能保证覆盖市面所有网站。第三方链接可能失效或更正，详情以源站为准。
 
 ## 导入自己的 PDF 试卷
 

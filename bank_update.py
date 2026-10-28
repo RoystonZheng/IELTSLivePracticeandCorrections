@@ -10,6 +10,8 @@ from __future__ import annotations
 import argparse
 import calendar
 import csv
+from concurrent.futures import ThreadPoolExecutor
+import hashlib
 import ipaddress
 import json
 import os
@@ -19,6 +21,7 @@ import time
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
 from html import unescape
+from html.parser import HTMLParser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Event, Semaphore, Thread
@@ -32,7 +35,6 @@ APP = ROOT / "app"
 ACTIVE = ROOT / "question-bank" / "current"
 TZ = ZoneInfo("Asia/Shanghai")
 YAQUAN = "https://www.yaquan.site/ielts/writing"
-MENTOR = "https://aiieltsmentor.com/jijing.html"
 XHD = "https://cq.xhd.cn/ielts/ysjj/"
 TUONIDEFU = "https://tuonidefu.com.cn/blogs"
 JOE_SPEAKING = "https://joespeaking.com/zh-CN/ielts-speaking-questions"
@@ -116,24 +118,6 @@ def parse_yaquan(html: str, season: Season, today: date) -> list[dict]:
     return sorted(items, key=lambda x: (x["date"], x["task"], x["url"]), reverse=True)
 
 
-def parse_mentor(html: str, season: Season, today: date) -> list[dict]:
-    paths = sorted(set(re.findall(r'href="(/jijing/(20\d\d-\d\d-\d\d-[^"/]+))"', html)))
-    items = []
-    for path, raw_date in paths:
-        try:
-            exam_date = date.fromisoformat(raw_date[:10])
-        except ValueError:
-            continue
-        if not season.start <= exam_date <= min(today, season.end):
-            continue
-        subject = "听力与阅读" if "listening-reading" in path else "写作" if "writing-speaking" in path else "综合"
-        items.append({"id": f"M-{path.rsplit('/', 1)[-1]}", "month": f"{exam_date:%Y-%m}",
-                      "date": exam_date.isoformat(), "title": f"{exam_date} {subject}考生回忆",
-                      "url": urljoin("https://aiieltsmentor.com", path), "kind": "candidate_recall_article",
-                      "geography": "mainland_or_asia_mixed_verify_article", "sourceId": "mentor"})
-    return items
-
-
 def parse_xhd(html: str, season: Season, today: date) -> list[dict]:
     items = []
     pattern = (r'<a href="(/ielts/ysjj/\d+\.html)"[^>]*>.*?'
@@ -181,6 +165,185 @@ def parse_tuonidefu(html: str, season: Season, today: date) -> list[dict]:
                       "kind": "weekly_exam_recap", "geography": "china_education_site_location_unspecified",
                       "sourceId": "tuonidefu"})
     return items
+
+
+class _VisibleText(HTMLParser):
+    """Keep short visible text fragments in document order, without page scripts."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.fragments: list[str] = []
+        self.hidden = 0
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag in ("script", "style"):
+            self.hidden += 1
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag in ("script", "style") and self.hidden:
+            self.hidden -= 1
+
+    def handle_data(self, data: str) -> None:
+        if not self.hidden:
+            value = " ".join(unescape(data).split())
+            if value:
+                self.fragments.append(value)
+
+
+def visible_fragments(html: str) -> list[str]:
+    parser = _VisibleText()
+    parser.feed(html)
+    return parser.fragments
+
+
+def weekly_period(title: str, year: int) -> str | None:
+    match = re.search(r"(\d{1,2})月(\d{1,2})日?\s*[-‐‑–—至~]\s*(?:(\d{1,2})月)?(\d{1,2})日?", title)
+    if not match:
+        return None
+    start_month, start_day, end_month, end_day = match.groups()
+    try:
+        first = date(year, int(start_month), int(start_day))
+        last = date(year, int(end_month or start_month), int(end_day))
+    except ValueError:
+        return None
+    return f"{first.isoformat()}—{last.isoformat()}" if first <= last else None
+
+
+def _topic_record(lead: dict, skill: str, section: str | None, title: str,
+                  position: int, period: str | None) -> dict:
+    key = f"{lead['id']}|{skill}|{section}|{title}|{position}"
+    digest = hashlib.sha1(key.encode("utf-8")).hexdigest()[:10]
+    return {"id": f"{'R' if skill == 'reading' else 'L'}-{lead['id']}-{digest}",
+            "month": lead["month"], "date": lead["date"], "title": title,
+            "url": lead["url"], "kind": "reported_topic", "section": section,
+            "reportedPeriod": period, "reportedAppearances": [],
+            "geography": "venue_unverified", "sourceId": f"{lead['sourceId']}-{lead['id']}",
+            "sourceTitle": lead["title"]}
+
+
+def parse_weekly_recap_topics(html: str, lead: dict) -> dict[str, list[dict]]:
+    """Extract only numbered hearing/reading topic labels, not papers or answers."""
+    fragments = visible_fragments(html)
+    disclaimer = next((i for i, value in enumerate(fragments)
+                       if "不提供、不传播任何考试原题" in value), -1)
+    if disclaimer < 0:
+        raise ValueError("weekly recap disclaimer/structure not found")
+    start = next((i for i in range(disclaimer + 1, len(fragments)) if fragments[i] == "听力"), -1)
+    reading_start = next((i for i in range(start + 1, len(fragments)) if fragments[i] == "阅读"), -1)
+    end = next((i for i in range(reading_start + 1, len(fragments)) if fragments[i] == "写作"), -1)
+    if min(start, reading_start, end) < 0:
+        raise ValueError("weekly recap listening/reading sections not found")
+    period = weekly_period(lead["title"], int(lead["date"][:4]))
+    result: dict[str, list[dict]] = {"reading": [], "listening": []}
+    for skill, part in (("listening", fragments[start + 1:reading_start]),
+                        ("reading", fragments[reading_start + 1:end])):
+        section = None
+        section_count = 0
+        named_heading_mode = skill == "reading" and any(re.match(r"第[一二三]篇[：:]", x) for x in part)
+        section_detail_mode = skill == "listening" and any(re.match(r"Section\s*[1-4]", x, re.I) for x in part)
+        for value in part:
+            heading = re.fullmatch(r"(?:Part|P|passage|Section)\s*([1-4])\s*[:：]?\s*(.*)", value, re.I)
+            if heading:
+                number = int(heading.group(1))
+                section = f"{'Part' if skill == 'listening' else 'Passage'} {number}"
+                section_count += 1
+                heading_topic = heading.group(2).strip()
+                if heading_topic and len(heading_topic) <= 80:
+                    result[skill].append(_topic_record(lead, skill, section, heading_topic,
+                                                       len(result[skill]) + 1, period))
+                elif skill == 'listening' and 'Section' in value:
+                    item = _topic_record(lead, skill, section,
+                                         f'{section} 回忆 {section_count}（话题未标明）',
+                                         len(result[skill]) + 1, period)
+                    item["kind"] = "reported_section"
+                    result[skill].append(item)
+                continue
+            if section_detail_mode:
+                continue
+            if skill == "reading":
+                named = re.fullmatch(r"第([一二三])篇[：:]\s*(.{2,100})", value)
+                if named:
+                    section = f"Passage {('一', '二', '三').index(named.group(1)) + 1}"
+                    result[skill].append(_topic_record(lead, skill, section, named.group(2),
+                                                       len(result[skill]) + 1, period))
+                    continue
+                if named_heading_mode:
+                    continue
+            match = re.match(r"^\s*\d{1,2}\s*[.．、)）]?\s+(.+)$", value)
+            if not match:
+                match = re.match(r"^\s*\d{1,2}\s*[.．、)）]\s*(.+)$", value)
+            if not section or not match:
+                if skill == "reading" and not section and match:
+                    topic = match.group(1).strip(" ：:;；。")
+                    if 2 <= len(topic) <= 100 and "____" not in topic:
+                        result[skill].append(_topic_record(lead, skill, None, topic,
+                                                           len(result[skill]) + 1, period))
+                elif skill == "reading" and not match and 3 <= len(value) <= 85 and re.search(r"[A-Za-z]", value) and not re.search(r"(?:Answer|Question|参考答案)", value, re.I):
+                    result[skill].append(_topic_record(lead, skill, section, value,
+                                                       len(result[skill]) + 1, period))
+                continue
+            topic = match.group(1).strip(" ：:;；。")
+            if not 2 <= len(topic) <= 120:
+                continue
+            result[skill].append(_topic_record(lead, skill, section, topic,
+                                               len(result[skill]) + 1, period))
+    if not result["reading"] and not result["listening"]:
+        raise ValueError("weekly recap has no numbered topics")
+    return result
+
+
+def parse_xhd_topics(html: str, lead: dict) -> dict[str, list[dict]]:
+    fragments = visible_fragments(html)
+    listening = next((i for i, v in enumerate(fragments) if v.startswith("雅思听力考情")), -1)
+    reading = next((i for i, v in enumerate(fragments) if v.startswith("雅思阅读考情")), -1)
+    if min(listening, reading) < 0:
+        raise ValueError("XHD skill sections not found")
+    result = {"reading": [], "listening": []}
+    year = int(lead["date"][:4])
+    period_match = re.search(r"(\d{1,2})\.(\d{1,2})\s*[-‐‑–—至~]\s*(\d{1,2})\.(\d{1,2})", lead["title"])
+    period = None
+    if period_match:
+        sm, sd, em, ed = map(int, period_match.groups())
+        try:
+            period = f"{date(year,sm,sd).isoformat()}—{date(year,em,ed).isoformat()}"
+        except ValueError:
+            pass
+    for value in fragments[listening + 1:reading]:
+        match = re.match(r"P(?:art)?\s*([1-4])\s*[（(](20\d\d)\.(\d{1,2})\.(\d{1,2})[）)]\s*(.*)", value, re.I)
+        if not match:
+            continue
+        number, y, m, d, rest = match.groups()
+        try:
+            day = date(int(y), int(m), int(d))
+        except ValueError:
+            continue
+        venue = re.split(r"题型|难度", rest, 1)[0].strip() or None
+        topic = "沼气发电厂" if "沼气发电厂" in rest else "超市布局" if "超市布局" in rest else f"Part {number} 回忆（话题未标明）"
+        item = _topic_record(lead, "listening", f"Part {number}", topic, len(result["listening"]) + 1, period)
+        if "话题未标明" in topic:
+            item["kind"] = "reported_section"
+        item["reportedAppearances"] = [{"date": day.isoformat(), "venue": venue,
+                                        "sourceUrl": lead["url"], "verification": "third_party_report_only"}]
+        result["listening"].append(item)
+    section = None
+    for value in fragments[reading + 1:]:
+        heading = re.match(r"Passage\s*([1-3])文章特点", value, re.I)
+        if heading:
+            section = f"Passage {heading.group(1)}"
+            continue
+        if section and value.startswith("话题分布："):
+            for group in re.findall(r"[①②③④]([^①②③④]+)", value):
+                topics = group.split("：", 1)[-1]
+                for raw in re.split(r"[、，。]​?", topics):
+                    topic = re.sub(r"(?:出现\s*\d+\s*次|[（(]\d+次[）)])", "", raw).strip(" ：:;；。")
+                    if 2 <= len(topic) <= 55:
+                        result["reading"].append(_topic_record(lead, "reading", section, topic,
+                                                                len(result["reading"]) + 1, period))
+        if value.startswith("二、 高频话题文章精讲"):
+            break
+    if not result["reading"]:
+        raise ValueError("XHD reading topics not found")
+    return result
 
 
 def speaking_url(season: Season) -> str:
@@ -281,26 +444,49 @@ def collect(today: date, fetcher=fetch, previous: dict | None = None) -> dict:
                                         "error": error[:200], "checkedAt": today.isoformat()})
 
     run_source("yaquan", YAQUAN, lambda html: parse_yaquan(html, season, today), "writing")
-    run_source("mentor", MENTOR, lambda html: parse_mentor(html, season, today), "recallLeads")
     run_source("xhd", XHD, lambda html: parse_xhd(html, season, today), "recallLeads")
     run_source("tuonidefu", TUONIDEFU, lambda html: parse_tuonidefu(html, season, today), "recallLeads")
     run_source("joe-speaking", speaking_url(season), lambda html: parse_joe_speaking(html, season), "speaking")
     if not result["speaking"]:
         run_source("zip-speaking", ZIP_SPEAKING, lambda html: parse_zip_speaking(html, season), "speaking")
-    for lead in result["recallLeads"]:
-        if lead.get("sourceId") == "mentor" and "listening-reading" in lead.get("url", ""):
-            for field, prefix in (("reading", "R"), ("listening", "L")):
-                result[field].append({**lead, "id": f"{prefix}-{lead['id']}",
-                                      "kind": "candidate_recall_article", "section": None,
-                                      "reportedAppearances": []})
+    article_leads = [(lead, parse_weekly_recap_topics) for lead in result["recallLeads"]
+                     if lead.get("sourceId") == "tuonidefu"]
+    article_leads += [(lead, parse_xhd_topics) for lead in result["recallLeads"]
+                      if lead.get("sourceId") == "xhd" and
+                      any(term in lead.get("title", "") for term in ("考了什么", "全科", "听力", "阅读", "机考回忆"))]
+    with ThreadPoolExecutor(max_workers=5) as pool:
+        pages = [(lead, parser, pool.submit(fetcher, lead["url"])) for lead, parser in article_leads]
+        for lead, parser, future in pages:
+            source_id = f"{lead['sourceId']}-{lead['id']}"
+            try:
+                parsed = parser(future.result(), lead)
+                for field in ("reading", "listening"):
+                    old = [x for x in (previous or {}).get(field, []) if x.get("sourceId") == source_id] if same_season else []
+                    items = parsed[field]
+                    if old and len(items) < max(1, len(old) // 2):
+                        raise ValueError(f"sudden topic shrink in {field}: {len(old)} -> {len(items)}")
+                for field in ("reading", "listening"):
+                    result[field].extend(parsed[field])
+                result["sourceStatus"].append({"id": source_id, "url": lead["url"], "status": "ok",
+                                                "items": sum(map(len, parsed.values())), "checkedAt": today.isoformat()})
+            except Exception as exc:
+                retained = []
+                if same_season:
+                    for field in ("reading", "listening"):
+                        old = [x for x in (previous or {}).get(field, []) if x.get("sourceId") == source_id]
+                        result[field].extend(old)
+                        retained.extend(old)
+                result["sourceStatus"].append({"id": source_id, "url": lead["url"], "status": "error",
+                                                "items": len(retained), "retainedFromSameSeason": bool(retained),
+                                                "error": f"{type(exc).__name__}: {exc}"[:200],
+                                                "checkedAt": today.isoformat()})
     for field in ("reading", "listening", "writing", "speaking", "recallLeads"):
-        key = "id" if field == "speaking" else "url"
+        key = "id" if field in ("reading", "listening", "speaking") else "url"
         result[field] = list({x[key]: x for x in result[field]}.values())
         for item in result[field]:
             item.setdefault("reportedAppearances", [])
     result["sources"] = [
         {"id": "yaquan", "url": YAQUAN, "description": "写作日期和考点由第三方网站标注，未独立逐条核验。"},
-        {"id": "mentor", "url": MENTOR, "description": "按日期的考生回忆文章；部分含亚太场，需回原文核对地点。"},
         {"id": "xhd", "url": XHD, "description": "机构考情文章，可能涉及全国多地；不是完整原卷。"},
         {"id": "tuonidefu", "url": TUONIDEFU, "description": "按周整理的机考反馈文章；考点地点需回原文核对。"},
         {"id": "joe-speaking", "url": speaking_url(season), "description": "第三方当期资料目录；只保存大陆话题标题和 Part，题卡请到原站查看。"},
@@ -356,8 +542,8 @@ def publish(index: dict) -> None:
     assert all(x["url"].startswith("https://") for field in ("reading", "listening", "writing", "recallLeads") for x in index[field])
     ACTIVE.mkdir(parents=True, exist_ok=True)
     for field, columns in {
-        "reading": ["id", "month", "date", "title", "url", "kind", "geography", "sourceId"],
-        "listening": ["id", "month", "date", "title", "url", "kind", "geography", "sourceId"],
+        "reading": ["id", "month", "date", "section", "reportedPeriod", "title", "url", "kind", "geography", "sourceId", "sourceTitle"],
+        "listening": ["id", "month", "date", "section", "reportedPeriod", "title", "url", "kind", "geography", "sourceId", "sourceTitle"],
         "writing": ["id", "month", "date", "task", "venueReported", "title", "url", "kind", "geography", "sourceId"],
         "speaking": ["id", "month", "date", "part", "title", "url", "kind", "geography", "sourceId"],
         "recallLeads": ["id", "month", "date", "title", "url", "kind", "geography", "sourceId"],
