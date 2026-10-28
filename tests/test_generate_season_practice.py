@@ -2,8 +2,12 @@ from __future__ import annotations
 
 import unittest
 from copy import deepcopy
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
 from app.scripts.generate_season_practice import candidates, new_content, update, validate_generated
+from app.scripts import build_season_audio
 
 
 def sample_index(season_id="2026-09_2026-12", checked="2026-10-28"):
@@ -100,6 +104,17 @@ class GenerationTests(unittest.TestCase):
                                   "explanation": "This is deliberately unsupported."}
         with self.assertRaisesRegex(ValueError, "not grounded"):
             validate_generated("reading", output, seed, index)
+
+    def test_rollover_prunes_old_season_audio(self):
+        with TemporaryDirectory() as directory:
+            app = Path(directory)
+            audio = app / "audio/season"
+            audio.mkdir(parents=True)
+            stale = audio / "old-season.m4a"
+            stale.write_bytes(b"old audio")
+            with patch.object(build_season_audio, "APP", app), patch.object(build_season_audio, "AUDIO", audio):
+                build_season_audio.sync({"listening": []}, only_missing=True)
+            self.assertFalse(stale.exists())
 
 
 if __name__ == "__main__":
