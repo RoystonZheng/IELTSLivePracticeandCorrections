@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "checkedAt": "2026-10-28",
+  "checkedAt": "2026-10-29",
   "season": {
     "id": "2026-09_2026-12",
     "start": "2026-09-01",
@@ -1788,15 +1788,15 @@
       "date": "2026-10-25",
       "task": "Task 1",
       "venueReported": "宁波华茂外国语学校",
-      "title": "加拿大、英国、美国和德国的茶叶与咖啡进口量",
-      "url": "https://www.yaquan.site/paper/09487329-094a-48bb-bfdb-f305477e2a75",
+      "title": "博物馆在1998年和2008年的布局Task 1加拿大、英国、美国和德国的茶叶与咖啡进口量",
+      "url": "https://www.yaquan.site/paper/085ea16a-0c52-47b9-b905-e44da740e885",
       "kind": "third_party_dated_topic",
       "geography": "site_reported_venue",
       "reportedAppearances": [
         {
           "date": "2026-10-25",
           "venue": "宁波华茂外国语学校",
-          "sourceUrl": "https://www.yaquan.site/paper/09487329-094a-48bb-bfdb-f305477e2a75",
+          "sourceUrl": "https://www.yaquan.site/paper/085ea16a-0c52-47b9-b905-e44da740e885",
           "verification": "third_party_report_only"
         }
       ],
@@ -3845,77 +3845,77 @@
       "url": "https://www.yaquan.site/ielts/writing",
       "status": "ok",
       "items": 44,
-      "checkedAt": "2026-10-28"
+      "checkedAt": "2026-10-29"
     },
     {
       "id": "xhd",
       "url": "https://cq.xhd.cn/ielts/ysjj/",
       "status": "ok",
       "items": 2,
-      "checkedAt": "2026-10-28"
+      "checkedAt": "2026-10-29"
     },
     {
       "id": "tuonidefu",
       "url": "https://tuonidefu.com.cn/blogs",
       "status": "ok",
       "items": 6,
-      "checkedAt": "2026-10-28"
+      "checkedAt": "2026-10-29"
     },
     {
       "id": "joe-speaking",
       "url": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec",
       "status": "ok",
       "items": 92,
-      "checkedAt": "2026-10-28"
+      "checkedAt": "2026-10-29"
     },
     {
       "id": "tuonidefu-T-450",
       "url": "https://tuonidefu.com.cn/blogs/450",
       "status": "ok",
       "items": 20,
-      "checkedAt": "2026-10-28"
+      "checkedAt": "2026-10-29"
     },
     {
       "id": "tuonidefu-T-438",
       "url": "https://tuonidefu.com.cn/blogs/438",
       "status": "ok",
       "items": 22,
-      "checkedAt": "2026-10-28"
+      "checkedAt": "2026-10-29"
     },
     {
       "id": "tuonidefu-T-441",
       "url": "https://tuonidefu.com.cn/blogs/441",
       "status": "ok",
       "items": 21,
-      "checkedAt": "2026-10-28"
+      "checkedAt": "2026-10-29"
     },
     {
       "id": "tuonidefu-T-428",
       "url": "https://tuonidefu.com.cn/blogs/428",
       "status": "ok",
       "items": 5,
-      "checkedAt": "2026-10-28"
+      "checkedAt": "2026-10-29"
     },
     {
       "id": "tuonidefu-T-421",
       "url": "https://tuonidefu.com.cn/blogs/421",
       "status": "ok",
       "items": 12,
-      "checkedAt": "2026-10-28"
+      "checkedAt": "2026-10-29"
     },
     {
       "id": "tuonidefu-T-409",
       "url": "https://tuonidefu.com.cn/blogs/409",
       "status": "ok",
       "items": 10,
-      "checkedAt": "2026-10-28"
+      "checkedAt": "2026-10-29"
     },
     {
       "id": "xhd-X-959846",
       "url": "https://cq.xhd.cn/ielts/ysjj/959846.html",
       "status": "ok",
       "items": 32,
-      "checkedAt": "2026-10-28"
+      "checkedAt": "2026-10-29"
     }
   ],
   "futureMonths": [
