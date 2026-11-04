@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "checkedAt": "2026-11-03",
+  "checkedAt": "2026-11-04",
   "season": {
     "id": "2026-09_2026-12",
     "start": "2026-09-01",
@@ -1917,7 +1917,27 @@
   ],
   "writing": [
     {
-      "id": "W-20261101-001",
+      "id": "W-20261103-001",
+      "month": "2026-11",
+      "date": "2026-11-03",
+      "task": "Task 1",
+      "venueReported": "济南IDP历下区",
+      "title": "专家和普通大众认为有助于减少全球变暖的前五种主要方法",
+      "url": "https://www.yaquan.site/paper/2619a438-e262-4847-a3b8-d7d57fa1ee3a",
+      "kind": "third_party_dated_topic",
+      "geography": "site_reported_venue",
+      "reportedAppearances": [
+        {
+          "date": "2026-11-03",
+          "venue": "济南IDP历下区",
+          "sourceUrl": "https://www.yaquan.site/paper/2619a438-e262-4847-a3b8-d7d57fa1ee3a",
+          "verification": "third_party_report_only"
+        }
+      ],
+      "sourceId": "yaquan"
+    },
+    {
+      "id": "W-20261101-002",
       "month": "2026-11",
       "date": "2026-11-01",
       "task": "Task 1",
@@ -1937,7 +1957,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261027-025",
+      "id": "W-20261027-026",
       "month": "2026-10",
       "date": "2026-10-27",
       "task": "Task 2",
@@ -1957,7 +1977,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261025-002",
+      "id": "W-20261025-003",
       "month": "2026-10",
       "date": "2026-10-25",
       "task": "Task 1",
@@ -1977,7 +1997,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261020-026",
+      "id": "W-20261020-027",
       "month": "2026-10",
       "date": "2026-10-20",
       "task": "Task 2",
@@ -1997,7 +2017,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261020-003",
+      "id": "W-20261020-004",
       "month": "2026-10",
       "date": "2026-10-20",
       "task": "Task 1",
@@ -2017,7 +2037,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261019-027",
+      "id": "W-20261019-028",
       "month": "2026-10",
       "date": "2026-10-19",
       "task": "Task 2",
@@ -2037,7 +2057,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261019-004",
+      "id": "W-20261019-005",
       "month": "2026-10",
       "date": "2026-10-19",
       "task": "Task 1",
@@ -2057,7 +2077,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261018-028",
+      "id": "W-20261018-029",
       "month": "2026-10",
       "date": "2026-10-18",
       "task": "Task 2",
@@ -2077,7 +2097,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261018-029",
+      "id": "W-20261018-030",
       "month": "2026-10",
       "date": "2026-10-18",
       "task": "Task 2",
@@ -2097,7 +2117,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261018-005",
+      "id": "W-20261018-006",
       "month": "2026-10",
       "date": "2026-10-18",
       "task": "Task 1",
@@ -2117,7 +2137,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261017-006",
+      "id": "W-20261017-007",
       "month": "2026-10",
       "date": "2026-10-17",
       "task": "Task 1",
@@ -2137,7 +2157,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261012-030",
+      "id": "W-20261012-031",
       "month": "2026-10",
       "date": "2026-10-12",
       "task": "Task 2",
@@ -2157,7 +2177,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261011-031",
+      "id": "W-20261011-032",
       "month": "2026-10",
       "date": "2026-10-11",
       "task": "Task 2",
@@ -2177,7 +2197,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261011-007",
+      "id": "W-20261011-008",
       "month": "2026-10",
       "date": "2026-10-11",
       "task": "Task 1",
@@ -2197,7 +2217,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261008-008",
+      "id": "W-20261008-009",
       "month": "2026-10",
       "date": "2026-10-08",
       "task": "Task 1",
@@ -2217,7 +2237,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20261006-009",
+      "id": "W-20261006-010",
       "month": "2026-10",
       "date": "2026-10-06",
       "task": "Task 1",
@@ -2237,7 +2257,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260924-032",
+      "id": "W-20260924-033",
       "month": "2026-09",
       "date": "2026-09-24",
       "task": "Task 2",
@@ -2257,7 +2277,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260923-010",
+      "id": "W-20260923-011",
       "month": "2026-09",
       "date": "2026-09-23",
       "task": "Task 1",
@@ -2277,7 +2297,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260922-033",
+      "id": "W-20260922-034",
       "month": "2026-09",
       "date": "2026-09-22",
       "task": "Task 2",
@@ -2297,7 +2317,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260919-011",
+      "id": "W-20260919-012",
       "month": "2026-09",
       "date": "2026-09-19",
       "task": "Task 1",
@@ -2317,7 +2337,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260916-034",
+      "id": "W-20260916-035",
       "month": "2026-09",
       "date": "2026-09-16",
       "task": "Task 2",
@@ -2337,7 +2357,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260916-012",
+      "id": "W-20260916-013",
       "month": "2026-09",
       "date": "2026-09-16",
       "task": "Task 1",
@@ -2357,7 +2377,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260915-035",
+      "id": "W-20260915-036",
       "month": "2026-09",
       "date": "2026-09-15",
       "task": "Task 2",
@@ -2377,7 +2397,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260915-013",
+      "id": "W-20260915-014",
       "month": "2026-09",
       "date": "2026-09-15",
       "task": "Task 1",
@@ -2397,7 +2417,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260914-036",
+      "id": "W-20260914-037",
       "month": "2026-09",
       "date": "2026-09-14",
       "task": "Task 2",
@@ -2417,7 +2437,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260913-037",
+      "id": "W-20260913-038",
       "month": "2026-09",
       "date": "2026-09-13",
       "task": "Task 2",
@@ -2437,7 +2457,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260912-038",
+      "id": "W-20260912-039",
       "month": "2026-09",
       "date": "2026-09-12",
       "task": "Task 2",
@@ -2457,7 +2477,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260912-014",
+      "id": "W-20260912-015",
       "month": "2026-09",
       "date": "2026-09-12",
       "task": "Task 1",
@@ -2477,7 +2497,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260911-039",
+      "id": "W-20260911-040",
       "month": "2026-09",
       "date": "2026-09-11",
       "task": "Task 2",
@@ -2497,7 +2517,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260911-016",
+      "id": "W-20260911-017",
       "month": "2026-09",
       "date": "2026-09-11",
       "task": "Task 1",
@@ -2517,7 +2537,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260911-015",
+      "id": "W-20260911-016",
       "month": "2026-09",
       "date": "2026-09-11",
       "task": "Task 1",
@@ -2537,7 +2557,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260910-040",
+      "id": "W-20260910-041",
       "month": "2026-09",
       "date": "2026-09-10",
       "task": "Task 2",
@@ -2557,7 +2577,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260910-017",
+      "id": "W-20260910-018",
       "month": "2026-09",
       "date": "2026-09-10",
       "task": "Task 1",
@@ -2577,7 +2597,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260909-041",
+      "id": "W-20260909-042",
       "month": "2026-09",
       "date": "2026-09-09",
       "task": "Task 2",
@@ -2597,7 +2617,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260909-018",
+      "id": "W-20260909-019",
       "month": "2026-09",
       "date": "2026-09-09",
       "task": "Task 1",
@@ -2617,7 +2637,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260909-019",
+      "id": "W-20260909-020",
       "month": "2026-09",
       "date": "2026-09-09",
       "task": "Task 1",
@@ -2637,7 +2657,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260908-020",
+      "id": "W-20260908-021",
       "month": "2026-09",
       "date": "2026-09-08",
       "task": "Task 1",
@@ -2657,7 +2677,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260905-042",
+      "id": "W-20260905-043",
       "month": "2026-09",
       "date": "2026-09-05",
       "task": "Task 2",
@@ -2677,7 +2697,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260905-022",
+      "id": "W-20260905-023",
       "month": "2026-09",
       "date": "2026-09-05",
       "task": "Task 1",
@@ -2697,7 +2717,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260905-021",
+      "id": "W-20260905-022",
       "month": "2026-09",
       "date": "2026-09-05",
       "task": "Task 1",
@@ -2717,7 +2737,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260904-043",
+      "id": "W-20260904-044",
       "month": "2026-09",
       "date": "2026-09-04",
       "task": "Task 2",
@@ -2737,7 +2757,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260904-045",
+      "id": "W-20260904-046",
       "month": "2026-09",
       "date": "2026-09-04",
       "task": "Task 2",
@@ -2757,7 +2777,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260904-044",
+      "id": "W-20260904-045",
       "month": "2026-09",
       "date": "2026-09-04",
       "task": "Task 2",
@@ -2777,7 +2797,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260904-024",
+      "id": "W-20260904-025",
       "month": "2026-09",
       "date": "2026-09-04",
       "task": "Task 1",
@@ -2797,7 +2817,7 @@
       "sourceId": "yaquan"
     },
     {
-      "id": "W-20260904-023",
+      "id": "W-20260904-024",
       "month": "2026-09",
       "date": "2026-09-04",
       "task": "Task 1",
@@ -4029,85 +4049,85 @@
       "id": "yaquan",
       "url": "https://www.yaquan.site/ielts/writing",
       "status": "ok",
-      "items": 45,
-      "checkedAt": "2026-11-03"
+      "items": 46,
+      "checkedAt": "2026-11-04"
     },
     {
       "id": "xhd",
       "url": "https://cq.xhd.cn/ielts/ysjj/",
       "status": "ok",
       "items": 2,
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-04"
     },
     {
       "id": "tuonidefu",
       "url": "https://tuonidefu.com.cn/blogs",
       "status": "ok",
       "items": 7,
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-04"
     },
     {
       "id": "joe-speaking",
       "url": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec",
       "status": "ok",
       "items": 92,
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-04"
     },
     {
       "id": "tuonidefu-T-456",
       "url": "https://tuonidefu.com.cn/blogs/456",
       "status": "ok",
       "items": 11,
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-04"
     },
     {
       "id": "tuonidefu-T-450",
       "url": "https://tuonidefu.com.cn/blogs/450",
       "status": "ok",
       "items": 20,
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-04"
     },
     {
       "id": "tuonidefu-T-438",
       "url": "https://tuonidefu.com.cn/blogs/438",
       "status": "ok",
       "items": 22,
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-04"
     },
     {
       "id": "tuonidefu-T-441",
       "url": "https://tuonidefu.com.cn/blogs/441",
       "status": "ok",
       "items": 21,
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-04"
     },
     {
       "id": "tuonidefu-T-428",
       "url": "https://tuonidefu.com.cn/blogs/428",
       "status": "ok",
       "items": 5,
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-04"
     },
     {
       "id": "tuonidefu-T-421",
       "url": "https://tuonidefu.com.cn/blogs/421",
       "status": "ok",
       "items": 12,
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-04"
     },
     {
       "id": "tuonidefu-T-409",
       "url": "https://tuonidefu.com.cn/blogs/409",
       "status": "ok",
       "items": 10,
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-04"
     },
     {
       "id": "xhd-X-959846",
       "url": "https://cq.xhd.cn/ielts/ysjj/959846.html",
       "status": "ok",
       "items": 32,
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-04"
     }
   ],
   "futureMonths": [
