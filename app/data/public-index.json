@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "checkedAt": "2026-11-07",
+  "checkedAt": "2026-11-08",
   "season": {
     "id": "2026-09_2026-12",
     "start": "2026-09-01",
@@ -1922,15 +1922,15 @@
       "date": "2026-11-03",
       "task": "Task 1",
       "venueReported": "济南IDP历下区",
-      "title": "专家和普通大众认为有助于减少全球变暖的前五种主要方法",
-      "url": "https://www.yaquan.site/paper/2619a438-e262-4847-a3b8-d7d57fa1ee3a",
+      "title": "海龟的生命周期Task 1猎户座飞船在组装过程之前和之后的各个部件Task 1专家和普通大众认为有助于减少全球变暖的前五种主要方法",
+      "url": "https://www.yaquan.site/paper/9203fcd0-a87f-4620-9ffb-317f65ee041b",
       "kind": "third_party_dated_topic",
       "geography": "site_reported_venue",
       "reportedAppearances": [
         {
           "date": "2026-11-03",
           "venue": "济南IDP历下区",
-          "sourceUrl": "https://www.yaquan.site/paper/2619a438-e262-4847-a3b8-d7d57fa1ee3a",
+          "sourceUrl": "https://www.yaquan.site/paper/9203fcd0-a87f-4620-9ffb-317f65ee041b",
           "verification": "third_party_report_only"
         }
       ],
@@ -4048,88 +4048,86 @@
     {
       "id": "yaquan",
       "url": "https://www.yaquan.site/ielts/writing",
-      "status": "error",
+      "status": "ok",
       "items": 46,
-      "retainedFromSameSeason": true,
-      "error": "TimeoutError: The read operation timed out",
-      "checkedAt": "2026-11-07"
+      "checkedAt": "2026-11-08"
     },
     {
       "id": "xhd",
       "url": "https://cq.xhd.cn/ielts/ysjj/",
       "status": "ok",
       "items": 2,
-      "checkedAt": "2026-11-07"
+      "checkedAt": "2026-11-08"
     },
     {
       "id": "tuonidefu",
       "url": "https://tuonidefu.com.cn/blogs",
       "status": "ok",
       "items": 7,
-      "checkedAt": "2026-11-07"
+      "checkedAt": "2026-11-08"
     },
     {
       "id": "joe-speaking",
       "url": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec",
       "status": "ok",
       "items": 92,
-      "checkedAt": "2026-11-07"
+      "checkedAt": "2026-11-08"
     },
     {
       "id": "tuonidefu-T-456",
       "url": "https://tuonidefu.com.cn/blogs/456",
       "status": "ok",
       "items": 11,
-      "checkedAt": "2026-11-07"
+      "checkedAt": "2026-11-08"
     },
     {
       "id": "tuonidefu-T-450",
       "url": "https://tuonidefu.com.cn/blogs/450",
       "status": "ok",
       "items": 20,
-      "checkedAt": "2026-11-07"
+      "checkedAt": "2026-11-08"
     },
     {
       "id": "tuonidefu-T-438",
       "url": "https://tuonidefu.com.cn/blogs/438",
       "status": "ok",
       "items": 22,
-      "checkedAt": "2026-11-07"
+      "checkedAt": "2026-11-08"
     },
     {
       "id": "tuonidefu-T-441",
       "url": "https://tuonidefu.com.cn/blogs/441",
       "status": "ok",
       "items": 21,
-      "checkedAt": "2026-11-07"
+      "checkedAt": "2026-11-08"
     },
     {
       "id": "tuonidefu-T-428",
       "url": "https://tuonidefu.com.cn/blogs/428",
       "status": "ok",
       "items": 5,
-      "checkedAt": "2026-11-07"
+      "checkedAt": "2026-11-08"
     },
     {
       "id": "tuonidefu-T-421",
       "url": "https://tuonidefu.com.cn/blogs/421",
       "status": "ok",
       "items": 12,
-      "checkedAt": "2026-11-07"
+      "checkedAt": "2026-11-08"
     },
     {
       "id": "tuonidefu-T-409",
       "url": "https://tuonidefu.com.cn/blogs/409",
       "status": "ok",
       "items": 10,
-      "checkedAt": "2026-11-07"
+      "checkedAt": "2026-11-08"
     },
     {
       "id": "xhd-X-959846",
       "url": "https://cq.xhd.cn/ielts/ysjj/959846.html",
       "status": "ok",
       "items": 32,
-      "checkedAt": "2026-11-07"
+      "checkedAt": "2026-11-08"
     }
   ],
   "futureMonths": [
