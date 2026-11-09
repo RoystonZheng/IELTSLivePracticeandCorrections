@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "checkedAt": "2026-11-08",
+  "checkedAt": "2026-11-09",
   "season": {
     "id": "2026-09_2026-12",
     "start": "2026-09-01",
@@ -15,6 +15,160 @@
   },
   "scope": "中国大陆考生的公开考情线索；仅展示来源允许保存的简短元数据和链接。",
   "reading": [
+    {
+      "id": "R-T-463-97addb180d",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "吉他的历史",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-463-8e74deee59",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "法律的重要性",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-463-d55f0f7d4a",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "伏尼契手稿",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-463-6a401d185c",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "英国作家",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-463-a36417b1ea",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "鲜花之力",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-463-e4e3a6f0dd",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "罗马宫殿",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-463-945a6b584d",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "铅笔的发展史",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-463-8ecfd44d7c",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "零售行业的发展",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-463-c52f519194",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "南极科考站",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-463-9e820bd009",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "植物战争",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-463-ef4d84ad88",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "社会关系",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
     {
       "id": "R-T-456-7596685179",
       "month": "2026-11",
@@ -1039,6 +1193,216 @@
     }
   ],
   "listening": [
+    {
+      "id": "L-T-463-370963719d",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "音乐俱乐部",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 1",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-cb38d78f86",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "女士找保姆的工作",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 1",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-4619f3af4d",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "护士减肥咨询",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 1",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-fd13dfd96f",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "骑车通勤",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 2",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-742b42cbc0",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "动物园",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 2",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-211d86001a",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "房屋交换计划",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 2",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-02842e7321",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "两个同学讨论女学生换专业的事情",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 3",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-d7a3e86ab7",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "毛利雕刻",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 3",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-d369c5f12c",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "和跑步有关的课题",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 3",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-0003063303",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "牛仔裤的历史",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 3",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-858d01e033",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "欧洲南部的古堡每个部分的情况",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 4",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-b36ed05580",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "人类嗅觉的研究",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 4",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-1d8183b00d",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "手套历史",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 4",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-d50e398897",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "考古遗址",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 4",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "L-T-463-c4c40f739f",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "南极科考船",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "reported_topic",
+      "section": "Part 4",
+      "reportedPeriod": "2026-11-02—2026-11-08",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-463",
+      "sourceTitle": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
     {
       "id": "L-T-456-2e901b630d",
       "month": "2026-11",
@@ -3967,6 +4331,17 @@
       "reportedAppearances": []
     },
     {
+      "id": "T-463",
+      "month": "2026-11",
+      "date": "2026-11-09",
+      "title": "11月2日-11月8日雅思机考回忆｜雅思真题｜雅思备考｜托你的福",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "kind": "weekly_exam_recap",
+      "geography": "china_education_site_location_unspecified",
+      "sourceId": "tuonidefu",
+      "reportedAppearances": []
+    },
+    {
       "id": "T-456",
       "month": "2026-11",
       "date": "2026-11-01",
@@ -4050,84 +4425,91 @@
       "url": "https://www.yaquan.site/ielts/writing",
       "status": "ok",
       "items": 46,
-      "checkedAt": "2026-11-08"
+      "checkedAt": "2026-11-09"
     },
     {
       "id": "xhd",
       "url": "https://cq.xhd.cn/ielts/ysjj/",
       "status": "ok",
       "items": 2,
-      "checkedAt": "2026-11-08"
+      "checkedAt": "2026-11-09"
     },
     {
       "id": "tuonidefu",
       "url": "https://tuonidefu.com.cn/blogs",
       "status": "ok",
-      "items": 7,
-      "checkedAt": "2026-11-08"
+      "items": 8,
+      "checkedAt": "2026-11-09"
     },
     {
       "id": "joe-speaking",
       "url": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec",
       "status": "ok",
       "items": 92,
-      "checkedAt": "2026-11-08"
+      "checkedAt": "2026-11-09"
+    },
+    {
+      "id": "tuonidefu-T-463",
+      "url": "https://tuonidefu.com.cn/blogs/463",
+      "status": "ok",
+      "items": 26,
+      "checkedAt": "2026-11-09"
     },
     {
       "id": "tuonidefu-T-456",
       "url": "https://tuonidefu.com.cn/blogs/456",
       "status": "ok",
       "items": 11,
-      "checkedAt": "2026-11-08"
+      "checkedAt": "2026-11-09"
     },
     {
       "id": "tuonidefu-T-450",
       "url": "https://tuonidefu.com.cn/blogs/450",
       "status": "ok",
       "items": 20,
-      "checkedAt": "2026-11-08"
+      "checkedAt": "2026-11-09"
     },
     {
       "id": "tuonidefu-T-438",
       "url": "https://tuonidefu.com.cn/blogs/438",
       "status": "ok",
       "items": 22,
-      "checkedAt": "2026-11-08"
+      "checkedAt": "2026-11-09"
     },
     {
       "id": "tuonidefu-T-441",
       "url": "https://tuonidefu.com.cn/blogs/441",
       "status": "ok",
       "items": 21,
-      "checkedAt": "2026-11-08"
+      "checkedAt": "2026-11-09"
     },
     {
       "id": "tuonidefu-T-428",
       "url": "https://tuonidefu.com.cn/blogs/428",
       "status": "ok",
       "items": 5,
-      "checkedAt": "2026-11-08"
+      "checkedAt": "2026-11-09"
     },
     {
       "id": "tuonidefu-T-421",
       "url": "https://tuonidefu.com.cn/blogs/421",
       "status": "ok",
       "items": 12,
-      "checkedAt": "2026-11-08"
+      "checkedAt": "2026-11-09"
     },
     {
       "id": "tuonidefu-T-409",
       "url": "https://tuonidefu.com.cn/blogs/409",
       "status": "ok",
       "items": 10,
-      "checkedAt": "2026-11-08"
+      "checkedAt": "2026-11-09"
     },
     {
       "id": "xhd-X-959846",
       "url": "https://cq.xhd.cn/ielts/ysjj/959846.html",
       "status": "ok",
       "items": 32,
-      "checkedAt": "2026-11-08"
+      "checkedAt": "2026-11-09"
     }
   ],
   "futureMonths": [
