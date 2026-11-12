@@ -4423,8 +4423,10 @@
     {
       "id": "yaquan",
       "url": "https://www.yaquan.site/ielts/writing",
-      "status": "ok",
+      "status": "error",
       "items": 46,
+      "retainedFromSameSeason": true,
+      "error": "URLError: <urlopen error timed out>",
       "checkedAt": "2026-11-12"
     },
     {
