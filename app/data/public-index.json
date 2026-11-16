@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "checkedAt": "2026-11-15",
+  "checkedAt": "2026-11-16",
   "season": {
     "id": "2026-09_2026-12",
     "start": "2026-09-01",
@@ -15,6 +15,216 @@
   },
   "scope": "中国大陆考生的公开考情线索；仅展示来源允许保存的简短元数据和链接。",
   "reading": [
+    {
+      "id": "R-T-469-e324285e9c",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "面部表情",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-41347370ce",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "珍珠",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-468bb2d8c8",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "罗伯特·路易斯·史蒂文森",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-9db4b54d09",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "涂鸦是艺术还是犯罪？",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-929b5ebef3",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "街头足球",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-5b547a68b6",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "从众行为",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-886d0b0c13",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "卷心菜",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-86483a4665",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "珊瑚",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-d6529a6e9d",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "塑料的发展",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-3293fcdeb2",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "为什么热爱音乐",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-7b46d379de",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "一位澳大利亚摄影师",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-ebb729ab9f",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "挪威博物馆搬运",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-ba0c2a049f",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "美国手语",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-c333fd83a9",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "欺骗的艺术",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
+    {
+      "id": "R-T-469-926457b556",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "动物适应城市",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "reported_topic",
+      "section": null,
+      "reportedPeriod": "2026-11-09—2026-11-15",
+      "reportedAppearances": [],
+      "geography": "venue_unverified",
+      "sourceId": "tuonidefu-T-469",
+      "sourceTitle": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福"
+    },
     {
       "id": "R-T-463-97addb180d",
       "month": "2026-11",
@@ -4331,6 +4541,17 @@
       "reportedAppearances": []
     },
     {
+      "id": "T-469",
+      "month": "2026-11",
+      "date": "2026-11-15",
+      "title": "11月9日-15日雅思机考回忆｜雅思真题｜雅思备考｜托你的福",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "kind": "weekly_exam_recap",
+      "geography": "china_education_site_location_unspecified",
+      "sourceId": "tuonidefu",
+      "reportedAppearances": []
+    },
+    {
       "id": "T-463",
       "month": "2026-11",
       "date": "2026-11-09",
@@ -4425,91 +4646,98 @@
       "url": "https://www.yaquan.site/ielts/writing",
       "status": "ok",
       "items": 46,
-      "checkedAt": "2026-11-15"
+      "checkedAt": "2026-11-16"
     },
     {
       "id": "xhd",
       "url": "https://cq.xhd.cn/ielts/ysjj/",
       "status": "ok",
       "items": 2,
-      "checkedAt": "2026-11-15"
+      "checkedAt": "2026-11-16"
     },
     {
       "id": "tuonidefu",
       "url": "https://tuonidefu.com.cn/blogs",
       "status": "ok",
-      "items": 8,
-      "checkedAt": "2026-11-15"
+      "items": 9,
+      "checkedAt": "2026-11-16"
     },
     {
       "id": "joe-speaking",
       "url": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec",
       "status": "ok",
       "items": 92,
-      "checkedAt": "2026-11-15"
+      "checkedAt": "2026-11-16"
+    },
+    {
+      "id": "tuonidefu-T-469",
+      "url": "https://tuonidefu.com.cn/blogs/469",
+      "status": "ok",
+      "items": 15,
+      "checkedAt": "2026-11-16"
     },
     {
       "id": "tuonidefu-T-463",
       "url": "https://tuonidefu.com.cn/blogs/463",
       "status": "ok",
       "items": 26,
-      "checkedAt": "2026-11-15"
+      "checkedAt": "2026-11-16"
     },
     {
       "id": "tuonidefu-T-456",
       "url": "https://tuonidefu.com.cn/blogs/456",
       "status": "ok",
       "items": 11,
-      "checkedAt": "2026-11-15"
+      "checkedAt": "2026-11-16"
     },
     {
       "id": "tuonidefu-T-450",
       "url": "https://tuonidefu.com.cn/blogs/450",
       "status": "ok",
       "items": 20,
-      "checkedAt": "2026-11-15"
+      "checkedAt": "2026-11-16"
     },
     {
       "id": "tuonidefu-T-438",
       "url": "https://tuonidefu.com.cn/blogs/438",
       "status": "ok",
       "items": 22,
-      "checkedAt": "2026-11-15"
+      "checkedAt": "2026-11-16"
     },
     {
       "id": "tuonidefu-T-441",
       "url": "https://tuonidefu.com.cn/blogs/441",
       "status": "ok",
       "items": 21,
-      "checkedAt": "2026-11-15"
+      "checkedAt": "2026-11-16"
     },
     {
       "id": "tuonidefu-T-428",
       "url": "https://tuonidefu.com.cn/blogs/428",
       "status": "ok",
       "items": 5,
-      "checkedAt": "2026-11-15"
+      "checkedAt": "2026-11-16"
     },
     {
       "id": "tuonidefu-T-421",
       "url": "https://tuonidefu.com.cn/blogs/421",
       "status": "ok",
       "items": 12,
-      "checkedAt": "2026-11-15"
+      "checkedAt": "2026-11-16"
     },
     {
       "id": "tuonidefu-T-409",
       "url": "https://tuonidefu.com.cn/blogs/409",
       "status": "ok",
       "items": 10,
-      "checkedAt": "2026-11-15"
+      "checkedAt": "2026-11-16"
     },
     {
       "id": "xhd-X-959846",
       "url": "https://cq.xhd.cn/ielts/ysjj/959846.html",
       "status": "ok",
       "items": 32,
-      "checkedAt": "2026-11-15"
+      "checkedAt": "2026-11-16"
     }
   ],
   "futureMonths": [
