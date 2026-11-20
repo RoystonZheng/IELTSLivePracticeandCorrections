@@ -24,10 +24,8 @@
     {
       "id": "yaquan",
       "url": "https://www.yaquan.site/ielts/writing",
-      "status": "error",
+      "status": "ok",
       "items": 46,
-      "retainedFromSameSeason": true,
-      "error": "URLError: <urlopen error timed out>",
       "checkedAt": "2026-11-20"
     },
     {
