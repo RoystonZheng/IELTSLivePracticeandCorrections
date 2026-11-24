@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "checkedAt": "2026-11-23",
+  "checkedAt": "2026-11-24",
   "season": {
     "id": "2026-09_2026-12",
     "start": "2026-09-01",
@@ -4541,6 +4541,17 @@
       "reportedAppearances": []
     },
     {
+      "id": "T-477",
+      "month": "2026-11",
+      "date": "2026-11-23",
+      "title": "雅思11月16—22日机考回忆：一周四科题目整理｜雅思真题｜雅思备考｜托你的福",
+      "url": "https://tuonidefu.com.cn/blogs/477",
+      "kind": "weekly_exam_recap",
+      "geography": "china_education_site_location_unspecified",
+      "sourceId": "tuonidefu",
+      "reportedAppearances": []
+    },
+    {
       "id": "T-469",
       "month": "2026-11",
       "date": "2026-11-15",
@@ -4646,98 +4657,107 @@
       "url": "https://www.yaquan.site/ielts/writing",
       "status": "ok",
       "items": 46,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "xhd",
       "url": "https://cq.xhd.cn/ielts/ysjj/",
       "status": "ok",
       "items": 2,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "tuonidefu",
       "url": "https://tuonidefu.com.cn/blogs",
       "status": "ok",
-      "items": 9,
-      "checkedAt": "2026-11-23"
+      "items": 10,
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "joe-speaking",
       "url": "https://joespeaking.com/zh-CN/ielts-speaking-questions/2026-sep-dec",
       "status": "ok",
       "items": 92,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "id": "tuonidefu-T-477",
+      "url": "https://tuonidefu.com.cn/blogs/477",
+      "status": "error",
+      "items": 0,
+      "retainedFromSameSeason": false,
+      "error": "ValueError: weekly recap disclaimer/structure not found",
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "tuonidefu-T-469",
       "url": "https://tuonidefu.com.cn/blogs/469",
       "status": "ok",
       "items": 15,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "tuonidefu-T-463",
       "url": "https://tuonidefu.com.cn/blogs/463",
       "status": "ok",
       "items": 26,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "tuonidefu-T-456",
       "url": "https://tuonidefu.com.cn/blogs/456",
       "status": "ok",
       "items": 11,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "tuonidefu-T-450",
       "url": "https://tuonidefu.com.cn/blogs/450",
       "status": "ok",
       "items": 20,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "tuonidefu-T-438",
       "url": "https://tuonidefu.com.cn/blogs/438",
       "status": "ok",
       "items": 22,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "tuonidefu-T-441",
       "url": "https://tuonidefu.com.cn/blogs/441",
       "status": "ok",
       "items": 21,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "tuonidefu-T-428",
       "url": "https://tuonidefu.com.cn/blogs/428",
       "status": "ok",
       "items": 5,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "tuonidefu-T-421",
       "url": "https://tuonidefu.com.cn/blogs/421",
       "status": "ok",
       "items": 12,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "tuonidefu-T-409",
       "url": "https://tuonidefu.com.cn/blogs/409",
       "status": "ok",
       "items": 10,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
     },
     {
       "id": "xhd-X-959846",
       "url": "https://cq.xhd.cn/ielts/ysjj/959846.html",
       "status": "ok",
       "items": 32,
-      "checkedAt": "2026-11-23"
+      "checkedAt": "2026-11-24"
     }
   ],
   "futureMonths": [
